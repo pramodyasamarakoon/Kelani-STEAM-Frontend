@@ -14,10 +14,28 @@ import React from "react";
 import AdbIcon from "@mui/icons-material/Adb";
 import Logo from "../../../Assets/Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-const pages = ["Home", "Our Projects", "About Us", "Contact Us"];
+const pages = [
+  {
+    label: "Home",
+    link: "/",
+  },
+  {
+    label: "Our Projects",
+    link: "/OurProjects",
+  },
+  {
+    label: "About Us",
+    link: "/AboutUs",
+  },
+  {
+    label: "Contact Us",
+    link: "/",
+  },
+];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -65,7 +83,7 @@ function NavBar() {
               textDecoration: "none",
             }}
           >
-            <img src={Logo} alt="" className="h-[40px]" />
+            <LazyLoadImage src={Logo} alt="Logo" className="h-[40px]" />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -74,7 +92,7 @@ function NavBar() {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              // onClick={handleOpenNavMenu}
+              onClick={handleOpenNavMenu}
               color="inherit"
             >
               <MenuIcon />
@@ -98,8 +116,10 @@ function NavBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" href={page.link}>
+                    {page.label}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -125,8 +145,9 @@ function NavBar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.label}
                 onClick={handleCloseNavMenu}
+                href={page.link}
                 sx={{
                   my: 2,
                   color: "black",
@@ -136,7 +157,7 @@ function NavBar() {
                   marginX: "1rem",
                 }}
               >
-                {page}
+                {page.label}
               </Button>
             ))}
           </Box>

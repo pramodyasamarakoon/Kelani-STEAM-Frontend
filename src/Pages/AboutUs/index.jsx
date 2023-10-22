@@ -1,6 +1,9 @@
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import NavBar from "../../Assets/Components/NavBar";
 import Team from "../../Assets/Images/BookNowImage/Team.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import Logo from "../../../src/Assets/LogoWhite.png";
+import Footer from "../../Assets/Components/Footer/Footer";
 
 function AboutUs() {
   return (
@@ -8,7 +11,7 @@ function AboutUs() {
       {/* Nav Bar */}
       <NavBar />
 
-      {/* Book Now Grid PC */}
+      {/* About Us Container Grid PC */}
       <Grid
         container
         sx={{
@@ -16,7 +19,7 @@ function AboutUs() {
           display: { xs: "none", md: "flex" },
         }}
       >
-        {/* Book Now Images */}
+        {/* Image Container */}
         <Grid item xs={12} className="h-auto flex justify-center items-center ">
           <Grid container spacing={0}>
             <Grid
@@ -41,25 +44,22 @@ function AboutUs() {
                 sx={{
                   position: "absolute",
                   top: "50%",
-                  left: "50%",
+                  left: "30%",
                   zIndex: 100,
                   color: "white",
                   transform: "translate(-50%, -50%)",
+                  textAlign: "center",
                 }}
               >
-                <p className="font-Lobster-Regular text-6xl">
-                  Do You Want Us to Cover Your Event?
+                <p>
+                  <img src={Logo} alt="" className="h-[100px] mb-4 mx-auto" />
                 </p>
-                <Button
-                  variant="contained"
-                  // onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 4,
-                    // color: "black",
-                  }}
-                >
-                  Order Now
-                </Button>
+                <p className="font-Poppins-SemiBold text-6xl">
+                  Official Media Unit
+                </p>
+                <p className="font-Poppins-Light text-2xl">
+                  Faculty of Science, University of Kelaniya
+                </p>
               </Box>
 
               <Box
@@ -81,6 +81,151 @@ function AboutUs() {
           </Grid>
         </Grid>
       </Grid>
+
+      {/* About Us Container Grid Mobile */}
+      <Grid
+        container
+        sx={{
+          marginY: 11,
+          display: { xs: "flex", md: "none" },
+        }}
+      >
+        {/* Image Container */}
+        <Grid item xs={12} className="h-auto flex justify-center items-center ">
+          <Grid container spacing={0}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  height: "60vh",
+                  backgroundImage: `url(${Team})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
+
+              {/* Booking Text */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                }}
+              >
+                <p>
+                  <img src={Logo} alt="" className="h-[60px] mb-4 mx-auto" />
+                </p>
+                <p className="font-Poppins-SemiBold text-3xl">
+                  Official Media Unit
+                </p>
+                <p className="font-Poppins-Light text-[16px">
+                  Faculty of Science, University of Kelaniya
+                </p>
+              </Box>
+
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 99,
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 10%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 70%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.4) 100%)", // Gradient from left black to right transparent
+                  //   opacity: 0.7,
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/* About Us Container Grid PC */}
+      <Grid
+        container
+        sx={{
+          marginY: 6,
+          paddingX: 30,
+          display: { xs: "none", md: "flex" },
+        }}
+      >
+        {/* Text Container PC */}
+        <Grid item xs={12} className="h-auto justify-center items-center ">
+          <p className="font-Lobster-Regular text-6xl">Our Journey</p>
+          <p className="font-Poppins-Regular text-[18px] text-left py-12">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, id
+            nesciunt! Fuga dicta tempore consequuntur odio ut suscipit
+            laudantium dolor, doloribus deleniti aperiam placeat, repellat
+            repudiandae, accusantium aliquam. Quas cum, saepe possimus tempore
+            labore, odio reiciendis culpa doloribus asperiores consequuntur
+            eaque praesentium necessitatibus commodi temporibus suscipit, quidem
+            nobis? Laudantium fuga tempore itaque amet, consequuntur laborum
+            ipsa nisi, reprehenderit tempora iure nulla alias praesentium
+            repellat autem doloribus quasi. Numquam deserunt nostrum ipsam
+            sapiente explicabo ex labore, ab magnam, molestiae sequi modi animi
+            consequuntur a aut tempore eaque laudantium iusto unde quas. Lorem
+            ipsum dolor sit, amet consectetur adipisicing elit. Ab porro dicta
+            dolorem, inventore tempore nisi labore reiciendis perspiciatis{" "}
+            <br />
+            <br />
+            tempora consequatur aliquid quis asperiores suscipit veritatis odio
+            voluptates incidunt sequi provident ipsa. Iste ab nisi suscipit
+            delectus impedit inventore soluta blanditiis. Laboriosam aperiam et
+            ratione harum dignissimos similique, hic excepturi nulla doloremque
+            quam, quisquam sequi quaerat facilis enim obcaecati placeat quae,
+            deserunt laudantium ut eligendi dolor sed praesentium consectetur
+            amet? Repellat a fuga officia nisi beatae voluptatibus explicabo
+            obcaecati? Excepturi eum nemo facere, veniam repellat sed dolores
+            aliquam blanditiis, at recusandae molestiae, soluta iure explicabo
+            iusto ipsam porro necessitatibus. Et maxime animi voluptates laborum
+            ducimus. At odio quibusdam aliquam nemo voluptatum architecto
+            provident distinctio. Ex nemo eaque pariatur? Doloremque labore a
+            explicabo soluta pariatur dignissimos cupiditate qui nesciunt ipsum
+            consectetur? Aperiam, fugiat quisquam voluptates ullam atque hic,
+            suscipit quos numquam rem tempore recusandae cupiditate optio <br />
+            <br />
+            blanditiis aliquid architecto rerum ea vero. Esse nostrum voluptas
+            officia cumque temporibus. Itaque nam explicabo atque culpa, iusto,
+            maiores, corrupti sit voluptate alias quas aperiam aliquam similique
+            minus est quis hic. Ab id quae vitae ex repellendus at ipsa suscipit
+            optio iusto! Accusantium voluptatum fugiat sint rem, voluptates,
+            quisquam enim animi laudantium deleniti distinctio nam excepturi ea
+            exercitationem numquam commodi iste ut sed quo tempora unde tempore,
+            quidem facilis magni non. Hic dignissimos nemo expedita consectetur?
+            Iusto alias quasi, officia quisquam obcaecati, enim cum, commodi
+            dignissimos fugiat laudantium ea. Sunt numquam explicabo iure
+            aspernatur sapiente,
+            <br />
+            <br /> consequuntur cum non aut! Modi vel deleniti accusamus
+            asperiores officia beatae veniam quia exercitationem numquam sunt?
+            Reiciendis, praesentium. Quia cum totam velit, ducimus tempore aut
+            impedit nesciunt? Corrupti rerum odio, ut dicta animi fugiat
+            delectus blanditiis? Hic aspernatur, a incidunt omnis maxime eveniet
+            labore illum voluptatem neque, ducimus laudantium optio dignissimos
+            quia fugiat repellendus repellat cumque debitis recusandae. Ducimus
+            reiciendis, ut debitis blanditiis at eligendi enim tempora, dolorem
+            exercitationem est sequi aperiam dolores odit provident inventore
+            repellendus, distinctio dolor commodi ratione unde ab aliquid quae
+            quas ullam.
+          </p>
+        </Grid>
+      </Grid>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

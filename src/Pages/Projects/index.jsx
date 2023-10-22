@@ -1,13 +1,13 @@
 import { Grid } from "@mui/material";
 import NavBar from "../../Assets/Components/NavBar";
 import MehewaraImage from "../../Assets/Images/ProjectImages/Mehewara.jpg";
+import Footer from "../../Assets/Components/Footer/Footer";
 
 function HomePage() {
   return (
     <div className="w-full">
       {/* Nav Bar */}
       <NavBar />
-
       {/* Project Card PC */}
       <Grid
         container
@@ -58,7 +58,6 @@ function HomePage() {
           </div>
         </Grid>
       </Grid>
-
       {/* Project Card Mobile */}
       <Grid
         container
@@ -110,6 +109,9 @@ function HomePage() {
           </div>
         </Grid>
       </Grid>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
