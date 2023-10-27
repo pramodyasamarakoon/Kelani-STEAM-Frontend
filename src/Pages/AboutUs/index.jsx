@@ -1,15 +1,41 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Fab, Grid, Typography } from "@mui/material";
 import NavBar from "../../Assets/Components/NavBar";
 import Team from "../../Assets/Images/BookNowImage/Team.jpg";
+import PresidentImage from "../../Assets/Images/Committee/ViDe/President.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../../../src/Assets/LogoWhite.png";
 import Footer from "../../Assets/Components/Footer/Footer";
+import { useEffect, useState } from "react";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
 
 function AboutUs() {
+  const [readM, setReadM] = useState(false);
+
+  // useEffect for readM state
+  useEffect(() => {
+    console.log(readM, "Updated!");
+  }, [readM]);
+
+  const readMore = () => {
+    setReadM(!readM);
+  };
+
+  // Scroll Buttons
+  const handleScrollToGrid = (id) => {
+    const gridElement = document.getElementById(id);
+    if (gridElement) {
+      gridElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="w-full">
       {/* Nav Bar */}
       <NavBar />
+
+      <ScrollToTopButton />
 
       {/* About Us Container Grid PC */}
       <Grid
@@ -62,6 +88,54 @@ function AboutUs() {
                 </p>
               </Box>
 
+              {/* Buttons */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "90%",
+                  left: "73%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                }}
+              >
+                <a href="#ourJourney">
+                  <Button
+                    variant="contained"
+                    onClick={() => handleScrollToGrid("OurJourney")}
+                    sx={{
+                      my: 4,
+                      // color: "black",
+                    }}
+                  >
+                    Our Journey
+                  </Button>
+                </a>
+              </Box>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "90%",
+                  left: "85%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  onClick={() => handleScrollToGrid("Committee")}
+                  sx={{
+                    my: 4,
+                    // color: "black",
+                  }}
+                >
+                  Executive Committee
+                </Button>
+              </Box>
+
               <Box
                 sx={{
                   width: "100%",
@@ -85,8 +159,10 @@ function AboutUs() {
       {/* About Us Container Grid Mobile */}
       <Grid
         container
+        id="ourJourney"
         sx={{
-          marginY: 11,
+          marginTop: 11,
+          marginBottom: 5,
           display: { xs: "flex", md: "none" },
         }}
       >
@@ -133,6 +209,54 @@ function AboutUs() {
                 </p>
               </Box>
 
+              {/* Buttons */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "90%",
+                  left: "23%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                }}
+              >
+                <a href="#ourJourney">
+                  <Button
+                    variant="contained"
+                    // onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 4,
+                      fontSize: 12,
+                    }}
+                  >
+                    Our Journey
+                  </Button>
+                </a>
+              </Box>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "90%",
+                  left: "77%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  // onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 4,
+                    fontSize: 12,
+                  }}
+                >
+                  Committee
+                </Button>
+              </Box>
+
               <Box
                 sx={{
                   width: "100%",
@@ -153,9 +277,10 @@ function AboutUs() {
         </Grid>
       </Grid>
 
-      {/* About Us Container Grid PC */}
+      {/* About Us Text Grid PC */}
       <Grid
         container
+        id="OurJourney"
         sx={{
           marginY: 6,
           paddingX: 30,
@@ -165,7 +290,7 @@ function AboutUs() {
         {/* Text Container PC */}
         <Grid item xs={12} className="h-auto justify-center items-center ">
           <p className="font-Lobster-Regular text-6xl">Our Journey</p>
-          <p className="font-Poppins-Regular text-[18px] text-left py-12">
+          <p className="font-Poppins-Regular text-[15px] text-left py-12">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, id
             nesciunt! Fuga dicta tempore consequuntur odio ut suscipit
             laudantium dolor, doloribus deleniti aperiam placeat, repellat
@@ -221,6 +346,258 @@ function AboutUs() {
             repellendus, distinctio dolor commodi ratione unde ab aliquid quae
             quas ullam.
           </p>
+        </Grid>
+      </Grid>
+
+      {/* About Us Text Grid Mobile */}
+      <Grid
+        container
+        id="OurJourney"
+        sx={{
+          marginY: 3,
+          marginTop: 0,
+          paddingX: 5,
+          display: { xs: "flex", md: "none" },
+        }}
+      >
+        {/* Text Container */}
+        {!readM ? (
+          <Grid item xs={12} className="h-auto justify-center items-center ">
+            <p className="font-Lobster-Regular text-4xl">Our Journey</p>
+            <p className="font-Poppins-Regular text-[12px] text-left pt-6 pb-1">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, id
+              nesciunt! Fuga dicta tempore consequuntur odio ut suscipit
+              laudantium dolor, doloribus deleniti aperiam placeat, repellat
+              repudiandae, accusantium aliquam. Quas cum, saepe possimus tempore
+              labore, odio reiciendis culpa doloribus asperiores consequuntur
+              eaque praesentium necessitatibus commodi temporibus suscipit,
+              quidem nobis? Laudantium fuga tempore itaque amet, consequuntur
+              laborum ipsa nisi, reprehenderit tempora iure nulla alias
+              praesentium repellat autem doloribus quasi. Numquam deserunt
+              nostrum ipsam sapiente explicabo ex labore, ab magnam, molestiae
+              sequi modi animi consequuntur a aut tempore eaque laudantium iusto
+              unde quas. Lorem ipsum dolor sit, amet consectetur adipisicing
+              elit. Ab porro dicta dolorem, inventore tempore nisi labore
+              reiciendis perspiciatis
+            </p>
+            <Button
+              variant="plain"
+              onClick={readMore}
+              size="sm"
+              sx={{
+                fontSize: 12,
+                color: "blue",
+              }}
+            >
+              Read More
+            </Button>
+          </Grid>
+        ) : (
+          <Grid item xs={12} className="h-auto justify-center items-center ">
+            <p className="font-Lobster-Regular text-4xl">Our Journey</p>
+            <p className="font-Poppins-Regular text-[12px] text-left pt-6 pb-1">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, id
+              nesciunt! Fuga dicta tempore consequuntur odio ut suscipit
+              laudantium dolor, doloribus deleniti aperiam placeat, repellat
+              repudiandae, accusantium aliquam. Quas cum, saepe possimus tempore
+              labore, odio reiciendis culpa doloribus asperiores consequuntur
+              eaque praesentium necessitatibus commodi temporibus suscipit,
+              quidem nobis? Laudantium fuga tempore itaque amet, consequuntur
+              laborum ipsa nisi, reprehenderit tempora iure nulla alias
+              praesentium repellat autem doloribus quasi. Numquam deserunt
+              nostrum ipsam sapiente explicabo ex labore, ab magnam, molestiae
+              sequi modi animi consequuntur a aut tempore eaque laudantium iusto
+              unde quas. Lorem ipsum dolor sit, amet consectetur adipisicing
+              elit. Ab porro dicta dolorem, inventore tempore nisi labore
+              reiciendis perspiciatis <br />
+              <br />
+              tempora consequatur aliquid quis asperiores suscipit veritatis
+              odio voluptates incidunt sequi provident ipsa. Iste ab nisi
+              suscipit delectus impedit inventore soluta blanditiis. Laboriosam
+              aperiam et ratione harum dignissimos similique, hic excepturi
+              nulla doloremque quam, quisquam sequi quaerat facilis enim
+              obcaecati placeat quae, deserunt laudantium ut eligendi dolor sed
+              praesentium consectetur amet? Repellat a fuga officia nisi beatae
+              voluptatibus explicabo obcaecati? Excepturi eum nemo facere,
+              veniam repellat sed dolores aliquam blanditiis, at recusandae
+              molestiae, soluta iure explicabo iusto ipsam porro necessitatibus.
+              Et maxime animi voluptates laborum ducimus. At odio quibusdam
+              aliquam nemo voluptatum architecto provident distinctio. Ex nemo
+              eaque pariatur? Doloremque labore a explicabo soluta pariatur
+              dignissimos cupiditate qui nesciunt ipsum consectetur? Aperiam,
+              fugiat quisquam voluptates ullam atque hic, suscipit quos numquam
+              rem tempore recusandae cupiditate optio <br />
+              <br />
+              blanditiis aliquid architecto rerum ea vero. Esse nostrum voluptas
+              officia cumque temporibus. Itaque nam explicabo atque culpa,
+              iusto, maiores, corrupti sit voluptate alias quas aperiam aliquam
+              similique minus est quis hic. Ab id quae vitae ex repellendus at
+              ipsa suscipit optio iusto! Accusantium voluptatum fugiat sint rem,
+              voluptates, quisquam enim animi laudantium deleniti distinctio nam
+              excepturi ea exercitationem numquam commodi iste ut sed quo
+              tempora unde tempore, quidem facilis magni non. Hic dignissimos
+              nemo expedita consectetur? Iusto alias quasi, officia quisquam
+              obcaecati, enim cum, commodi dignissimos fugiat laudantium ea.
+              Sunt numquam explicabo iure aspernatur sapiente,
+              <br />
+              <br /> consequuntur cum non aut! Modi vel deleniti accusamus
+              asperiores officia beatae veniam quia exercitationem numquam sunt?
+              Reiciendis, praesentium. Quia cum totam velit, ducimus tempore aut
+              impedit nesciunt? Corrupti rerum odio, ut dicta animi fugiat
+              delectus blanditiis? Hic aspernatur, a incidunt omnis maxime
+              eveniet labore illum voluptatem neque, ducimus laudantium optio
+              dignissimos quia fugiat repellendus repellat cumque debitis
+              recusandae. Ducimus reiciendis, ut debitis blanditiis at eligendi
+              enim tempora, dolorem exercitationem est sequi aperiam dolores
+              odit provident inventore repellendus, distinctio dolor commodi
+              ratione unde ab aliquid quae quas ullam.
+            </p>
+            <Button
+              variant="plain"
+              onClick={readMore}
+              size="sm"
+              sx={{
+                fontSize: 12,
+                color: "blue",
+              }}
+            >
+              Show Less
+            </Button>
+          </Grid>
+        )}
+      </Grid>
+
+      {/* Committee Grid PC */}
+      <Grid
+        container
+        id="Committee"
+        sx={{
+          marginY: 8,
+          display: { xs: "none", md: "flex" },
+        }}
+      >
+        {/* <Grid
+          item
+          xs={12}
+          className="h-auto flex justify-center items-center pb-8 "
+        >
+          <p className="font-Poppins-SemiBold text-5xl">
+            Executive Committee 22/23
+          </p>
+        </Grid> */}
+        {/* Image Container */}
+        <Grid item xs={12} className="h-auto flex justify-center items-center ">
+          <Grid container spacing={0}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  height: "150vh",
+                  backgroundImage: `url(${Team})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
+
+              {/* Text */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "10%",
+                  left: "50%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                }}
+              >
+                <p className="font-Poppins-SemiBold text-5xl">
+                  ViDe Executive Committee 22/23
+                </p>
+              </Box>
+
+              {/* President Card */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "36%",
+                  left: "50%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "45vh",
+                    height: "360px",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 10%,  transparent), url(${PresidentImage})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      position: "absolute",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "10%",
+                      left: 0,
+                      right: 0,
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                    }}
+                    className="font-Poppins-SemiBold"
+                  >
+                    President
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "5%",
+                      left: 0,
+                      right: 0,
+                      fontSize: "18px",
+                    }}
+                    className="font- Poppins-Regular"
+                  >
+                    Pramodya Samarakoon
+                  </div>
+                </div>
+              </Box>
+
+              {/* Committee Carousal */}
+
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "150vh",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 99,
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 25%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.5) 75%, rgba(0, 0, 0, 0.4) 100%)", // Gradient from left black to right transparent
+                  //   opacity: 0.7,
+                }}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
 

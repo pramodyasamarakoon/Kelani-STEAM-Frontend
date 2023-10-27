@@ -2,12 +2,14 @@ import { Grid } from "@mui/material";
 import NavBar from "../../Assets/Components/NavBar";
 import MehewaraImage from "../../Assets/Images/ProjectImages/Mehewara.jpg";
 import Footer from "../../Assets/Components/Footer/Footer";
+import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
 
 function HomePage() {
   return (
     <div className="w-full">
       {/* Nav Bar */}
       <NavBar />
+      <ScrollToTopButton />
       {/* Project Card PC */}
       <Grid
         container

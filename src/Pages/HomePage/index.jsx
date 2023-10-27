@@ -36,6 +36,7 @@ import BookImage from "../../Assets/Images/BookNowImage/BookNowSmall.jpg";
 import OpenInNew from "@mui/icons-material/OpenInNew";
 import NavBar from "../../Assets/Components/NavBar";
 import Footer from "../../Assets/Components/Footer/Footer";
+import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
 
 const heroImages = [
   {
@@ -214,137 +215,7 @@ function HomePage() {
     <div className="w-full">
       {/* Nav Bar */}
       <NavBar />
-      {/* <AppBar
-        position="fixed"
-        color="transparent"
-        sx={{ margin: 1, width: "99%" }}
-      >
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 6,
-                ml: 4,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <img src={Logo} alt="" className="h-[40px]" />
-            </Typography>
-
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <img src={Logo} alt="" className="h-[40px]" />
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: "black",
-                    display: "block",
-                    backgroundColor: "transparent",
-                    borderRadius: "1rem",
-                    marginX: "1rem",
-                  }}
-                >
-                  {page}
-                </Button>
-              ))}
-            </Box>
-
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Button
-                variant="contained"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  mx: 4,
-                  color: "black",
-                  display: "end",
-                  justifyContent: "end",
-                }}
-              >
-                Order the T-Shirt
-              </Button>
-            </Box>
-
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <Tooltip title="Order the T-Shirt">
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  // onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <ShoppingCartOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar> */}
+      <ScrollToTopButton />
 
       {/* Hero Section */}
       <Grid container spacing={2} sx={{ paddingLeft: 5 }}>
