@@ -1,7 +1,7 @@
 import { Box, Button, Fab, Grid, Typography } from "@mui/material";
 import NavBar from "../../Assets/Components/NavBar";
-import Team from "../../Assets/Images/BookNowImage/Team.jpg";
-import PresidentImage from "../../Assets/Images/Committee/ViDe/President.jpg";
+import Team from "../../Assets/Images/BookNowImage/TeamMedium.jpg";
+import PresidentImage from "../../Assets/Images/Committee/ViDe/PresidentMedium.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../../../src/Assets/LogoWhite.png";
 import Footer from "../../Assets/Components/Footer/Footer";

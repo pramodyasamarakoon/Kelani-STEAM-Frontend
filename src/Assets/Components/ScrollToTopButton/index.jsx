@@ -1,5 +1,6 @@
 import { Box, Fab, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 
 function ScrollToTopButton() {
   // useEffect for scroll visibility and cleanup
@@ -54,8 +55,8 @@ function ScrollToTopButton() {
       }}
     >
       <Fab color="primary" aria-label="scroll to top" onClick={scrollToTop}>
-        {/* <KeyboardArrowUpIcon /> */}
-        <p>Up</p>
+        <KeyboardArrowUpOutlinedIcon />
+        {/* <p>Up</p> */}
       </Fab>
     </div>
   );
