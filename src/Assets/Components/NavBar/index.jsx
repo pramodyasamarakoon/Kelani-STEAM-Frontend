@@ -15,7 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Logo from "../../../Assets/Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import back20 from "../../Images/Back20Small.jpg";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const pages = [
@@ -63,7 +63,12 @@ function NavBar() {
     <AppBar
       position="fixed"
       color="transparent"
-      sx={{ margin: 1, width: "99%" }}
+      sx={{
+        margin: 1,
+        width: "99%",
+        background: `url(${back20})`, // Replace 'path/to/your/image.jpg' with the actual path to your background image
+        backgroundSize: "cover",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>

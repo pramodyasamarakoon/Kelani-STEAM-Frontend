@@ -1,35 +1,15 @@
-import * as React from "react";
-import { useState } from "react";
-import AppBar from "@mui/material/AppBar";
+import React, { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import Logo from "../../Assets/Logo.png";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Grid, ImageList, ImageListItem } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
-import Cover01 from "../../Assets/Cover01.jpg";
-// import require from "require";
-import img01 from "../../Assets/Images/HeroImages/01.jpg";
-import img02 from "../../Assets/Images/HeroImages/02.jpg";
-import img03 from "../../Assets/Images/HeroImages/03.jpg";
-import img04 from "../../Assets/Images/HeroImages/04.jpg";
-import img05 from "../../Assets/Images/HeroImages/05.jpg";
-import img06 from "../../Assets/Images/HeroImages/06.jpg";
-import img07 from "../../Assets/Images/HeroImages/07.jpg";
-import img08 from "../../Assets/Images/HeroImages/08.jpg";
-import img09 from "../../Assets/Images/HeroImages/09.jpg";
-import img10 from "../../Assets/Images/HeroImages/10.jpg";
+import {
+  Grid,
+  ImageList,
+  ImageListItem,
+  Collapse,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material";
 import AboutUsSmall from "../../Assets/Images/AboutUsImage/AboutUsSmall.jpg";
 import TShirtSmall from "../../Assets/Images/TShirtImage/TShirtSmall.jpg";
 import BookImage from "../../Assets/Images/BookNowImage/BookNowSmall.jpg";
@@ -37,45 +17,10 @@ import OpenInNew from "@mui/icons-material/OpenInNew";
 import NavBar from "../../Assets/Components/NavBar";
 import Footer from "../../Assets/Components/Footer/Footer";
 import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
-
-const heroImages = [
-  {
-    img: img01,
-    title: "Image 01",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: img02,
-    title: "Image 02",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: img03,
-    title: "Image 03",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: img04,
-    title: "Image 04",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: img05,
-    title: "Image 05",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: img06,
-    title: "Image 06",
-    rows: 2,
-    cols: 1,
-  },
-];
+import { Link } from "react-router-dom";
+import BookingForm from "../BookingForm";
+import BackgroundBlur from "../../Assets/Components/BlurBackground";
+import back20 from "../../Assets/Images/Back20Small.jpg";
 
 const itemData = [
   {
@@ -186,29 +131,90 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
-const pages = ["Home", "Our Projects", "About Us", "Contact Us"];
-
 function HomePage() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [showAboutUs, setShowAboutUs] = useState(false);
+  const [showGridBelow, setShowGridBelow] = useState(false);
+  const [showEventContainer, setShowEventContainer] = useState(false);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  useEffect(() => {
+    const aboutUsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShowAboutUs(true);
+          } else {
+            setShowAboutUs(false);
+          }
+        });
+      },
+      { threshold: 0.3 } // Trigger callback when 30% of the target is visible
+    );
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    const gridBelowObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShowGridBelow(true);
+          } else {
+            setShowGridBelow(false);
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger callback when 30% of the target is visible
+    );
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    const eventContainerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShowEventContainer(true);
+          } else {
+            setShowEventContainer(false);
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger callback when 30% of the target is visible
+    );
 
-  const colors = {
-    black: "#212121",
+    const aboutUsSection = document.getElementById("about-us-section");
+    const gridBelowSection = document.getElementById("grid-below-section");
+    const eventContainerSection = document.getElementById(
+      "event-container-section"
+    );
+
+    if (aboutUsSection) {
+      aboutUsObserver.observe(aboutUsSection);
+    }
+
+    if (gridBelowSection) {
+      gridBelowObserver.observe(gridBelowSection);
+    }
+
+    if (eventContainerSection) {
+      eventContainerObserver.observe(eventContainerSection);
+    }
+
+    // Cleanup the observers on component unmount
+    return () => {
+      aboutUsObserver.disconnect();
+      gridBelowObserver.disconnect();
+      eventContainerObserver.disconnect();
+    };
+  }, []); // Empty dependency array ensures the effect runs once after the initial render
+
+  // Submit Form Handling
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleFormSubmit = (formData) => {
+    // Handle form submission logic here
+    setIsLoading(true);
+
+    // Simulate an API call or any asynchronous operation
+    setTimeout(() => {
+      setIsLoading(false);
+      console.log("Form Data Submitted:", formData);
+    }, 2000);
   };
 
   return (
@@ -341,11 +347,12 @@ function HomePage() {
         <Grid
           container
           spacing={2}
+          className="h-[500px] flex justify-center items-center "
+          id="about-us-section"
           sx={{
             marginX: 16,
             marginTop: 10,
             marginBottom: 5,
-            display: { xs: "none", md: "flex" },
           }}
         >
           {/*About US Topic */}
@@ -354,7 +361,9 @@ function HomePage() {
             xs={12}
             className="h-auto flex justify-center items-center "
           >
-            <p className="font-Poppins-SemiBold text-5xl pt-4">About Us</p>
+            <Collapse in={showAboutUs} timeout={1000}>
+              <p className="font-Poppins-SemiBold text-5xl pt-4">About Us</p>
+            </Collapse>
           </Grid>
           {/*About US Group Photo */}
           <Grid
@@ -363,7 +372,10 @@ function HomePage() {
             className="h-auto flex justify-center items-center "
             sx={{ padding: 6 }}
           >
-            <img className="m-10" src={AboutUsSmall} alt="Team Photo" />
+            <Collapse in={showAboutUs} timeout={1000}>
+              {" "}
+              <img className="m-10" src={AboutUsSmall} alt="Team Photo" />
+            </Collapse>
           </Grid>
           {/*About US Content */}
           <Grid
@@ -372,37 +384,41 @@ function HomePage() {
             className="h-auto flex justify-center items-center "
             // sx={{ padding: 6 }}
           >
-            <Grid container>
-              <Grid
-                item
-                xs={12}
-                className="h-auto flex justify-start items-center"
-                // sx={{ padding: 6 }}
-              >
-                <p className=" font-Poppins-Regular text-[16px]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quaerat eos laborum sit? Repudiandae, dicta, aliquid eligendi
-                  cum excepturi quod aliquam, alias quidem perspiciatis dolores
-                  ab quisquam voluptatibus eos nobis impedit! <br />
-                  <br /> Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Nam cumque sit eligendi laudantium nesciunt numquam
-                  odit? Id sunt, blanditiis dolores recusandae laudantium
-                  maiores ex iste, impedit ducimus provident magnam quidem?
-                </p>
-              </Grid>
-              <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>
-                <Button
-                  variant="contained"
-                  // onClick={handleCloseNavMenu}
-                  sx={{
-                    mx: 4,
-                    // color: "black",
-                  }}
+            <Collapse in={showAboutUs} timeout={2000}>
+              {" "}
+              <Grid container>
+                <Grid
+                  item
+                  xs={12}
+                  className="h-auto flex justify-start items-center"
+                  // sx={{ padding: 6 }}
                 >
-                  Read More...
-                </Button>
+                  <p className=" font-Poppins-Regular text-[16px]">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quaerat eos laborum sit? Repudiandae, dicta, aliquid
+                    eligendi cum excepturi quod aliquam, alias quidem
+                    perspiciatis dolores ab quisquam voluptatibus eos nobis
+                    impedit! <br />
+                    <br /> Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Nam cumque sit eligendi laudantium nesciunt numquam
+                    odit? Id sunt, blanditiis dolores recusandae laudantium
+                    maiores ex iste, impedit ducimus provident magnam quidem?
+                  </p>
+                </Grid>
+                <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>
+                  <Button
+                    variant="contained"
+                    // onClick={handleCloseNavMenu}
+                    sx={{
+                      mx: 4,
+                      // color: "black",
+                    }}
+                  >
+                    Read More...
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            </Collapse>
           </Grid>
         </Grid>
 
@@ -478,6 +494,7 @@ function HomePage() {
         <Grid
           container
           spacing={2}
+          id="grid-below-section"
           sx={{ marginX: 16, display: { xs: "none", md: "flex" } }}
         >
           {/*T Shirt Topic */}
@@ -486,11 +503,14 @@ function HomePage() {
             xs={12}
             className="h-auto flex justify-center items-center "
           >
-            <p className="font-Poppins-SemiBoldItalic text-5xl pt-4">
-              Member T Shirts Are Available Now
-            </p>
+            <Collapse in={showGridBelow} timeout={1000}>
+              <p className="font-Poppins-SemiBoldItalic text-5xl pt-4">
+                Member T Shirts Are Available Now
+              </p>
+            </Collapse>
           </Grid>
           {/*T Shirt Content */}
+
           <Grid container spacing={2} sx={{ marginTop: 2, marginX: 36 }}>
             {/*T Shirt Button */}
             <Grid
@@ -499,16 +519,19 @@ function HomePage() {
               className="h-auto flex justify-center items-center "
               // sx={{ padding: 6 }}
             >
-              <Button
-                variant="contained"
-                // onClick={handleCloseNavMenu}
-                sx={{
-                  mx: 4,
-                  // color: "black",
-                }}
-              >
-                Order Now
-              </Button>
+              {" "}
+              <Collapse in={showGridBelow} timeout={2000}>
+                <Button
+                  variant="contained"
+                  // onClick={handleCloseNavMenu}
+                  sx={{
+                    mx: 4,
+                    // color: "black",
+                  }}
+                >
+                  Order Now
+                </Button>
+              </Collapse>
             </Grid>
             {/*T Shirt Photo */}
             <Grid
@@ -517,7 +540,10 @@ function HomePage() {
               className="h-auto flex justify-center items-center "
               // sx={{ marginX: 36 }}
             >
-              <img className="m-10" src={TShirtSmall} alt="T Shirt Flyer" />
+              {" "}
+              <Collapse in={showGridBelow} timeout={1000}>
+                <img className="m-10" src={TShirtSmall} alt="T Shirt Flyer" />
+              </Collapse>
             </Grid>
           </Grid>
         </Grid>
@@ -575,6 +601,7 @@ function HomePage() {
         {/* Book Now Grid PC */}
         <Grid
           container
+          id="event-container-section"
           sx={{
             marginY: 5,
             marginLeft: -1,
@@ -622,19 +649,25 @@ function HomePage() {
                     transform: "translate(-50%, -50%)",
                   }}
                 >
-                  <p className="font-Lobster-Regular text-6xl">
-                    Do You Want Us to Cover Your Event?
-                  </p>
-                  <Button
-                    variant="contained"
-                    // onClick={handleCloseNavMenu}
-                    sx={{
-                      my: 4,
-                      // color: "black",
-                    }}
-                  >
-                    Order Now
-                  </Button>
+                  <Collapse in={showEventContainer} timeout={3000}>
+                    <p className="font-Lobster-Regular text-6xl">
+                      Do You Want Us to Cover Your Event?
+                    </p>
+                  </Collapse>
+                  <Collapse in={showEventContainer} timeout={3000}>
+                    {/* <Link to="/BookingForm"> */}
+                    <Button
+                      variant="contained"
+                      onClick={() => setIsFormOpen(true)}
+                      sx={{
+                        my: 4,
+                        // color: "black",
+                      }}
+                    >
+                      Book Now
+                    </Button>
+                    {/* </Link> */}
+                  </Collapse>
                 </Box>
 
                 <Box
@@ -655,6 +688,33 @@ function HomePage() {
             </Grid>
           </Grid>
         </Grid>
+
+        {/* Booking Form Dialog */}
+        <Dialog
+          open={isFormOpen}
+          onClose={() => setIsFormOpen(false)}
+          PaperProps={{
+            style: {
+              // backgroundColor: "rgba(0, 0, 0)",
+              background: `url(${back20})`, // Replace 'path/to/your/image.jpg' with the actual path to your background image
+              backgroundSize: "cover", // Adjust the background size as needed
+              // opacity: 0.8, // Set the opacity of the background image
+            },
+          }}
+        >
+          <DialogTitle style={{ textAlign: "center", paddingTop: 15 }}>
+            Booking Form
+          </DialogTitle>
+          <DialogContent>
+            <BookingForm
+              onSubmit={handleFormSubmit}
+              onClose={() => setIsFormOpen(false)}
+            />
+          </DialogContent>
+        </Dialog>
+
+        {/* Background Blur */}
+        {isFormOpen && <BackgroundBlur isLoading={isLoading} />}
 
         {/* Book Now Grid Mobile */}
         <Grid
