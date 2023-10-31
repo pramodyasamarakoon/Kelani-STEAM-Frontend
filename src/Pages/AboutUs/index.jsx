@@ -1,7 +1,7 @@
 import { Box, Button, Fab, Grid, Typography } from "@mui/material";
 import NavBar from "../../Assets/Components/NavBar";
 import Team from "../../Assets/Images/BookNowImage/TeamMedium.jpg";
-import PresidentImage from "../../Assets/Images/Committee/ViDe/PresidentMedium.jpg";
+import PresidentImage from "../../Assets/Images/Committee/ViDe/President.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../../../src/Assets/LogoWhite.png";
 import Footer from "../../Assets/Components/Footer/Footer";
@@ -9,6 +9,15 @@ import { useEffect, useState } from "react";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
+import CommitteeSwiper from "../../Assets/Components/CommitteeSwiper";
+import HoverCard from "../../Assets/Components/PresidentHoverCard";
+import {
+  STEAM_bg_img,
+  vide_bg_img,
+  presidents,
+  steamCommittee,
+  videCommittee,
+} from "../../Assets/Components/const";
 
 function AboutUs() {
   const [readM, setReadM] = useState(false);
@@ -467,7 +476,7 @@ function AboutUs() {
         )}
       </Grid>
 
-      {/* Committee Grid PC */}
+      {/* viDe Committee Grid PC */}
       <Grid
         container
         id="Committee"
@@ -476,16 +485,16 @@ function AboutUs() {
           display: { xs: "none", md: "flex" },
         }}
       >
-        {/* <Grid
+        <Grid
           item
           xs={12}
           className="h-auto flex justify-center items-center pb-8 "
         >
           <p className="font-Poppins-SemiBold text-5xl">
-            Executive Committee 22/23
+            ViDe Executive Committee 22/23
           </p>
-        </Grid> */}
-        {/* Image Container */}
+        </Grid>
+        {/* Committee Container */}
         <Grid item xs={12} className="h-auto flex justify-center items-center ">
           <Grid container spacing={0}>
             <Grid
@@ -495,106 +504,52 @@ function AboutUs() {
                 position: "relative",
               }}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "150vh",
-                  backgroundImage: `url(${Team})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
+              <CommitteeSwiper
+                bgImg={vide_bg_img.url}
+                presidentPosition={presidents[0].position}
+                presidentName={presidents[0].name}
+                presidentImg={presidents[0].img}
+                isPresident={true}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
 
-              {/* Text */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "10%",
-                  left: "50%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                }}
-              >
-                <p className="font-Poppins-SemiBold text-5xl">
-                  ViDe Executive Committee 22/23
-                </p>
-              </Box>
-
-              {/* President Card */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "36%",
-                  left: "50%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                }}
-              >
-                <div
-                  style={{
-                    width: "45vh",
-                    height: "360px",
-                    position: "relative",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 10%,  transparent), url(${PresidentImage})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      position: "absolute",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "10%",
-                      left: 0,
-                      right: 0,
-                      fontSize: "24px",
-                      fontWeight: "bold",
-                    }}
-                    className="font-Poppins-SemiBold"
-                  >
-                    President
-                  </div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "5%",
-                      left: 0,
-                      right: 0,
-                      fontSize: "18px",
-                    }}
-                    className="font- Poppins-Regular"
-                  >
-                    Pramodya Samarakoon
-                  </div>
-                </div>
-              </Box>
-
-              {/* Committee Carousal */}
-
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "150vh",
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 99,
-                  backgroundImage:
-                    "linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 25%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.5) 75%, rgba(0, 0, 0, 0.4) 100%)", // Gradient from left black to right transparent
-                  //   opacity: 0.7,
-                }}
+      {/* STEAM Committee Grid PC */}
+      <Grid
+        container
+        id="Committee"
+        sx={{
+          marginY: 8,
+          display: { xs: "none", md: "flex" },
+        }}
+      >
+        <Grid
+          item
+          xs={12}
+          className="h-auto flex justify-center items-center pb-8 "
+        >
+          <p className="font-Poppins-SemiBold text-5xl">
+            STEAM Executive Committee 22/23
+          </p>
+        </Grid>
+        {/* Committee Container */}
+        <Grid item xs={12} className="h-auto flex justify-center items-center ">
+          <Grid container spacing={0}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                position: "relative",
+              }}
+            >
+              <CommitteeSwiper
+                bgImg={STEAM_bg_img.url}
+                presidentPosition={presidents[1].position}
+                presidentName={presidents[1].name}
+                presidentImg={presidents[1].img}
+                isPresident={false}
               />
             </Grid>
           </Grid>

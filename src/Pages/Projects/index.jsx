@@ -3,6 +3,7 @@ import NavBar from "../../Assets/Components/NavBar";
 import MehewaraImage from "../../Assets/Images/ProjectImages/Mehewara.jpg";
 import Footer from "../../Assets/Components/Footer/Footer";
 import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
+import Loader from "../../Assets/Components/Loader";
 
 function HomePage() {
   return (

@@ -222,6 +222,7 @@ function HomePage() {
       {/* Nav Bar */}
       <NavBar />
       <ScrollToTopButton />
+      
 
       {/* Hero Section */}
       <Grid container spacing={2} sx={{ paddingLeft: 5 }}>
