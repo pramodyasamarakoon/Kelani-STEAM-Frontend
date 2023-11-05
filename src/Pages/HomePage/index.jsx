@@ -21,6 +21,8 @@ import { Link } from "react-router-dom";
 import BookingForm from "../BookingForm";
 import BackgroundBlur from "../../Assets/Components/BlurBackground";
 import back20 from "../../Assets/Images/Back20Small.jpg";
+import Loader from "../../Assets/Components/Loader";
+import AlbumContainer from "../../Assets/Components/AlbumContainer";
 
 const itemData = [
   {
@@ -217,12 +219,21 @@ function HomePage() {
     }, 2000);
   };
 
+  // const openDialogForm = () => {
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     setIsFormOpen(true);
+  //   }, 2000);
+  // };
+
   return (
     <div className="w-full">
       {/* Nav Bar */}
       <NavBar />
       <ScrollToTopButton />
-      
+
+      {isFormOpen ? <Loader /> : null}
 
       {/* Hero Section */}
       <Grid container spacing={2} sx={{ paddingLeft: 5 }}>
@@ -504,11 +515,11 @@ function HomePage() {
             xs={12}
             className="h-auto flex justify-center items-center "
           >
-            <Collapse in={showGridBelow} timeout={1000}>
-              <p className="font-Poppins-SemiBoldItalic text-5xl pt-4">
-                Member T Shirts Are Available Now
-              </p>
-            </Collapse>
+            {/* <Collapse in={showGridBelow} timeout={1000}> */}
+            <p className="font-Poppins-SemiBoldItalic text-5xl pt-4">
+              Member T Shirts Are Available Now
+            </p>
+            {/* </Collapse> */}
           </Grid>
           {/*T Shirt Content */}
 
@@ -542,9 +553,9 @@ function HomePage() {
               // sx={{ marginX: 36 }}
             >
               {" "}
-              <Collapse in={showGridBelow} timeout={1000}>
-                <img className="m-10" src={TShirtSmall} alt="T Shirt Flyer" />
-              </Collapse>
+              {/* <Collapse in={showGridBelow} timeout={1000}> */}
+              <img className="m-10" src={TShirtSmall} alt="T Shirt Flyer" />
+              {/* </Collapse> */}
             </Grid>
           </Grid>
         </Grid>
@@ -599,6 +610,22 @@ function HomePage() {
           </Grid>
         </Grid>
 
+        {/* Albums Grid PC */}
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            marginX: 10,
+            marginTop: 8,
+            display: { xs: "none", md: "flex" },
+          }}
+        >
+          <Grid item xs={12} sx={{ textAlign: "left" }}>
+            <p className="font-OpenSans-SemiBold text-4xl">Recent Albums</p>
+          </Grid>
+        </Grid>
+        <AlbumContainer />
+
         {/* Book Now Grid PC */}
         <Grid
           container
@@ -650,25 +677,26 @@ function HomePage() {
                     transform: "translate(-50%, -50%)",
                   }}
                 >
-                  <Collapse in={showEventContainer} timeout={3000}>
-                    <p className="font-Lobster-Regular text-6xl">
-                      Do You Want Us to Cover Your Event?
-                    </p>
-                  </Collapse>
-                  <Collapse in={showEventContainer} timeout={3000}>
-                    {/* <Link to="/BookingForm"> */}
-                    <Button
-                      variant="contained"
-                      onClick={() => setIsFormOpen(true)}
-                      sx={{
-                        my: 4,
-                        // color: "black",
-                      }}
-                    >
-                      Book Now
-                    </Button>
-                    {/* </Link> */}
-                  </Collapse>
+                  {/* <Collapse in={showEventContainer} timeout={3000}> */}
+                  <p className="font-Lobster-Regular text-6xl">
+                    Do You Want Us to Cover Your Event?
+                  </p>
+                  {/* </Collapse> */}
+                  {/* <Collapse in={showEventContainer} timeout={3000}> */}
+                  {/* <Link to="/BookingForm"> */}
+                  <Button
+                    variant="contained"
+                    onClick={() => setIsFormOpen(true)}
+                    // onClick={() => openDialogForm()}
+                    sx={{
+                      my: 4,
+                      // color: "black",
+                    }}
+                  >
+                    Book Now
+                  </Button>
+                  {/* </Link> */}
+                  {/* </Collapse> */}
                 </Box>
 
                 <Box
