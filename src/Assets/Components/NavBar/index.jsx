@@ -33,7 +33,7 @@ const pages = [
   },
   {
     label: "Contact Us",
-    link: "/",
+    link: "/ContactUs",
   },
 ];
 

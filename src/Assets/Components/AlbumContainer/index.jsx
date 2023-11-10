@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { recent_albums } from "../const";
+import Loader from "../Loader";
 
 const AlbumContainer = () => {
   const AlbumData = recent_albums.slice(0, 7);
   console.log(AlbumData, "AlbumData");
   const [albumIndex, setAlbumIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleAlbumNameClick = (index) => {
     setAlbumIndex(index);
     console.log(`Grid at index ${index} clicked.`);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -29,7 +36,7 @@ const AlbumContainer = () => {
       {/* Album Title */}
       <Grid
         item
-        xs={8}
+        xs={8.5}
         sx={{
           backgroundColor: "#e0e0e0",
           height: "430px",
@@ -77,7 +84,7 @@ const AlbumContainer = () => {
       {/* Text Container */}
       <Grid
         item
-        xs={3.9}
+        xs={3.4}
         sx={{
           borderRadius: "20px",
           borderWidth: "3px",
@@ -143,37 +150,41 @@ const AlbumContainer = () => {
         sx={{
           position: "absolute",
           top: "52%",
-          left: "55%",
+          left: "58%",
           zIndex: 100,
           color: "white",
           transform: "translate(-50%, -50%)",
         }}
       >
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            display: "flex",
-            justifyContent: "space-around",
-            width: "450px",
-          }}
-        >
-          {AlbumData[albumIndex].imgLinks.map((imgLinks) => (
-            <Grid
-              item
-              xs={5.9}
-              sx={{
-                borderRadius: "20px",
-                backgroundColor: "#616161",
-                height: "180px",
-                marginBottom: 0.5,
-                backgroundImage: `url(${imgLinks})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></Grid>
-          ))}
-        </Grid>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              width: "450px",
+            }}
+          >
+            {AlbumData[albumIndex].imgLinks.map((imgLinks) => (
+              <Grid
+                item
+                xs={5.9}
+                sx={{
+                  borderRadius: "20px",
+                  backgroundColor: "#616161",
+                  height: "180px",
+                  marginBottom: 0.5,
+                  backgroundImage: `url(${imgLinks})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></Grid>
+            ))}
+          </Grid>
+        )}
       </Box>
     </Grid>
   );
