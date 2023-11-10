@@ -4,7 +4,7 @@ import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
 import { Avatar, Box, Button, Grid, Stack } from "@mui/material";
 import Footer from "../../Assets/Components/Footer/Footer";
 import facebook from "../../Assets/Icons/Images/Facebook.png";
-import instagram from "../../Assets/Icons/Images/Facebook.png";
+import instagram from "../../Assets/Icons/Images/Instagram.png";
 
 const ContactUs = () => {
   const [selectedIcon, setSelectedIcon] = useState("facebook");
@@ -127,7 +127,7 @@ const ContactUs = () => {
             />
           </Stack>
         </div>
-        {/* Facebook Image Container */}
+        {/*  Image Container */}
         <div
           style={{
             width: "66%",
@@ -136,7 +136,7 @@ const ContactUs = () => {
             backgroundImage:
               selectedIcon === "facebook"
                 ? `url(${facebook})`
-                : selectedIcon === "facebook"
+                : selectedIcon === "instagram"
                 ? `url(${instagram})`
                 : null,
             backgroundSize: "cover",
@@ -146,7 +146,7 @@ const ContactUs = () => {
             left: "6%",
           }}
         ></div>
-        {/* Facebook text grid */}
+        {/*  text grid */}
         <div
           className="h-[460px]"
           style={{

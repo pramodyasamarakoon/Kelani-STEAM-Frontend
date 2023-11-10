@@ -12,6 +12,7 @@ import DirectorHoverCard from "../DirectorHoverCard";
 import { presidents, videCommittee, steamCommittee } from "../const";
 import CommitteeHoverCard from "../CommitteeCard";
 import CommitteeCard from "../CommitteeCard";
+import committee01 from "../../Images/Committee/Committee01.png";
 
 const CommitteeSwiper = ({
   bgImg,
@@ -114,6 +115,59 @@ const CommitteeSwiper = ({
         >
           {isPresident ? <PresidentHoverCard /> : <DirectorHoverCard />}
         </div>
+        {/* <div
+          style={{
+            width: "491px",
+            height: "201px",
+            position: "relative",
+            zIndex: 103,
+            left: "50%", // Align to the left
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            // justifyContent: "center",
+            marginRight: "20px", // Add right margin
+            // background: "linear-gradient(to right, #ED1B1B, #1A1515)", // Gradient from #ED1B1B to #1A1515
+            background: "#e0e0e0",
+            borderRadius: "30px",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              zIndex: 103,
+              left: "35%", // Align to the left
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              textAlign: "left",
+              color: "black",
+            }}
+          >
+            <p className="font-Poppins-SemiBold text-[32px]">
+              {presidentPosition}
+            </p>
+            <p className="font-Poppins-Regular text-[16px]">{presidentName}</p>
+            <p className="font-Poppins-Regular text-[12px]">Level 04</p>
+            <p className="font-Poppins-Regular text-[12px]">
+              Department of Industrial Management
+            </p>
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              zIndex: 103,
+              left: "80%", // Align to the left
+              top: "40%",
+              transform: "translate(-50%, -50%)",
+              "background-image": `url(${committee01})`,
+              width: "50%",
+              height: "120%",
+              WebkitBackgroundSize: "cover",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          ></div>
+        </div> */}
       </SwiperSlide>
 
       {/* 2nd Slide */}
