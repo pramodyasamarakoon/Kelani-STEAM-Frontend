@@ -80,7 +80,7 @@ const CommitteeSwiper = ({
       {/* President Slide */}
       <SwiperSlide>
         {/* Text */}
-        <div
+        {/* <div
           style={{
             position: "absolute",
             zIndex: 103,
@@ -98,9 +98,9 @@ const CommitteeSwiper = ({
             {presidentPosition}
           </p>
           <p className="font-Poppins-Regular text-[25px]">{presidentName}</p>
-        </div>
+        </div> */}
         {/* President Card */}
-        <div
+        {/* <div
           style={{
             position: "absolute",
             zIndex: 103,
@@ -114,60 +114,67 @@ const CommitteeSwiper = ({
           }}
         >
           {isPresident ? <PresidentHoverCard /> : <DirectorHoverCard />}
-        </div>
-        {/* <div
-          style={{
-            width: "491px",
-            height: "201px",
-            position: "relative",
-            zIndex: 103,
-            left: "50%", // Align to the left
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-            display: "flex",
-            // justifyContent: "center",
-            marginRight: "20px", // Add right margin
-            // background: "linear-gradient(to right, #ED1B1B, #1A1515)", // Gradient from #ED1B1B to #1A1515
-            background: "#e0e0e0",
-            borderRadius: "30px",
-          }}
-        >
+        </div> */}
+        <div style={{ width: "100%", height: "100%", position: "relative" }}>
           <div
             style={{
-              position: "absolute",
-              zIndex: 103,
-              left: "35%", // Align to the left
+              width: 491,
+              height: 201,
+              left: "50%",
               top: "50%",
               transform: "translate(-50%, -50%)",
-              textAlign: "left",
-              color: "black",
+              position: "absolute",
+              background: "rgba(212.50, 212.50, 206.30, 0.70)",
+              boxShadow: "8px 0px 10px rgba(0, 0, 0, 0.25)",
+              borderRadius: 30,
             }}
-          >
-            <p className="font-Poppins-SemiBold text-[32px]">
-              {presidentPosition}
-            </p>
-            <p className="font-Poppins-Regular text-[16px]">{presidentName}</p>
-            <p className="font-Poppins-Regular text-[12px]">Level 04</p>
-            <p className="font-Poppins-Regular text-[12px]">
-              Department of Industrial Management
-            </p>
-          </div>
+          />
+          <img
+            alt="president"
+            style={{
+              width: 233,
+              height: 255,
+              left: "60%",
+              top: "43%",
+              transform: "translate(-50%, -50%)",
+              position: "absolute",
+              // boxShadow: "10px 4px 10px rgba(0, 0, 0, 1)",
+            }}
+            src={committee01}
+          />
           <div
             style={{
-              position: "absolute",
-              zIndex: 103,
-              left: "80%", // Align to the left
-              top: "40%",
+              width: "300px",
+              left: "45%",
+              top: "50%",
               transform: "translate(-50%, -50%)",
-              "background-image": `url(${committee01})`,
-              width: "50%",
-              height: "120%",
-              WebkitBackgroundSize: "cover",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              position: "absolute",
+              color: "black",
+              textAlign: "left",
             }}
-          ></div>
-        </div> */}
+          >
+            <p className="font-Poppins-SemiBold text-4xl">
+              {presidentPosition}
+            </p>
+            <p className="font-Poppins-Regular text-[18px]">{presidentName}</p>
+          </div>
+          {/* <div
+            style={{
+              width: 220,
+              left: 50,
+              top: 163,
+              position: "absolute",
+              color: "black",
+              fontSize: 12,
+              fontFamily: "Manrope",
+              fontWeight: "500",
+              wordWrap: "break-word",
+            }}
+          >
+            Level 4<br />
+            Department of Industrial Management
+          </div> */}
+        </div>
       </SwiperSlide>
 
       {/* 2nd Slide */}
@@ -208,7 +215,7 @@ const CommitteeSwiper = ({
                 transform: "translate(-50%, -50%)",
                 display: "flex",
                 justifyContent: "center",
-                marginRight: "20px", //
+                // marginRight: "20px", //
               }}
             >
               <CommitteeCard img={committeeMember.img} />

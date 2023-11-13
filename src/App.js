@@ -6,6 +6,7 @@ import Projects from './Pages/Projects';
 import AboutUs from './Pages/AboutUs';
 import BookingForm from './Pages/BookingForm';
 import ContactUs from './Pages/ContactUs';
+import OrderTShirtFormPage from './Pages/OrderTShirtFormPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/AboutUs" element={<AboutUs/>} />
         <Route path="/BookingForm" element={<BookingForm/>} />
         <Route path="/ContactUs" element={<ContactUs/>} />
+        <Route path="/OrderTShirtFormPage" element={<OrderTShirtFormPage/>} />
       </Routes>
     </BrowserRouter>
     </div>
