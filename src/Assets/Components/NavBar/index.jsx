@@ -17,6 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import back20 from "../../Images/Back20Small.jpg";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { Link } from "react-router-dom";
 
 const pages = [
   {
@@ -37,7 +38,8 @@ const pages = [
   },
 ];
 
-function NavBar() {
+const NavBar = ({ visibilityOfOrderButton = true }) => {
+  // console.log("NavBar visibilityOfOrderButton:", visibilityOfOrderButton);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -168,38 +170,45 @@ function NavBar() {
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button
-              variant="contained"
-              onClick={handleCloseNavMenu}
-              sx={{
-                mx: 4,
-                color: "black",
-                display: "end",
-                justifyContent: "end",
-              }}
-            >
-              Order the T-Shirt
-            </Button>
+            {visibilityOfOrderButton !== undefined &&
+            visibilityOfOrderButton ? (
+              <Link to="/OrderTShirtFormPage">
+                <Button
+                  variant="contained"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    mx: 4,
+                    color: "black",
+                    display: "end",
+                    justifyContent: "end",
+                  }}
+                >
+                  Order the T-Shirt
+                </Button>
+              </Link>
+            ) : null}
           </Box>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <Tooltip title="Order the T-Shirt">
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                // onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <ShoppingCartOutlinedIcon />
-              </IconButton>
-            </Tooltip>
+            {visibilityOfOrderButton ? (
+              <Tooltip title="Order the T-Shirt">
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  // onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <ShoppingCartOutlinedIcon />
+                </IconButton>
+              </Tooltip>
+            ) : null}
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 
 export default NavBar;

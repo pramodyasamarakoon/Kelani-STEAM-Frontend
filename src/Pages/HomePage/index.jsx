@@ -533,16 +533,18 @@ function HomePage() {
             >
               {" "}
               <Collapse in={showGridBelow} timeout={2000}>
-                <Button
-                  variant="contained"
-                  // onClick={handleCloseNavMenu}
-                  sx={{
-                    mx: 4,
-                    // color: "black",
-                  }}
-                >
-                  Order Now
-                </Button>
+                <Link to="/OrderTShirtFormPage">
+                  <Button
+                    variant="contained"
+                    // onClick={handleCloseNavMenu}
+                    sx={{
+                      mx: 4,
+                      // color: "black",
+                    }}
+                  >
+                    Order Now
+                  </Button>
+                </Link>
               </Collapse>
             </Grid>
             {/*T Shirt Photo */}
