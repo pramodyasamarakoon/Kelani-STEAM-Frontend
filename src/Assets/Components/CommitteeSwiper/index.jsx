@@ -80,7 +80,7 @@ const CommitteeSwiper = ({
       {/* President Slide */}
       <SwiperSlide>
         {/* Text */}
-        {/* <div
+        <div
           style={{
             position: "absolute",
             zIndex: 103,
@@ -98,9 +98,9 @@ const CommitteeSwiper = ({
             {presidentPosition}
           </p>
           <p className="font-Poppins-Regular text-[25px]">{presidentName}</p>
-        </div> */}
+        </div>
         {/* President Card */}
-        {/* <div
+        <div
           style={{
             position: "absolute",
             zIndex: 103,
@@ -114,66 +114,6 @@ const CommitteeSwiper = ({
           }}
         >
           {isPresident ? <PresidentHoverCard /> : <DirectorHoverCard />}
-        </div> */}
-        <div style={{ width: "100%", height: "100%", position: "relative" }}>
-          <div
-            style={{
-              width: 491,
-              height: 201,
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              position: "absolute",
-              background: "rgba(212.50, 212.50, 206.30, 0.70)",
-              boxShadow: "8px 0px 10px rgba(0, 0, 0, 0.25)",
-              borderRadius: 30,
-            }}
-          />
-          <img
-            alt="president"
-            style={{
-              width: 233,
-              height: 255,
-              left: "60%",
-              top: "43%",
-              transform: "translate(-50%, -50%)",
-              position: "absolute",
-              // boxShadow: "10px 4px 10px rgba(0, 0, 0, 1)",
-            }}
-            src={committee01}
-          />
-          <div
-            style={{
-              width: "300px",
-              left: "45%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              position: "absolute",
-              color: "black",
-              textAlign: "left",
-            }}
-          >
-            <p className="font-Poppins-SemiBold text-4xl">
-              {presidentPosition}
-            </p>
-            <p className="font-Poppins-Regular text-[18px]">{presidentName}</p>
-          </div>
-          {/* <div
-            style={{
-              width: 220,
-              left: 50,
-              top: 163,
-              position: "absolute",
-              color: "black",
-              fontSize: 12,
-              fontFamily: "Manrope",
-              fontWeight: "500",
-              wordWrap: "break-word",
-            }}
-          >
-            Level 4<br />
-            Department of Industrial Management
-          </div> */}
         </div>
       </SwiperSlide>
 

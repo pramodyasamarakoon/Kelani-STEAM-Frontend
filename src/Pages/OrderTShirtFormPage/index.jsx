@@ -11,6 +11,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  LinearProgress,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
@@ -25,6 +26,8 @@ import {
 } from "react-material-ui-form-validator";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const OrderTShirtFormPage = () => {
   const departments = ["IM", "PS", "BS", "ENCM", "PE", "ECS", "AC", "SS", "SE"];
@@ -75,9 +78,6 @@ const OrderTShirtFormPage = () => {
     // setEmail(inputValue);
   };
 
-  // Form Payment Method Handling
-  const [paymentMethod, setPaymentMethod] = useState("");
-
   // State to hold form data
   const [formData, setFormData] = useState({
     name: "",
@@ -107,20 +107,39 @@ const OrderTShirtFormPage = () => {
     }));
   };
 
+  //  Handle Radio Buttons
   const handleChangeRadio = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    // console.log("Payment Method", formData.paymentMethod);
   };
 
+  //  Handle File Uploading
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
       file,
     }));
+
+    // Simulating file upload progress (remove this in actual implementation)
+    const interval = setInterval(() => {
+      setUploadProgress((prevProgress) =>
+        prevProgress < 100 ? prevProgress + 10 : prevProgress
+      );
+    }, 500);
+
+    // Simulating file upload completion (remove this in actual implementation)
+    setTimeout(() => {
+      clearInterval(interval);
+      setUploadProgress(100);
+      setIsFileUploaded(true);
+    }, 3000);
   };
 
   // Submit Function
@@ -145,43 +164,79 @@ const OrderTShirtFormPage = () => {
           ", "
         )}`
       );
-      // You may want to display an error message to the user here
+      toast.error(" Please fill in the required fields!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
-    }
-
-    if (contactNumberError) {
+    } else if (contactNumberError) {
       console.error("Error: Please fix the contact number error");
+      toast.error("Invalid contact number!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
-    }
-    if (emailError) {
+    } else if (emailError) {
       console.error("Error: Please fix the e mail error");
+      toast.error("Invalid E mail!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
+    } else {
+      // send data to the database
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("department", formData.department);
+      formDataToSend.append("studentNumber", formData.studentNumber);
+      formDataToSend.append("contactNumber", formData.contactNumber);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("size", formData.size);
+      formDataToSend.append("paymentMethod", formData.paymentMethod);
+      formDataToSend.append("paymentAmount", formData.paymentAmount);
+      formDataToSend.append("file", formData.file);
+      // Log the entered data
+      console.log("Data Stored successfully:");
+      for (const [key, value] of formDataToSend.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+      toast.success("Successfully Placed the Order!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // axios
+      //   .post("your_api_endpoint", formDataToSend)
+      //   .then((response) => {
+      //     console.log("Data sent successfully:", response.data);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error sending data:", error);
+      //   });
     }
-
-    // send data to the database
-    const formDataToSend = new FormData();
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("department", formData.department);
-    formDataToSend.append("studentNumber", formData.studentNumber);
-    formDataToSend.append("contactNumber", formData.contactNumber);
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("size", formData.size);
-    formDataToSend.append("paymentMethod", formData.paymentMethod);
-    formDataToSend.append("paymentAmount", formData.paymentAmount);
-    formDataToSend.append("file", formData.file);
-    // Log the entered data
-    console.log("Data Stored successfully:");
-    for (const [key, value] of formDataToSend.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-    // axios
-    //   .post("your_api_endpoint", formDataToSend)
-    //   .then((response) => {
-    //     console.log("Data sent successfully:", response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error sending data:", error);
-    //   });
   };
 
   return (
@@ -393,8 +448,6 @@ const OrderTShirtFormPage = () => {
                       variant="standard"
                       fullWidth
                       required
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
                       sx={{
                         marginY: "5px",
                       }}
@@ -411,8 +464,6 @@ const OrderTShirtFormPage = () => {
                       name="department"
                       value={formData.department}
                       onChange={handleChange}
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
                       sx={{ marginY: "5px" }}
                     >
                       {departments.map((dept) => (
@@ -429,8 +480,6 @@ const OrderTShirtFormPage = () => {
                       variant="standard"
                       fullWidth
                       required
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
                       sx={{
                         marginY: "5px",
                       }}
@@ -450,9 +499,6 @@ const OrderTShirtFormPage = () => {
                       fullWidth
                       required
                       error={Boolean(contactNumberError)}
-                      // onChange={handleContactNumberChange}
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
                       sx={{
                         marginY: "5px",
                       }}
@@ -468,9 +514,6 @@ const OrderTShirtFormPage = () => {
                       fullWidth
                       required
                       error={Boolean(emailError)}
-                      // onChange={handleEmailChange}
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
                       sx={{
                         marginY: "5px",
                       }}
@@ -487,8 +530,6 @@ const OrderTShirtFormPage = () => {
                       name="size"
                       value={formData.size}
                       onChange={handleChange}
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
                       sx={{ marginY: "5px" }}
                     >
                       {sizeChart.map((size) => (
@@ -501,16 +542,10 @@ const OrderTShirtFormPage = () => {
                 </div>
               </div>
               <div className="w-full my-2">
-                <ValidatorForm
-                // onSubmit={handleSubmit}
-                >
+                <ValidatorForm>
                   <div className="flex justify-between">
                     {/* Payment Amount Radio Group */}
-                    <FormControl
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
-                      id="paymentAmount"
-                    >
+                    <FormControl id="paymentAmount">
                       <FormLabel sx={{ color: "black" }}>
                         Payment Amount
                       </FormLabel>
@@ -534,10 +569,7 @@ const OrderTShirtFormPage = () => {
                     </FormControl>
 
                     {/* Payment Method Radio Group */}
-                    <FormControl
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
-                    >
+                    <FormControl>
                       <FormLabel sx={{ color: "black" }} id="paymentMethod">
                         Payment Method
                       </FormLabel>
@@ -568,26 +600,52 @@ const OrderTShirtFormPage = () => {
                       sx={{ color: "black", marginRight: 4 }}
                       id="file"
                     >
-                      {paymentMethod === "BankDeposit/OnlinePayment"
+                      {formData.paymentMethod === "BankDeposit/OnlinePayment"
                         ? "Upload an image of your payment proof"
-                        : paymentMethod === "CashOnHand"
+                        : formData.paymentMethod === "CashOnHand"
                         ? "Upload the payment proof image you got"
                         : "Please select the Payment Method"}
                     </FormLabel>
-                    <Button
+                    {/* <Button
                       component="label"
                       variant="outlined"
                       startIcon={<CloudUploadIcon />}
                       disabled={formData.paymentMethod === ""}
-                      validators={["required"]}
-                      errorMessages={["This field is required"]}
                     >
                       Upload file
                       <VisuallyHiddenInput
                         type="file"
                         onChange={handleFileChange}
                       />
-                    </Button>
+                    </Button> */}
+                    <label>
+                      <Button
+                        component="span"
+                        variant="outlined"
+                        startIcon={<CloudUploadIcon />}
+                        disabled={
+                          uploadProgress > 0 ||
+                          isFileUploaded ||
+                          !formData.paymentMethod
+                        }
+                      >
+                        {isFileUploaded ? "Done" : "Upload file"}
+                      </Button>
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                        disabled={uploadProgress > 0 || isFileUploaded}
+                      />
+                    </label>
+
+                    {/* Progress Bar */}
+                    {uploadProgress > 0 && !isFileUploaded && (
+                      <LinearProgress
+                        variant="determinate"
+                        value={uploadProgress}
+                      />
+                    )}
                   </div>
 
                   {/* Submit Button */}
@@ -607,6 +665,7 @@ const OrderTShirtFormPage = () => {
       </div>
 
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

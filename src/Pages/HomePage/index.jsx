@@ -373,9 +373,9 @@ function HomePage() {
             xs={12}
             className="h-auto flex justify-center items-center "
           >
-            <Collapse in={showAboutUs} timeout={1000}>
-              <p className="font-Poppins-SemiBold text-5xl pt-4">About Us</p>
-            </Collapse>
+            {/* <Collapse in={showAboutUs} timeout={1000}> */}
+            <p className="font-Poppins-SemiBold text-5xl pt-4">About Us</p>
+            {/* </Collapse> */}
           </Grid>
           {/*About US Group Photo */}
           <Grid
@@ -384,10 +384,9 @@ function HomePage() {
             className="h-auto flex justify-center items-center "
             sx={{ padding: 6 }}
           >
-            <Collapse in={showAboutUs} timeout={1000}>
-              {" "}
-              <img className="m-10" src={AboutUsSmall} alt="Team Photo" />
-            </Collapse>
+            {/* <Collapse in={showAboutUs} timeout={1000}> */}{" "}
+            <img className="m-10" src={AboutUsSmall} alt="Team Photo" />
+            {/* </Collapse> */}
           </Grid>
           {/*About US Content */}
           <Grid
@@ -396,41 +395,39 @@ function HomePage() {
             className="h-auto flex justify-center items-center "
             // sx={{ padding: 6 }}
           >
-            <Collapse in={showAboutUs} timeout={2000}>
-              {" "}
-              <Grid container>
-                <Grid
-                  item
-                  xs={12}
-                  className="h-auto flex justify-start items-center"
-                  // sx={{ padding: 6 }}
-                >
-                  <p className=" font-Poppins-Regular text-[16px]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quaerat eos laborum sit? Repudiandae, dicta, aliquid
-                    eligendi cum excepturi quod aliquam, alias quidem
-                    perspiciatis dolores ab quisquam voluptatibus eos nobis
-                    impedit! <br />
-                    <br /> Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Nam cumque sit eligendi laudantium nesciunt numquam
-                    odit? Id sunt, blanditiis dolores recusandae laudantium
-                    maiores ex iste, impedit ducimus provident magnam quidem?
-                  </p>
-                </Grid>
-                <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>
-                  <Button
-                    variant="contained"
-                    // onClick={handleCloseNavMenu}
-                    sx={{
-                      mx: 4,
-                      // color: "black",
-                    }}
-                  >
-                    Read More...
-                  </Button>
-                </Grid>
+            {/* <Collapse in={showAboutUs} timeout={2000}> */}{" "}
+            <Grid container>
+              <Grid
+                item
+                xs={12}
+                className="h-auto flex justify-start items-center"
+                // sx={{ padding: 6 }}
+              >
+                <p className=" font-Poppins-Regular text-[16px]">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Quaerat eos laborum sit? Repudiandae, dicta, aliquid eligendi
+                  cum excepturi quod aliquam, alias quidem perspiciatis dolores
+                  ab quisquam voluptatibus eos nobis impedit! <br />
+                  <br /> Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Nam cumque sit eligendi laudantium nesciunt numquam
+                  odit? Id sunt, blanditiis dolores recusandae laudantium
+                  maiores ex iste, impedit ducimus provident magnam quidem?
+                </p>
               </Grid>
-            </Collapse>
+              <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>
+                <Button
+                  variant="contained"
+                  // onClick={handleCloseNavMenu}
+                  sx={{
+                    mx: 4,
+                    // color: "black",
+                  }}
+                >
+                  Read More...
+                </Button>
+              </Grid>
+            </Grid>
+            {/* </Collapse> */}
           </Grid>
         </Grid>
 
@@ -507,7 +504,11 @@ function HomePage() {
           container
           spacing={2}
           id="grid-below-section"
-          sx={{ marginX: 16, display: { xs: "none", md: "flex" } }}
+          sx={{
+            marginX: 16,
+            marginTop: 10,
+            display: { xs: "none", md: "flex" },
+          }}
         >
           {/*T Shirt Topic */}
           <Grid
@@ -532,20 +533,20 @@ function HomePage() {
               // sx={{ padding: 6 }}
             >
               {" "}
-              <Collapse in={showGridBelow} timeout={2000}>
-                <Link to="/OrderTShirtFormPage">
-                  <Button
-                    variant="contained"
-                    // onClick={handleCloseNavMenu}
-                    sx={{
-                      mx: 4,
-                      // color: "black",
-                    }}
-                  >
-                    Order Now
-                  </Button>
-                </Link>
-              </Collapse>
+              {/* <Collapse in={showGridBelow} timeout={2000}> */}
+              <Link to="/OrderTShirtFormPage">
+                <Button
+                  variant="contained"
+                  // onClick={handleCloseNavMenu}
+                  sx={{
+                    mx: 4,
+                    // color: "black",
+                  }}
+                >
+                  Order Now
+                </Button>
+              </Link>
+              {/* </Collapse> */}
             </Grid>
             {/*T Shirt Photo */}
             <Grid

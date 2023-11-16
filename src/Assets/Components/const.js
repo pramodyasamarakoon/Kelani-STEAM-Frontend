@@ -299,3 +299,58 @@ export const recent_albums = [
         albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
     },
 ]
+
+export const Project_Data = [
+    {
+        title:"Project මෙහෙවර",
+        description:`Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+        ducimus pariatur officia delectus nulla qui, provident at eveniet, in
+        voluptate cupiditate. Doloribus eaque blanditiis ut! Culpa alias, id
+        voluptates illum impedit accusantium excepturi voluptatibus
+        consectetur minima maiores corporis rerum temporibus autem fugit
+        delectus! Aliquid beatae aperiam sapiente odio!`,
+        coverImage:  require('../Images/ProjectImages/Mehewara/01.jpg'),
+        img02:  require('../Images/ProjectImages/Mehewara/02.jpg'),
+        img03:  require('../Images/ProjectImages/Mehewara/03.jpg'),
+        img04:  require('../Images/ProjectImages/Mehewara/04.jpg'),
+    },
+    {
+        title:"Annual Trip to Nuwaraeliya",
+        description:`Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+        ducimus pariatur officia delectus nulla qui, provident at eveniet, in
+        voluptate cupiditate. Doloribus eaque blanditiis ut! Culpa alias, id
+        voluptates illum impedit accusantium excepturi voluptatibus
+        consectetur minima maiores corporis rerum temporibus autem fugit
+        delectus! Aliquid beatae aperiam sapiente odio!`,
+        coverImage:  require('../Images/ProjectImages/AnnualTrip/01.jpg'),
+        img02:  require('../Images/ProjectImages/AnnualTrip/02.jpg'),
+        img03:  require('../Images/ProjectImages/AnnualTrip/03.jpg'),
+        img04:  require('../Images/ProjectImages/AnnualTrip/04.jpg'),
+    },
+    {
+        title:"Step Up 2.0",
+        description:`Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+        ducimus pariatur officia delectus nulla qui, provident at eveniet, in
+        voluptate cupiditate. Doloribus eaque blanditiis ut! Culpa alias, id
+        voluptates illum impedit accusantium excepturi voluptatibus
+        consectetur minima maiores corporis rerum temporibus autem fugit
+        delectus! Aliquid beatae aperiam sapiente odio!`,
+        coverImage:  require('../Images/ProjectImages/StepUp/01.jpg'),
+        img02:  require('../Images/ProjectImages/StepUp/02.jpg'),
+        img03:  require('../Images/ProjectImages/StepUp/03.jpg'),
+        img04:  require('../Images/ProjectImages/StepUp/04.jpg'),
+    },
+    {
+        title:"Project මෙහෙවර",
+        description:`Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+        ducimus pariatur officia delectus nulla qui, provident at eveniet, in
+        voluptate cupiditate. Doloribus eaque blanditiis ut! Culpa alias, id
+        voluptates illum impedit accusantium excepturi voluptatibus
+        consectetur minima maiores corporis rerum temporibus autem fugit
+        delectus! Aliquid beatae aperiam sapiente odio!`,
+        coverImage:  require('../Images/ProjectImages/Mehewara/01.jpg'),
+        img02:  require('../Images/ProjectImages/Mehewara/02.jpg'),
+        img03:  require('../Images/ProjectImages/Mehewara/03.jpg'),
+        img04:  require('../Images/ProjectImages/Mehewara/04.jpg'),
+    },
+]

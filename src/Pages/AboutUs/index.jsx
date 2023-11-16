@@ -18,6 +18,7 @@ import {
   steamCommittee,
   videCommittee,
 } from "../../Assets/Components/const";
+import CountingNumber from "../../Assets/Components/CountingNumber";
 
 function AboutUs() {
   const [readM, setReadM] = useState(false);
@@ -78,7 +79,7 @@ function AboutUs() {
               <Box
                 sx={{
                   position: "absolute",
-                  top: "50%",
+                  top: "40%",
                   left: "30%",
                   zIndex: 100,
                   color: "white",
@@ -96,6 +97,50 @@ function AboutUs() {
                   Faculty of Science, University of Kelaniya
                 </p>
               </Box>
+
+              {/* Counting Numbers */}
+              <Grid
+                container
+                sx={{
+                  marginTop: 14,
+                  marginBottom: 8,
+                  position: "absolute",
+                  top: "55%",
+                  left: "30%",
+                  zIndex: 100,
+                  color: "white",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                {/* Image Container */}
+                <Grid
+                  item
+                  xs={12}
+                  className="h-auto flex justify-center items-center "
+                >
+                  <CountingNumber
+                    label="Years of Excellence"
+                    initialValue={0}
+                    finalValue={5}
+                  />
+                  <CountingNumber
+                    label="Different Avenues"
+                    initialValue={10}
+                    finalValue={6}
+                    isPlus={false}
+                  />
+                  <CountingNumber
+                    label="Undergraduates"
+                    initialValue={5}
+                    finalValue={300}
+                  />
+                  <CountingNumber
+                    label="Events Covered"
+                    initialValue={100}
+                    finalValue={110}
+                  />
+                </Grid>
+              </Grid>
 
               {/* Buttons */}
               <Box
