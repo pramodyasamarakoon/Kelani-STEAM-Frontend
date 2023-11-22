@@ -1,4 +1,12 @@
-import { Box, Button, Fab, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Fab,
+  Grid,
+  ImageList,
+  ImageListItem,
+  Typography,
+} from "@mui/material";
 import NavBar from "../../Assets/Components/NavBar";
 import Team from "../../Assets/Images/BookNowImage/TeamMedium.jpg";
 import PresidentImage from "../../Assets/Images/Committee/ViDe/President.jpg";
@@ -19,6 +27,19 @@ import {
   videCommittee,
 } from "../../Assets/Components/const";
 import CountingNumber from "../../Assets/Components/CountingNumber";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { aboutUsImageList } from "../../Assets/Components/const";
+
+const limitedItemData = aboutUsImageList.slice(0, 12);
+
+function srcset(image, size, rows = 1, cols = 1) {
+  return {
+    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+    srcSet: `${image}?w=${size * cols}&h=${
+      size * rows
+    }&fit=crop&auto=format&dpr=2 2x`,
+  };
+}
 
 function AboutUs() {
   const [readM, setReadM] = useState(false);
@@ -40,12 +61,182 @@ function AboutUs() {
     }
   };
 
+  const trackingInExpandStyles = {
+    animation:
+      "tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1.000) both",
+    // Add other styles or Tailwind classes as needed
+  };
+
   return (
     <div className="w-full">
       {/* Nav Bar */}
       <NavBar />
 
       <ScrollToTopButton />
+
+      {/* Hero Section */}
+      <Grid container>
+        {/* Hero Text Grid PC */}
+        <Grid
+          container
+          xs={12}
+          md={4}
+          className="h-screen flex justify-center "
+          // sx={{ display: { xs: "none", md: "flex" } }}
+        >
+          <Grid item xs={12} sx={{ marginTop: 40 }}>
+            <Box sx={{}}>
+              {/* <p className="font-Poppins-Regular text-4xl">Welcome to</p>
+              <p className="font-Poppins-Regular text-4xl">the</p> */}
+              <div style={trackingInExpandStyles}>
+                <p className="font-Poppins-SemiBold text-5xl pt-4">
+                  Official Media Unit
+                </p>
+              </div>
+              <p className="font-Poppins-Regular text-xl py-2">
+                Faculty of Science, University of Kelaniya
+              </p>
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            {/* Buttons */}
+            <Box
+              sx={{
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              <a href="#ourJourney">
+                <Button
+                  variant="contained"
+                  onClick={() => handleScrollToGrid("OurJourney")}
+                  endIcon={<ArrowDownwardIcon />}
+                  sx={{
+                    my: 1,
+                    width: "220px",
+                  }}
+                >
+                  Our Journey
+                </Button>
+              </a>
+            </Box>
+            <Box
+              sx={{
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              <Button
+                variant="contained"
+                onClick={() => handleScrollToGrid("Committee")}
+                endIcon={<ArrowDownwardIcon />}
+                sx={{
+                  // my: 1,
+                  width: "220px",
+                }}
+              >
+                Executive Committee
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+
+        {/* Hero Text Grid Mobile */}
+        <Grid
+          item
+          xs={12}
+          className="h-[180px] flex justify-center items-center "
+          sx={{
+            marginTop: 15,
+            display: { xs: "flex", md: "none" },
+            paddingRight: 5,
+          }}
+        >
+          <div>
+            <Box sx={{}}>
+              <p className="font-Poppins-Regular text-2xl">Welcome to the</p>
+              <p className="font-Poppins-SemiBold text-4xl pt-2">
+                Official Media Unit
+              </p>
+              <p className="font-Poppins-Regular text-xl ">
+                Faculty of Science, University of Kelaniya
+              </p>
+            </Box>
+          </div>
+        </Grid>
+
+        {/* Hero Image Grid PC */}
+        <Grid
+          item
+          xs={12}
+          md={8}
+          className="h-screen flex justify-center items-center "
+          sx={{ display: { xs: "none", md: "flex" } }}
+        >
+          <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
+            <ImageList
+              // sx={{ height: 450 }}
+              variant="quilted"
+              cols={4}
+              rowHeight={121}
+              style={{
+                transform: "rotate(-25deg)",
+                opacity: 0.8,
+              }}
+            >
+              {aboutUsImageList.map((item) => (
+                <ImageListItem
+                  key={item.img}
+                  cols={item.cols || 1}
+                  rows={item.rows || 1}
+                >
+                  <img
+                    {...srcset(item.img, 121, item.rows, item.cols)}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </div>
+        </Grid>
+
+        {/* Hero Image Grid Mobile */}
+        <Grid
+          item
+          xs={12}
+          md={8}
+          className="h-auto flex justify-center items-center "
+          sx={{ display: { xs: "flex", md: "none" }, paddingRight: 5 }}
+        >
+          <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
+            <ImageList
+              // sx={{ height: 450 }}
+              variant="quilted"
+              cols={4}
+              rowHeight={40}
+              style={{
+                // transform: "rotate(-25deg)",
+                opacity: 0.8,
+              }}
+            >
+              {limitedItemData.map((item) => (
+                <ImageListItem
+                  key={item.img}
+                  cols={item.cols || 1}
+                  rows={item.rows || 1}
+                >
+                  <img
+                    {...srcset(item.img, 121, item.rows, item.cols)}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </div>
+        </Grid>
+      </Grid>
 
       {/* About Us Container Grid PC */}
       <Grid

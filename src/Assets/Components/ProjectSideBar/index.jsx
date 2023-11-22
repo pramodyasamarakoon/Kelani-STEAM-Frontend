@@ -1,11 +1,13 @@
 import { Fab } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import NavigationIcon from "@mui/icons-material/Navigation";
+import { Link } from "react-scroll";
 import { Project_Data } from "../const";
 
 const ProjectSideBar = () => {
   // useEffect for scroll visibility and cleanup
   useEffect(() => {});
+
+  const [activeTitle, setActiveTitle] = useState("");
 
   return (
     <div
@@ -20,18 +22,26 @@ const ProjectSideBar = () => {
       }}
     >
       {Project_Data.map((data) => (
-        <Fab
+        <Link
           key={data.title}
-          variant="extended"
-          //   color="primary"
-          sx={{
-            my: "4px",
-            width: 290,
-          }}
+          to={data.title}
+          spy={true}
+          smooth={true}
+          offset={-70} // Adjust the offset based on your layout
+          duration={500}
+          onSetActive={() => setActiveTitle(data.title)}
         >
-          {/* <NavigationIcon sx={{ mr: 1 }} /> */}
-          <p className="text-[14px] font-OpenSans-Regular">{data.title}</p>
-        </Fab>
+          <Fab
+            variant="extended"
+            color={data.title === activeTitle ? "primary" : "default"}
+            sx={{
+              my: "4px",
+              width: 290,
+            }}
+          >
+            <p className="text-[15px] ">{data.title}</p>
+          </Fab>
+        </Link>
       ))}
     </div>
   );

@@ -23,115 +23,9 @@ import BackgroundBlur from "../../Assets/Components/BlurBackground";
 import back20 from "../../Assets/Images/Back20Small.jpg";
 import Loader from "../../Assets/Components/Loader";
 import AlbumContainer from "../../Assets/Components/AlbumContainer";
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1683009686716-ac2096a5a73b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1683009427470-a36fee396389?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1697370149703-82d435c83226?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1682687219612-b12805df750d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1696635102429-189a58beb4e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1697081543985-af767ab666aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1696958363946-b58f40cda426?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1696835938882-e9b41b3c5690?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1682686580849-3e7f67df4015?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwyNXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1683009686716-ac2096a5a73b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1683009427470-a36fee396389?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1697370149703-82d435c83226?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 1,
-  },
-];
-const limitedItemData = itemData.slice(0, 12);
-
-function srcset(image, size, rows = 1, cols = 1) {
-  return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
-  };
-}
+import CountingNumber from "../../Assets/Components/CountingNumber";
+import Logo from "../../../src/Assets/LogoWhite.png";
+import Team from "../../Assets/Images/BookNowImage/TeamMedium.jpg";
 
 function HomePage() {
   const [showAboutUs, setShowAboutUs] = useState(false);
@@ -219,14 +113,6 @@ function HomePage() {
     }, 2000);
   };
 
-  // const openDialogForm = () => {
-  //   setIsLoading(true);
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //     setIsFormOpen(true);
-  //   }, 2000);
-  // };
-
   return (
     <div className="w-full">
       {/* Nav Bar */}
@@ -236,123 +122,245 @@ function HomePage() {
       {isFormOpen ? <Loader /> : null}
 
       {/* Hero Section */}
-      <Grid container spacing={2} sx={{ paddingLeft: 5 }}>
-        {/* Hero Text Grid PC */}
+      <Grid container spacing={2}>
+        {/* Home Container Grid PC */}
         <Grid
-          item
-          xs={12}
-          md={4}
-          className="h-[500px] flex justify-center items-center "
-          sx={{ marginTop: 15, display: { xs: "none", md: "flex" } }}
-        >
-          <div>
-            <Box sx={{}}>
-              <p className="font-Poppins-Regular text-4xl">Welcome to</p>
-              <p className="font-Poppins-Regular text-4xl">the</p>
-              <p className="font-Poppins-SemiBold text-5xl pt-4">
-                Official Media Unit
-              </p>
-              <p className="font-Poppins-Regular text-xl py-2">
-                Faculty of Science, University of Kelaniya
-              </p>
-            </Box>
-          </div>
-        </Grid>
-
-        {/* Hero Text Grid Mobile */}
-        <Grid
-          item
-          xs={12}
-          className="h-[180px] flex justify-center items-center "
+          container
           sx={{
-            marginTop: 15,
-            display: { xs: "flex", md: "none" },
-            paddingRight: 5,
+            marginY: 2,
+            display: { xs: "none", md: "flex" },
           }}
+          className="h-screen"
         >
-          <div>
-            <Box sx={{}}>
-              <p className="font-Poppins-Regular text-2xl">Welcome to the</p>
-              <p className="font-Poppins-SemiBold text-4xl pt-2">
-                Official Media Unit
-              </p>
-              <p className="font-Poppins-Regular text-xl ">
-                Faculty of Science, University of Kelaniya
-              </p>
-            </Box>
-          </div>
+          {/* Image Container */}
+          <Grid
+            item
+            xs={12}
+            className="h-screen flex justify-center items-center "
+          >
+            <Grid container spacing={0}>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100vh",
+                    backgroundImage: `url(${Team})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+
+                {/*  Text */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "40%",
+                    left: "30%",
+                    zIndex: 100,
+                    color: "white",
+                    transform: "translate(-50%, -50%)",
+                    textAlign: "center",
+                  }}
+                >
+                  <p>
+                    <img src={Logo} alt="" className="h-[150px] mb-4 mx-auto" />
+                  </p>
+                  <p className="font-Poppins-SemiBold text-5xl mx-4">
+                    Official Media Unit
+                  </p>
+                  <p className="font-Poppins-Light text-2xl">
+                    Faculty of Science, University of Kelaniya
+                  </p>
+                </Box>
+
+                {/* Counting Numbers */}
+                <Grid
+                  container
+                  sx={{
+                    marginTop: 14,
+                    marginBottom: 8,
+                    position: "absolute",
+                    top: "55%",
+                    left: "30%",
+                    zIndex: 100,
+                    color: "white",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {/* Image Container */}
+                  <Grid
+                    item
+                    xs={12}
+                    className="h-auto flex justify-center items-center "
+                  >
+                    <CountingNumber
+                      label="Years of Excellence"
+                      initialValue={0}
+                      finalValue={5}
+                    />
+                    <CountingNumber
+                      label="Different Avenues"
+                      initialValue={10}
+                      finalValue={6}
+                      isPlus={false}
+                    />
+                    <CountingNumber
+                      label="Undergraduates"
+                      initialValue={5}
+                      finalValue={300}
+                    />
+                    <CountingNumber
+                      label="Events Covered"
+                      initialValue={100}
+                      finalValue={110}
+                    />
+                  </Grid>
+                </Grid>
+
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    zIndex: 99,
+                    backgroundImage:
+                      "linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 10%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 70%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.4) 100%)", // Gradient from left black to right transparent
+                    //   opacity: 0.7,
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
 
-        {/* Hero Image Grid PC */}
+        {/* Home Container Grid Mobile */}
         <Grid
-          item
-          xs={12}
-          md={8}
-          className="h-[700px] flex justify-center items-center "
-          sx={{ display: { xs: "none", md: "flex" } }}
+          container
+          sx={{
+            marginY: 2,
+            display: { xs: "flex", md: "none" },
+          }}
+          className="h-screen"
         >
-          <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-            <ImageList
-              // sx={{ height: 450 }}
-              variant="quilted"
-              cols={4}
-              rowHeight={121}
-              style={{
-                transform: "rotate(-25deg)",
-                opacity: 0.8,
-              }}
-            >
-              {itemData.map((item) => (
-                <ImageListItem
-                  key={item.img}
-                  cols={item.cols || 1}
-                  rows={item.rows || 1}
-                >
-                  <img
-                    {...srcset(item.img, 121, item.rows, item.cols)}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          </div>
-        </Grid>
+          {/* Image Container */}
+          <Grid
+            item
+            xs={12}
+            className="h-screen flex justify-center items-center "
+          >
+            <Grid container spacing={0}>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100vh",
+                    backgroundImage: `url(${Team})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
 
-        {/* Hero Image Grid Mobile */}
-        <Grid
-          item
-          xs={12}
-          md={8}
-          className="h-auto flex justify-center items-center "
-          sx={{ display: { xs: "flex", md: "none" }, paddingRight: 5 }}
-        >
-          <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-            <ImageList
-              // sx={{ height: 450 }}
-              variant="quilted"
-              cols={4}
-              rowHeight={40}
-              style={{
-                // transform: "rotate(-25deg)",
-                opacity: 0.8,
-              }}
-            >
-              {limitedItemData.map((item) => (
-                <ImageListItem
-                  key={item.img}
-                  cols={item.cols || 1}
-                  rows={item.rows || 1}
+                {/*  Text */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "40%",
+                    left: "30%",
+                    zIndex: 100,
+                    color: "white",
+                    transform: "translate(-50%, -50%)",
+                    textAlign: "center",
+                  }}
                 >
-                  <img
-                    {...srcset(item.img, 121, item.rows, item.cols)}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          </div>
+                  <p>
+                    <img src={Logo} alt="" className="h-[50px] mb-4 mx-auto" />
+                  </p>
+                  <p className="font-Poppins-SemiBold text-2xl mx-4">
+                    Official Media Unit
+                  </p>
+                  <p className="font-Poppins-Light text-2xl">
+                    Faculty of Science, University of Kelaniya
+                  </p>
+                </Box>
+
+                {/* Counting Numbers */}
+                <Grid
+                  container
+                  sx={{
+                    marginTop: 14,
+                    marginBottom: 8,
+                    position: "absolute",
+                    top: "55%",
+                    left: "30%",
+                    zIndex: 100,
+                    color: "white",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {/* Image Container */}
+                  <Grid
+                    item
+                    xs={12}
+                    className="h-auto flex justify-center items-center "
+                  >
+                    <CountingNumber
+                      label="Years of Excellence"
+                      initialValue={0}
+                      finalValue={5}
+                    />
+                    <CountingNumber
+                      label="Different Avenues"
+                      initialValue={10}
+                      finalValue={6}
+                      isPlus={false}
+                    />
+                    <CountingNumber
+                      label="Undergraduates"
+                      initialValue={5}
+                      finalValue={300}
+                    />
+                    <CountingNumber
+                      label="Events Covered"
+                      initialValue={100}
+                      finalValue={110}
+                    />
+                  </Grid>
+                </Grid>
+
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    zIndex: 99,
+                    backgroundImage:
+                      "linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 10%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 70%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.4) 100%)", // Gradient from left black to right transparent
+                    //   opacity: 0.7,
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
 
         {/* About US Grid PC */}

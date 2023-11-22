@@ -2,7 +2,7 @@ import React from "react";
 
 const ProjectCard = ({ coverImage, images, title, description }) => {
   return (
-    <div className="w-full h-screen relative">
+    <div id={title} className="w-full h-screen relative">
       {/* Background Image */}
       <img
         src={coverImage}
