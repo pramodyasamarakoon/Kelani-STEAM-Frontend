@@ -4,7 +4,7 @@ import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
 import { Avatar, Box, Button, Grid, Stack } from "@mui/material";
 import Footer from "../../Assets/Components/Footer/Footer";
 import facebook from "../../Assets/Icons/Images/Facebook.png";
-import instagram from "../../Assets/Icons/Images/Instagram.png";
+// import instagram from "../../Assets/Icons/Images/Instagram.png";
 
 const ContactUs = () => {
   const [selectedIcon, setSelectedIcon] = useState("facebook");
@@ -137,7 +137,7 @@ const ContactUs = () => {
               selectedIcon === "facebook"
                 ? `url(${facebook})`
                 : selectedIcon === "instagram"
-                ? `url(${instagram})`
+                ? `url(${facebook})`
                 : null,
             backgroundSize: "cover",
             backgroundPosition: "center",
