@@ -24,14 +24,20 @@ const CountingNumber = ({ label, initialValue, finalValue, isPlus = true }) => {
   }, [initialValue, finalValue]);
 
   return (
-    <div className="w-[200px] h-[200px] mx-2 flex flex-col justify-center items-center">
-      <div className="mb-4">
-        <span className="font-OpenSans-SemiBold text-6xl">{count}</span>
+    <div className="w-[60px] h-[100px] md:w-[200px] md:h-[200px] mx-2 flex flex-col justify-center items-center">
+      <div className="h-[30px] md:h-auto">
+        <span className="font-OpenSans-SemiBold text-2xl md:text-5xl">
+          {count}
+        </span>
         {isPlus ? (
-          <span className="font-OpenSans-SemiBold text-6xl">+</span>
+          <span className="font-OpenSans-SemiBold text-2xl md:text-5xl">+</span>
         ) : null}
       </div>
-      <span className="font-OpenSans-regular text-[20px]">{label}</span>
+      <div className="h-[40px] md:h-auto">
+        <span className="font-OpenSans-regular text-[12px] md:text-[18px]">
+          {label}
+        </span>
+      </div>
     </div>
   );
 };

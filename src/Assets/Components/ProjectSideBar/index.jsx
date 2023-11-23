@@ -11,11 +11,11 @@ const ProjectSideBar = () => {
 
   return (
     <div
+      className="hidden md:flex"
       style={{
         position: "fixed",
         top: "50%",
         right: "0.1%",
-        display: "flex",
         flexDirection: "column",
         zIndex: 999,
         transform: "translate(-50%, -50%)",
@@ -34,12 +34,13 @@ const ProjectSideBar = () => {
           <Fab
             variant="extended"
             color={data.title === activeTitle ? "primary" : "default"}
+            size="small"
             sx={{
               my: "4px",
-              width: 290,
+              width: 220,
             }}
           >
-            <p className="text-[15px] ">{data.title}</p>
+            <p className="text-[12px] ">{data.title}</p>
           </Fab>
         </Link>
       ))}

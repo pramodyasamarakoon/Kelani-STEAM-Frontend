@@ -29,6 +29,7 @@ import {
 import CountingNumber from "../../Assets/Components/CountingNumber";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { aboutUsImageList } from "../../Assets/Components/const";
+import CommitteeSwiperMini from "../../Assets/Components/CommitteeSwiperMini";
 
 const limitedItemData = aboutUsImageList.slice(0, 12);
 
@@ -74,26 +75,25 @@ function AboutUs() {
 
       <ScrollToTopButton />
 
-      {/* Hero Section */}
+      {/* Hero Section PC */}
       <Grid container>
         {/* Hero Text Grid PC */}
         <Grid
           container
-          xs={12}
           md={4}
           className="h-screen flex justify-center "
-          // sx={{ display: { xs: "none", md: "flex" } }}
+          sx={{ display: { xs: "none", md: "flex" }, padding: 7 }}
         >
-          <Grid item xs={12} sx={{ marginTop: 40 }}>
+          <Grid item xs={12} sx={{ marginTop: 20 }}>
             <Box sx={{}}>
               {/* <p className="font-Poppins-Regular text-4xl">Welcome to</p>
               <p className="font-Poppins-Regular text-4xl">the</p> */}
               <div style={trackingInExpandStyles}>
-                <p className="font-Poppins-SemiBold text-5xl pt-4">
+                <p className="font-Poppins-SemiBold text-4xl pt-4">
                   Official Media Unit
                 </p>
               </div>
-              <p className="font-Poppins-Regular text-xl py-2">
+              <p className="font-Poppins-Regular text-[18px] py-2">
                 Faculty of Science, University of Kelaniya
               </p>
             </Box>
@@ -111,6 +111,7 @@ function AboutUs() {
                   variant="contained"
                   onClick={() => handleScrollToGrid("OurJourney")}
                   endIcon={<ArrowDownwardIcon />}
+                  size="small"
                   sx={{
                     my: 1,
                     width: "220px",
@@ -129,6 +130,7 @@ function AboutUs() {
               <Button
                 variant="contained"
                 onClick={() => handleScrollToGrid("Committee")}
+                size="small"
                 endIcon={<ArrowDownwardIcon />}
                 sx={{
                   // my: 1,
@@ -139,30 +141,6 @@ function AboutUs() {
               </Button>
             </Box>
           </Grid>
-        </Grid>
-
-        {/* Hero Text Grid Mobile */}
-        <Grid
-          item
-          xs={12}
-          className="h-[180px] flex justify-center items-center "
-          sx={{
-            marginTop: 15,
-            display: { xs: "flex", md: "none" },
-            paddingRight: 5,
-          }}
-        >
-          <div>
-            <Box sx={{}}>
-              <p className="font-Poppins-Regular text-2xl">Welcome to the</p>
-              <p className="font-Poppins-SemiBold text-4xl pt-2">
-                Official Media Unit
-              </p>
-              <p className="font-Poppins-Regular text-xl ">
-                Faculty of Science, University of Kelaniya
-              </p>
-            </Box>
-          </div>
         </Grid>
 
         {/* Hero Image Grid PC */}
@@ -178,7 +156,7 @@ function AboutUs() {
               // sx={{ height: 450 }}
               variant="quilted"
               cols={4}
-              rowHeight={121}
+              rowHeight={90}
               style={{
                 transform: "rotate(-25deg)",
                 opacity: 0.8,
@@ -200,27 +178,40 @@ function AboutUs() {
             </ImageList>
           </div>
         </Grid>
+      </Grid>
 
-        {/* Hero Image Grid Mobile */}
+      {/* Hero Section Mobile */}
+      <Grid container>
         <Grid
           item
           xs={12}
-          md={8}
-          className="h-auto flex justify-center items-center "
-          sx={{ display: { xs: "flex", md: "none" }, paddingRight: 5 }}
+          className="h-screen relative"
+          sx={{ display: { xs: "block", md: "none" } }}
         >
-          <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
+          {/* Image List */}
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              right: 0,
+            }}
+          >
             <ImageList
               // sx={{ height: 450 }}
               variant="quilted"
               cols={4}
-              rowHeight={40}
+              rowHeight={80}
               style={{
-                // transform: "rotate(-25deg)",
-                opacity: 0.8,
+                // transform: "rotate(-8deg)",
+                opacity: 0.4,
               }}
             >
-              {limitedItemData.map((item) => (
+              {aboutUsImageList.map((item) => (
                 <ImageListItem
                   key={item.img}
                   cols={item.cols || 1}
@@ -235,290 +226,63 @@ function AboutUs() {
               ))}
             </ImageList>
           </div>
-        </Grid>
-      </Grid>
 
-      {/* About Us Container Grid PC */}
-      <Grid
-        container
-        sx={{
-          marginY: 11,
-          display: { xs: "none", md: "flex" },
-        }}
-      >
-        {/* Image Container */}
-        <Grid item xs={12} className="h-auto flex justify-center items-center ">
-          <Grid container spacing={0}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                position: "relative",
-              }}
-            >
-              <div
-                style={{
-                  width: "100%",
-                  height: "80vh",
-                  backgroundImage: `url(${Team})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-
-              {/* Booking Text */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "40%",
-                  left: "30%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                }}
-              >
-                <p>
-                  <img src={Logo} alt="" className="h-[100px] mb-4 mx-auto" />
-                </p>
-                <p className="font-Poppins-SemiBold text-6xl">
-                  Official Media Unit
-                </p>
-                <p className="font-Poppins-Light text-2xl">
+          {/* Hero Text Grid Mobile */}
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              textAlign: "center",
+              color: "black",
+            }}
+          >
+            <Grid item xs={12}>
+              <Box sx={{}}>
+                <div style={trackingInExpandStyles}>
+                  <p className="font-Poppins-SemiBold text-4xl pt-2">
+                    Official Media Unit
+                  </p>
+                </div>
+                <p className="font-Poppins-SemiBold text-[16px]">
                   Faculty of Science, University of Kelaniya
                 </p>
               </Box>
+            </Grid>
 
-              {/* Counting Numbers */}
-              <Grid
-                container
-                sx={{
-                  marginTop: 14,
-                  marginBottom: 8,
-                  position: "absolute",
-                  top: "55%",
-                  left: "30%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
-                {/* Image Container */}
-                <Grid
-                  item
-                  xs={12}
-                  className="h-auto flex justify-center items-center "
-                >
-                  <CountingNumber
-                    label="Years of Excellence"
-                    initialValue={0}
-                    finalValue={5}
-                  />
-                  <CountingNumber
-                    label="Different Avenues"
-                    initialValue={10}
-                    finalValue={6}
-                    isPlus={false}
-                  />
-                  <CountingNumber
-                    label="Undergraduates"
-                    initialValue={5}
-                    finalValue={300}
-                  />
-                  <CountingNumber
-                    label="Events Covered"
-                    initialValue={100}
-                    finalValue={110}
-                  />
-                </Grid>
-              </Grid>
-
-              {/* Buttons */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "90%",
-                  left: "73%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                }}
-              >
-                <a href="#ourJourney">
-                  <Button
-                    variant="contained"
-                    onClick={() => handleScrollToGrid("OurJourney")}
-                    sx={{
-                      my: 4,
-                      // color: "black",
-                    }}
-                  >
-                    Our Journey
-                  </Button>
-                </a>
-              </Box>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "90%",
-                  left: "85%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                }}
-              >
+            {/* Buttons */}
+            <Box sx={{ mt: 1 }}>
+              <a href="#ourJourney">
                 <Button
                   variant="contained"
-                  onClick={() => handleScrollToGrid("Committee")}
+                  onClick={() => handleScrollToGrid("OurJourney")}
+                  endIcon={<ArrowDownwardIcon />}
+                  size="small"
                   sx={{
-                    my: 4,
-                    // color: "black",
+                    width: "200px",
+                    // my: 1,
                   }}
                 >
-                  Executive Committee
+                  Our Journey
                 </Button>
-              </Box>
-
-              <Box
+              </a>
+            </Box>
+            <Box sx={{ mt: 1 }}>
+              <Button
+                variant="contained"
+                onClick={() => handleScrollToGrid("Committee")}
+                endIcon={<ArrowDownwardIcon />}
+                size="small"
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 99,
-                  backgroundImage:
-                    "linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 10%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 70%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.4) 100%)", // Gradient from left black to right transparent
-                  //   opacity: 0.7,
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-
-      {/* About Us Container Grid Mobile */}
-      <Grid
-        container
-        id="ourJourney"
-        sx={{
-          marginTop: 11,
-          marginBottom: 5,
-          display: { xs: "flex", md: "none" },
-        }}
-      >
-        {/* Image Container */}
-        <Grid item xs={12} className="h-auto flex justify-center items-center ">
-          <Grid container spacing={0}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                position: "relative",
-              }}
-            >
-              <div
-                style={{
-                  width: "100%",
-                  height: "60vh",
-                  backgroundImage: `url(${Team})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-
-              {/* Booking Text */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
+                  width: "200px",
+                  // my: 1,
                 }}
               >
-                <p>
-                  <img src={Logo} alt="" className="h-[60px] mb-4 mx-auto" />
-                </p>
-                <p className="font-Poppins-SemiBold text-3xl">
-                  Official Media Unit
-                </p>
-                <p className="font-Poppins-Light text-[16px">
-                  Faculty of Science, University of Kelaniya
-                </p>
-              </Box>
-
-              {/* Buttons */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "90%",
-                  left: "23%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                }}
-              >
-                <a href="#ourJourney">
-                  <Button
-                    variant="contained"
-                    // onClick={handleCloseNavMenu}
-                    sx={{
-                      my: 4,
-                      fontSize: 12,
-                    }}
-                  >
-                    Our Journey
-                  </Button>
-                </a>
-              </Box>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "90%",
-                  left: "77%",
-                  zIndex: 100,
-                  color: "white",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                }}
-              >
-                <Button
-                  variant="contained"
-                  // onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 4,
-                    fontSize: 12,
-                  }}
-                >
-                  Committee
-                </Button>
-              </Box>
-
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 99,
-                  backgroundImage:
-                    "linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 10%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 70%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.4) 100%)", // Gradient from left black to right transparent
-                  //   opacity: 0.7,
-                }}
-              />
-            </Grid>
-          </Grid>
+                Executive Committee
+              </Button>
+            </Box>
+          </div>
         </Grid>
       </Grid>
 
@@ -527,15 +291,15 @@ function AboutUs() {
         container
         id="OurJourney"
         sx={{
-          marginY: 6,
+          marginY: 8,
           paddingX: 30,
           display: { xs: "none", md: "flex" },
         }}
       >
         {/* Text Container PC */}
         <Grid item xs={12} className="h-auto justify-center items-center ">
-          <p className="font-Lobster-Regular text-6xl">Our Journey</p>
-          <p className="font-Poppins-Regular text-[15px] text-left py-12">
+          <p className="font-Lobster-Regular text-5xl">Our Journey</p>
+          <p className="font-Poppins-Regular text-[14px] text-left py-12">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, id
             nesciunt! Fuga dicta tempore consequuntur odio ut suscipit
             laudantium dolor, doloribus deleniti aperiam placeat, repellat
@@ -599,8 +363,7 @@ function AboutUs() {
         container
         id="OurJourney"
         sx={{
-          marginY: 3,
-          marginTop: 0,
+          marginY: 5,
           paddingX: 5,
           display: { xs: "flex", md: "none" },
         }}
@@ -726,7 +489,7 @@ function AboutUs() {
           xs={12}
           className="h-auto flex justify-center items-center pb-8 "
         >
-          <p className="font-Poppins-SemiBold text-5xl">
+          <p className="font-Poppins-SemiBold text-4xl">
             ViDe Executive Committee 22/23
           </p>
         </Grid>
@@ -752,6 +515,51 @@ function AboutUs() {
         </Grid>
       </Grid>
 
+      {/* viDe Committee Grid Mobile */}
+      <Grid
+        container
+        id="Committee"
+        sx={{
+          marginY: 5,
+          display: { xs: "flex", md: "none" },
+        }}
+      >
+        <Grid
+          item
+          xs={12}
+          className="h-auto flex justify-center items-center pb-4 "
+        >
+          <p className="font-Poppins-SemiBold text-2xl px-4">
+            ViDe Executive Committee 22/23
+          </p>
+        </Grid>
+
+        {/* Committee Container Mobile*/}
+        <Grid
+          item
+          xs={12}
+          className="h-auto md:hidden flex justify-center items-center "
+        >
+          <Grid container spacing={0}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                position: "relative",
+              }}
+            >
+              <CommitteeSwiperMini
+                bgImg={vide_bg_img.url}
+                presidentPosition={presidents[0].position}
+                presidentName={presidents[0].name}
+                presidentImg={presidents[0].img}
+                isPresident={true}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
       {/* STEAM Committee Grid PC */}
       <Grid
         container
@@ -766,7 +574,7 @@ function AboutUs() {
           xs={12}
           className="h-auto flex justify-center items-center pb-8 "
         >
-          <p className="font-Poppins-SemiBold text-5xl">
+          <p className="font-Poppins-SemiBold text-4xl">
             STEAM Executive Committee 22/23
           </p>
         </Grid>
@@ -781,6 +589,46 @@ function AboutUs() {
               }}
             >
               <CommitteeSwiper
+                bgImg={STEAM_bg_img.url}
+                presidentPosition={presidents[1].position}
+                presidentName={presidents[1].name}
+                presidentImg={presidents[1].img}
+                isPresident={false}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/* STEAM Committee Grid Mobile */}
+      <Grid
+        container
+        id="Committee"
+        sx={{
+          marginY: 8,
+          display: { xs: "flex", md: "none" },
+        }}
+      >
+        <Grid
+          item
+          xs={12}
+          className="h-auto flex justify-center items-center pb-4 "
+        >
+          <p className="font-Poppins-SemiBold text-2xl px-4">
+            STEAM Executive Committee 22/23
+          </p>
+        </Grid>
+        {/* Committee Container */}
+        <Grid item xs={12} className="h-auto flex justify-center items-center ">
+          <Grid container spacing={0}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                position: "relative",
+              }}
+            >
+              <CommitteeSwiperMini
                 bgImg={STEAM_bg_img.url}
                 presidentPosition={presidents[1].position}
                 presidentName={presidents[1].name}

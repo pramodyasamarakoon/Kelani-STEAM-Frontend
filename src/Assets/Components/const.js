@@ -297,6 +297,25 @@ export const recent_albums = [
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
         albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+    },{
+        title: `AGM'23 - Chemical Society`,
+        imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
+        photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
+        edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+    },
+    {
+        title: `AGM'23 - Statistics and Computer Science Students' Association`,
+        imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
+        photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
+        edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+    },{
+        title: `AGM'23 - Chemical Society`,
+        imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
+        photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
+        edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
     },
 ]
 
@@ -465,4 +484,24 @@ export const aboutUsImageList = [
       rows: 2,
       cols: 1,
     },
+  ];
+
+export const universities = [
+    "University of Kelaniya",
+    "University of Colombo",
+    "University of Peradeniya",
+    "University of Moratuwa",
+    "University of Sri Jayewardenepura",
+    "University of Ruhuna",
+    "University of Jaffna",
+    "Eastern University, Sri Lanka",
+    "Rajarata University of Sri Lanka",
+    "Sabaragamuwa University of Sri Lanka",
+    "Wayamba University of Sri Lanka",
+    "Uva Wellassa University",
+    "University of the Visual & Performing Arts",
+    "South Eastern University of Sri Lanka",
+    "Open University of Sri Lanka",
+    "Sri Lanka Technological Campus (SLTC)",
+    "Sri Lanka Institute of Information Technology (SLIIT)",
   ];

@@ -151,6 +151,8 @@ function HomePage() {
                     width: "100%",
                     height: "100vh",
                     backgroundImage: `url(${Team})`,
+                    // backgroundImage:
+                    //   "url(https://sltappbucket.s3.amazonaws.com/testimage.jpg?AWSAccessKeyId=ASIA46B2THDZ6OEGUQD2\u0026Expires=1858492301\u0026x-amz-security-token=IQoJb3JpZ2luX2VjEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJGMEQCIGpau1S4fx1XWAoxnkVUhJOkFCDVIommCzFFEbI5SyTpAiAxjzEkoAHFe3o0IactbY1fVcR%2F3l55xjRQFWVFpwxbEirqAggpEAAaDDg4OTE4MTEyNDg1MSIMkgvWmZjKE%2FnvSdrNKscCBs7ecW1YLeWO4Oyex6PW%2BM35yP3jCdGy9KSTh22voUmXKQ8xADqrktkYonrIs%2BKRvm8NjnUZxzrqtl2%2BGVKDgBFriI1CEqZkclXi0vtn%2FZ%2BILLwrizzPCe7UIqPnHU90CTLAGIK7oX72tZe0e0JYP%2Be%2FxjU%2B%2BqAJ37fTXa2gzPIrBCFNfWthsXw9GI%2BMgFLby8zsGiS7qWCyWXNTDWbxSzP37zlEcGPB1KbMqcON4fDEN44Sahngr8hyEEHRDQMFGap6WawOEiMIdIsBDVIU71Vq3XP%2FMhr%2BmFKp46icX8wxWtJ8slLc7S%2F%2FvNcbD8rUsUeWhFu2Ugcn2cAOksQfjg2NM1LBWwk4L4I4CfL3t5JEKLo5IggjKtMu1rP%2BoaZtPHQ%2FApHgmjR05lDa673G0i4scbZOJCK7JJc8eYhRnls6P%2F6kPBLlMIbm9qoGOp8BxMor0VGvQre7UeAMQ7jESA6RloDOdHawsixDqxjYU%2F8NDRbmPL4GQyyXhKCEzpVvU2JD9EP36yccHGH5oozLypDdB023KwEu6DDsPRqvf%2BQOGkESlI4NK9TICULc8l41m60XHp92FYx9yuvJ9S3LBDC%2FGX4eRguPbpjIzwQvJ%2BVOXIxNXIJZtDarGejUCPq6cwPLaBjIoczC9NLyXO%2Bi\u0026Signature=T3nkhQzwkYfpnJOB3EByPF6XuVM%3D)",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -169,7 +171,7 @@ function HomePage() {
                   }}
                 >
                   <p>
-                    <img src={Logo} alt="" className="h-[150px] mb-4 mx-auto" />
+                    <img src={Logo} alt="" className="h-[120px] mb-4 mx-auto" />
                   </p>
                   <p className="font-Poppins-SemiBold text-5xl mx-4">
                     Official Media Unit
@@ -187,13 +189,13 @@ function HomePage() {
                     marginBottom: 8,
                     position: "absolute",
                     top: "55%",
-                    left: "30%",
+                    left: "35%",
                     zIndex: 100,
                     color: "white",
                     transform: "translate(-50%, -50%)",
                   }}
                 >
-                  {/* Image Container */}
+                  {/* Counting Container */}
                   <Grid
                     item
                     xs={12}
@@ -246,17 +248,18 @@ function HomePage() {
         {/* Home Container Grid Mobile */}
         <Grid
           container
+          id="ourJourney"
           sx={{
-            marginY: 2,
+            marginTop: 11,
+            marginBottom: 5,
             display: { xs: "flex", md: "none" },
           }}
-          className="h-screen"
         >
           {/* Image Container */}
           <Grid
             item
             xs={12}
-            className="h-screen flex justify-center items-center "
+            className="h-auto flex justify-center items-center "
           >
             <Grid container spacing={0}>
               <Grid
@@ -269,7 +272,7 @@ function HomePage() {
                 <div
                   style={{
                     width: "100%",
-                    height: "100vh",
+                    height: "80vh",
                     backgroundImage: `url(${Team})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
@@ -281,7 +284,7 @@ function HomePage() {
                   sx={{
                     position: "absolute",
                     top: "40%",
-                    left: "30%",
+                    left: "50%",
                     zIndex: 100,
                     color: "white",
                     transform: "translate(-50%, -50%)",
@@ -289,12 +292,12 @@ function HomePage() {
                   }}
                 >
                   <p>
-                    <img src={Logo} alt="" className="h-[50px] mb-4 mx-auto" />
+                    <img src={Logo} alt="" className="h-[60px] mb-4 mx-auto" />
                   </p>
-                  <p className="font-Poppins-SemiBold text-2xl mx-4">
+                  <p className="font-Poppins-SemiBold text-3xl">
                     Official Media Unit
                   </p>
-                  <p className="font-Poppins-Light text-2xl">
+                  <p className="font-Poppins-Light text-[16px">
                     Faculty of Science, University of Kelaniya
                   </p>
                 </Box>
@@ -307,13 +310,13 @@ function HomePage() {
                     marginBottom: 8,
                     position: "absolute",
                     top: "55%",
-                    left: "30%",
+                    left: "50%",
                     zIndex: 100,
                     color: "white",
                     transform: "translate(-50%, -50%)",
                   }}
                 >
-                  {/* Image Container */}
+                  {/* Counting Container */}
                   <Grid
                     item
                     xs={12}
@@ -371,8 +374,9 @@ function HomePage() {
           id="about-us-section"
           sx={{
             marginX: 16,
-            marginTop: 10,
+            marginTop: 7,
             marginBottom: 5,
+            display: { xs: "none", md: "flex" },
           }}
         >
           {/*About US Topic */}
@@ -411,7 +415,7 @@ function HomePage() {
                 className="h-auto flex justify-start items-center"
                 // sx={{ padding: 6 }}
               >
-                <p className=" font-Poppins-Regular text-[16px]">
+                <p className=" font-Poppins-Regular text-[14px]">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Quaerat eos laborum sit? Repudiandae, dicta, aliquid eligendi
                   cum excepturi quod aliquam, alias quidem perspiciatis dolores
@@ -426,6 +430,7 @@ function HomePage() {
                 <Button
                   variant="contained"
                   // onClick={handleCloseNavMenu}
+                  size="small"
                   sx={{
                     mx: 4,
                     // color: "black",
@@ -444,8 +449,7 @@ function HomePage() {
           container
           spacing={2}
           sx={{
-            marginTop: 3,
-            marginRight: 1,
+            marginTop: -3,
             display: { xs: "flex", md: "none" },
           }}
         >
@@ -471,7 +475,7 @@ function HomePage() {
             item
             xs={12}
             className="h-auto flex justify-center items-center "
-            sx={{ paddingRight: 1 }}
+            sx={{ marginLeft: 7, marginRight: 7 }}
           >
             <Grid container>
               <Grid
@@ -514,7 +518,7 @@ function HomePage() {
           id="grid-below-section"
           sx={{
             marginX: 16,
-            marginTop: 10,
+            marginBottom: 10,
             display: { xs: "none", md: "flex" },
           }}
         >
@@ -532,7 +536,7 @@ function HomePage() {
           </Grid>
           {/*T Shirt Content */}
 
-          <Grid container spacing={2} sx={{ marginTop: 2, marginX: 36 }}>
+          <Grid container spacing={2} sx={{ marginX: 36 }}>
             {/*T Shirt Button */}
             <Grid
               item
@@ -546,6 +550,7 @@ function HomePage() {
                 <Button
                   variant="contained"
                   // onClick={handleCloseNavMenu}
+                  size="small"
                   sx={{
                     mx: 4,
                     // color: "black",
@@ -574,10 +579,8 @@ function HomePage() {
         {/* T Shirt Grid Mobile */}
         <Grid
           container
-          spacing={2}
           sx={{
-            marginTop: 3,
-            marginRight: 1,
+            marginTop: 1,
             marginBottom: 6,
             display: { xs: "flex", md: "none" },
           }}
@@ -588,7 +591,7 @@ function HomePage() {
             xs={12}
             className="h-auto flex justify-center items-center "
           >
-            <p className="font-Poppins-SemiBoldItalic text-3xl pt-4 mr-4">
+            <p className="font-Poppins-SemiBoldItalic text-2xl p-4">
               Member T Shirts Are Available Now
             </p>
           </Grid>
@@ -612,7 +615,7 @@ function HomePage() {
               variant="contained"
               // onClick={handleCloseNavMenu}
               sx={{
-                mx: 4,
+                my: 2,
                 // color: "black",
               }}
             >
@@ -624,15 +627,15 @@ function HomePage() {
         {/* Albums Grid PC */}
         <Grid
           container
-          spacing={2}
           sx={{
-            marginX: 10,
-            marginTop: 8,
-            display: { xs: "none", md: "flex" },
+            marginX: { md: 14 },
+            marginTop: { xs: 1, md: 2 },
           }}
         >
-          <Grid item xs={12} sx={{ textAlign: "left" }}>
-            <p className="font-OpenSans-SemiBold text-4xl">Recent Albums</p>
+          <Grid item xs={12} sx={{ textAlign: { xs: "center", md: "left" } }}>
+            <p className="font-OpenSans-SemiBold text-2xl md:text-4xl">
+              Recent Albums
+            </p>
           </Grid>
         </Grid>
         <AlbumContainer />
@@ -761,9 +764,8 @@ function HomePage() {
           container
           className="flex justify-center items-center "
           sx={{
-            marginY: 4,
-            marginX: 4,
-            marginRight: 7,
+            marginY: -1,
+            marginBottom: 2,
             display: { xs: "flex", md: "none" },
           }}
         >
@@ -814,7 +816,7 @@ function HomePage() {
                   <Button
                     startDecorator={<OpenInNew />}
                     variant="contained"
-                    // onClick={handleCloseNavMenu}
+                    onClick={() => setIsFormOpen(true)}
                     sx={{
                       my: 4,
                       // color: "black",

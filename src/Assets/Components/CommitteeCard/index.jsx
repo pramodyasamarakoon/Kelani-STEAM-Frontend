@@ -8,13 +8,13 @@ const CommitteeCard = ({ img }) => {
       elevation={3}
       sx={{
         position: "relative",
-        width: "150px",
-        height: "150px",
+        width: { xs: "50px", md: "150px" },
+        height: { xs: "50px", md: "150px" },
         transition: "200ms",
-        "&:hover": {
-          width: "195px",
-          height: "195px",
-        },
+        // "&:hover": {
+        //   width: "195px",
+        //   height: "195px",
+        // },
         background: `url(${img})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

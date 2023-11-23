@@ -244,10 +244,10 @@ const OrderTShirtFormPage = () => {
       <NavBar visibilityOfOrderButton={false} />
       {/* T shirt form Container */}
       <div
-        className="w-[86%] mx-auto my-10"
+        className="w-[86%] mx-auto"
         style={{ background: "#D9D9D950", borderRadius: "30px" }}
       >
-        <Grid container spacing={0} sx={{ marginTop: 12 }}>
+        <Grid container spacing={0} sx={{ marginTop: 8 }}>
           {/* Form Title */}
           <Grid item xs={12} sx={{ marginY: "30px" }}>
             <p className="font-OpenSans-SemiBold text-[30px]">
@@ -257,7 +257,7 @@ const OrderTShirtFormPage = () => {
           <Grid item xs={12} sx={{}}>
             {/* White background box */}
             <div
-              className="w-[1172px] h-[507px] mx-auto"
+              className="w-full h-[490px] mx-auto"
               style={{
                 background: "#FFFFFF90",
                 padding: "30px",
@@ -265,7 +265,7 @@ const OrderTShirtFormPage = () => {
               }}
             >
               {/* Shirt Image */}
-              <div className="w-[403px] h-[403px] ">
+              <div className="w-[390px] h-[390px] ">
                 <img className="" src={TShirtSmall} alt="T Shirt Flyer" />
               </div>
               {/* Right text grid */}
@@ -282,22 +282,22 @@ const OrderTShirtFormPage = () => {
                 <Grid container spacing={1}>
                   {/* T shirt details */}
                   <Grid item xs={12} sx={{}}>
-                    <p className="font-OpenSans-SemiBold text-[18px]">
+                    <p className="font-OpenSans-SemiBold text-[16px]">
                       T-Shirt Details
                     </p>
                     <Grid container spacing={1}>
                       <Grid item xs={4} sx={{}}>
-                        <p className="font-OpenSans-regular text-[16px]">
+                        <p className="font-OpenSans-regular text-[14px]">
                           Color - Black
                         </p>
                       </Grid>
                       <Grid item xs={4} sx={{}}>
-                        <p className="font-OpenSans-regular text-[16px]">
+                        <p className="font-OpenSans-regular text-[14px]">
                           Material: 220 gsm crocodile
                         </p>
                       </Grid>
                       <Grid item xs={4} sx={{}}>
-                        <p className="font-OpenSans-regular text-[16px]">
+                        <p className="font-OpenSans-regular text-[14px]">
                           Price: 1800.00 LKR
                         </p>
                       </Grid>
@@ -316,7 +316,7 @@ const OrderTShirtFormPage = () => {
                         style={{
                           width: 673,
                           color: "black",
-                          fontSize: 18,
+                          fontSize: 16,
                           fontFamily: "Open Sans",
                           fontWeight: "600",
                           wordWrap: "break-word",
@@ -328,7 +328,7 @@ const OrderTShirtFormPage = () => {
                         style={{
                           width: 664,
                           color: "black",
-                          fontSize: 16,
+                          fontSize: 14,
                           fontFamily: "Open Sans",
                           fontWeight: "400",
                           wordWrap: "break-word",
@@ -361,7 +361,7 @@ const OrderTShirtFormPage = () => {
                         style={{
                           width: 673,
                           color: "black",
-                          fontSize: 18,
+                          fontSize: 16,
                           fontFamily: "Open Sans",
                           fontWeight: "600",
                           wordWrap: "break-word",
@@ -373,7 +373,7 @@ const OrderTShirtFormPage = () => {
                         style={{
                           width: "100%",
                           color: "black",
-                          fontSize: 16,
+                          fontSize: 14,
                           fontFamily: "Open Sans",
                           fontWeight: "400",
                           wordWrap: "break-word",
@@ -404,7 +404,7 @@ const OrderTShirtFormPage = () => {
                   textAlign: "center",
                 }}
               >
-                <p className="font-OpenSans-SemiBold text-[22px]">
+                <p className="font-OpenSans-SemiBold text-[18px]">
                   Deadline: 30th October 2023
                 </p>
               </div>

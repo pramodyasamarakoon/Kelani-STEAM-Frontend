@@ -8,28 +8,9 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { universities } from "../../Assets/Components/const";
 
 const BookingForm = ({ onSubmit, onClose }) => {
-  const universities = [
-    "University of Kelaniya",
-    "University of Colombo",
-    "University of Peradeniya",
-    "University of Moratuwa",
-    "University of Sri Jayewardenepura",
-    "University of Ruhuna",
-    "University of Jaffna",
-    "Eastern University, Sri Lanka",
-    "Rajarata University of Sri Lanka",
-    "Sabaragamuwa University of Sri Lanka",
-    "Wayamba University of Sri Lanka",
-    "Uva Wellassa University",
-    "University of the Visual & Performing Arts",
-    "South Eastern University of Sri Lanka",
-    "Open University of Sri Lanka",
-    "Sri Lanka Technological Campus (SLTC)",
-    "Sri Lanka Institute of Information Technology (SLIIT)",
-    // Add more universities as needed
-  ];
   const [formData, setFormData] = useState({
     // Initialize form data here if needed
   });
@@ -110,8 +91,12 @@ const BookingForm = ({ onSubmit, onClose }) => {
           <Grid item xs={12}>
             <TextField fullWidth label="Other" multiline />
           </Grid>
-          <Grid item xs={3.5}></Grid>
-          <Grid item xs={5}>
+          <Grid
+            item
+            xs={3.5}
+            sx={{ display: { xs: "none", md: "flex" } }}
+          ></Grid>
+          <Grid item xs={5} sx={{ display: { xs: "none", md: "flex" } }}>
             <Box display="flex" justifyContent="space-between" marginTop={2}>
               <Button
                 variant="contained"
@@ -120,7 +105,37 @@ const BookingForm = ({ onSubmit, onClose }) => {
               >
                 Submit
               </Button>
-              <Button variant="contained" color="secondary" onClick={onClose}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={onClose}
+                sx={{ marginLeft: 2 }}
+              >
+                Cancel
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sx={{ display: { xs: "flex", md: "none" } }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginTop: 2,
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={onClose}
+                sx={{ marginLeft: 2 }}
+              >
                 Cancel
               </Button>
             </Box>

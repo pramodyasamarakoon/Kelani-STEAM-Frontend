@@ -8,12 +8,12 @@ const DirectorHoverCard = (img) => {
       elevation={3}
       sx={{
         position: "relative",
-        width: "250px",
-        height: "310px",
+        width: { xs: "150px", md: "250px" },
+        height: { xs: "200px", md: "310px" },
         transition: "200ms",
         "&:hover": {
-          width: "245px",
-          height: "305px",
+          width: { xs: "145px", md: "245px" },
+          height: { xs: "195px", md: "305px" },
         },
         background: `url(${presidents[1].img})`,
         backgroundSize: "cover", // Adjust as needed

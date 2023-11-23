@@ -1,28 +1,30 @@
 import React from "react";
 
-const ProjectCard = ({ coverImage, images, title, description }) => {
+const ProjectCardMini = ({ coverImage, images, title, description }) => {
   return (
-    <div id={title} className="w-full h-screen relative">
+    <div id={title} className="w-[100%] h-screen relative">
       {/* Background Image */}
       <img
         src={coverImage}
         alt="Mehewara"
-        className="w-full h-full object-cover"
+        className="w-[100%] h-full object-cover"
       />
       {/* Container */}
       <div
-        className="absolute inset-0 flex flex-col  justify-center w-[800px] text-left"
+        className="absolute inset-0 flex flex-col  justify-center w-[90%] text-left"
         style={{ zIndex: 1, left: "10%" }}
       >
-        <p className="text-white text-5xl font-Lobster-Regular my-8">{title}</p>
-        <p className="text-white text-[14px] font-OpenSans-Regular w-[600px]">
+        <p className="text-white text-3xl font-Lobster-Regular w-[90%] my-8">
+          {title}
+        </p>
+        <p className="text-white text-[12px] font-OpenSans-Regular w-[90%]">
           {description}{" "}
         </p>
         {/* Image Boxes */}
         <div className="flex mt-8">
           {/* Boxes */}
           {images.map((image, index) => (
-            <div key={index} className="w-[180px] h-[130px] mr-5">
+            <div key={index} className="w-[150px] h-[100px] mr-2">
               <img
                 src={image}
                 alt={index}
@@ -44,4 +46,4 @@ const ProjectCard = ({ coverImage, images, title, description }) => {
   );
 };
 
-export default ProjectCard;
+export default ProjectCardMini;

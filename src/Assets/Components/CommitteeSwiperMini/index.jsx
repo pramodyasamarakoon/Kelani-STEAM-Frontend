@@ -14,7 +14,7 @@ import CommitteeHoverCard from "../CommitteeCard";
 import CommitteeCard from "../CommitteeCard";
 import committee01 from "../../Images/Committee/Committee01.png";
 
-const CommitteeSwiper = ({
+const CommitteeSwiperMini = ({
   bgImg,
   presidentPosition,
   presidentName,
@@ -24,6 +24,9 @@ const CommitteeSwiper = ({
   // Select the appropriate committee based on isPresident value
   const committee = isPresident ? videCommittee : steamCommittee;
   console.log("Committee", committee);
+
+  //   Align Items
+  const alignRows = ["10%", "25%", "40%", "55%", "70%", "85%"];
   return (
     <Swiper
       style={{
@@ -84,17 +87,20 @@ const CommitteeSwiper = ({
           style={{
             position: "absolute",
             zIndex: 103,
-            left: "40%", // Align to the left
-            top: "50%",
+            right: { xs: "80%", md: "40%" },
+            top: { xs: "80%", md: "50%" },
             // bottom: "50%",
-            transform: "translate(-50%, -50%)",
+            transform: {
+              xs: "translate(-50%, -50%)",
+              md: "translate(-50%, -50%)",
+            },
             display: "flex",
             flexDirection: "column", // Align items in a column
-            alignItems: "flex-end", // Right-align content
+            alignItems: { xs: "center", md: "flex-end" }, // Right-align content
             marginRight: "20px", // Add right margin
           }}
         >
-          <p className="font-Poppins-SemiBold text-3xl mb-2">
+          <p className="font-Poppins-SemiBold text-xl mb-1">
             {presidentPosition}
           </p>
           <p className="font-Poppins-Regular text-[16px]">{presidentName}</p>
@@ -104,7 +110,7 @@ const CommitteeSwiper = ({
           style={{
             position: "absolute",
             zIndex: 103,
-            right: "10%", // Align to the left
+            right: "5%", // Align to the left
             top: "50%",
             // bottom: "50%",
             transform: "translate(-50%, -50%)",
@@ -126,22 +132,23 @@ const CommitteeSwiper = ({
               style={{
                 position: "absolute",
                 zIndex: 103,
-                left: committeeMember.left,
-                top: committeeMember.top,
+                left: "64%",
+                width: "70%",
+                top: alignRows[index],
                 transform: "translate(-50%, -50%)",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "flex-end",
+                alignItems: { xs: "flex-start", md: "flex-end" },
                 marginRight: "20px",
               }}
             >
-              <p className="font-Poppins-SemiBold text-xl flex-wrap">
+              <p className="font-Poppins-SemiBold text-left text-[18px] flex-wrap">
                 {committeeMember.position}
               </p>
-              <p className="font-Poppins-SemiBold text-[14px] flex-wrap">
+              <p className="font-Poppins-SemiBold text-left text-[14px] flex-wrap">
                 {committeeMember.subPosition}
               </p>
-              <p className="font-Poppins-Regular text-[12px]">
+              <p className="font-Poppins-Regular text-left text-[12px]">
                 {committeeMember.name}
               </p>
             </div>
@@ -150,8 +157,8 @@ const CommitteeSwiper = ({
               style={{
                 position: "absolute",
                 zIndex: 103,
-                left: committeeMember.imgLeft,
-                top: committeeMember.top,
+                left: "20%",
+                top: alignRows[index],
                 transform: "translate(-50%, -50%)",
                 display: "flex",
                 justifyContent: "center",
@@ -167,29 +174,30 @@ const CommitteeSwiper = ({
       {/* 3rd Slide */}
       {committee.slice(6, 12).length > 0 ? (
         <SwiperSlide>
-          {committee.slice(6, 12).map((committeeMember, index) => (
+          {committee.slice(0, 6).map((committeeMember, index) => (
             <div key={committeeMember.id}>
               {/* Text */}
               <div
                 style={{
                   position: "absolute",
                   zIndex: 103,
-                  left: committeeMember.left,
-                  top: committeeMember.top,
+                  left: "64%",
+                  width: "70%",
+                  top: alignRows[index],
                   transform: "translate(-50%, -50%)",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "flex-end",
+                  alignItems: { xs: "flex-start", md: "flex-end" },
                   marginRight: "20px",
                 }}
               >
-                <p className="font-Poppins-SemiBold text-xl flex-wrap">
+                <p className="font-Poppins-SemiBold text-left text-[18px] flex-wrap">
                   {committeeMember.position}
                 </p>
-                <p className="font-Poppins-SemiBold text-[14px] flex-wrap">
+                <p className="font-Poppins-SemiBold text-left text-[14px] flex-wrap">
                   {committeeMember.subPosition}
                 </p>
-                <p className="font-Poppins-Regular text-[12px]">
+                <p className="font-Poppins-Regular text-left text-[12px]">
                   {committeeMember.name}
                 </p>
               </div>
@@ -198,12 +206,12 @@ const CommitteeSwiper = ({
                 style={{
                   position: "absolute",
                   zIndex: 103,
-                  left: committeeMember.imgLeft,
-                  top: committeeMember.top,
+                  left: "20%",
+                  top: alignRows[index],
                   transform: "translate(-50%, -50%)",
                   display: "flex",
                   justifyContent: "center",
-                  marginRight: "20px", //
+                  // marginRight: "20px", //
                 }}
               >
                 <CommitteeCard img={committeeMember.img} />
@@ -223,22 +231,23 @@ const CommitteeSwiper = ({
                 style={{
                   position: "absolute",
                   zIndex: 103,
-                  left: committeeMember.left,
-                  top: committeeMember.top,
+                  left: "64%",
+                  width: "70%",
+                  top: alignRows[index],
                   transform: "translate(-50%, -50%)",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "flex-end",
+                  alignItems: { xs: "flex-start", md: "flex-end" },
                   marginRight: "20px",
                 }}
               >
-                <p className="font-Poppins-SemiBold text-xl flex-wrap">
+                <p className="font-Poppins-SemiBold text-left text-[18px] flex-wrap">
                   {committeeMember.position}
                 </p>
-                <p className="font-Poppins-SemiBold text-[14px] flex-wrap">
+                <p className="font-Poppins-SemiBold text-left text-[14px] flex-wrap">
                   {committeeMember.subPosition}
                 </p>
-                <p className="font-Poppins-Regular text-[12px]">
+                <p className="font-Poppins-Regular text-left text-[12px]">
                   {committeeMember.name}
                 </p>
               </div>
@@ -247,12 +256,12 @@ const CommitteeSwiper = ({
                 style={{
                   position: "absolute",
                   zIndex: 103,
-                  left: committeeMember.imgLeft,
-                  top: committeeMember.top,
+                  left: "20%",
+                  top: alignRows[index],
                   transform: "translate(-50%, -50%)",
                   display: "flex",
                   justifyContent: "center",
-                  marginRight: "20px", //
+                  // marginRight: "20px", //
                 }}
               >
                 <CommitteeCard img={committeeMember.img} />
@@ -272,22 +281,23 @@ const CommitteeSwiper = ({
                 style={{
                   position: "absolute",
                   zIndex: 103,
-                  left: committeeMember.left,
-                  top: committeeMember.top,
+                  left: "64%",
+                  width: "70%",
+                  top: alignRows[index],
                   transform: "translate(-50%, -50%)",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "flex-end",
+                  alignItems: { xs: "flex-start", md: "flex-end" },
                   marginRight: "20px",
                 }}
               >
-                <p className="font-Poppins-SemiBold text-xl flex-wrap">
+                <p className="font-Poppins-SemiBold text-left text-[18px] flex-wrap">
                   {committeeMember.position}
                 </p>
-                <p className="font-Poppins-SemiBold text-[14px] flex-wrap">
+                <p className="font-Poppins-SemiBold text-left text-[14px] flex-wrap">
                   {committeeMember.subPosition}
                 </p>
-                <p className="font-Poppins-Regular text-[12px]">
+                <p className="font-Poppins-Regular text-left text-[12px]">
                   {committeeMember.name}
                 </p>
               </div>
@@ -296,12 +306,12 @@ const CommitteeSwiper = ({
                 style={{
                   position: "absolute",
                   zIndex: 103,
-                  left: committeeMember.imgLeft,
-                  top: committeeMember.top,
+                  left: "20%",
+                  top: alignRows[index],
                   transform: "translate(-50%, -50%)",
                   display: "flex",
                   justifyContent: "center",
-                  marginRight: "20px", //
+                  // marginRight: "20px", //
                 }}
               >
                 <CommitteeCard img={committeeMember.img} />
@@ -314,4 +324,4 @@ const CommitteeSwiper = ({
   );
 };
 
-export default CommitteeSwiper;
+export default CommitteeSwiperMini;

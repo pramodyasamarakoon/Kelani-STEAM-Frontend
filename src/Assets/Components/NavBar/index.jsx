@@ -16,7 +16,7 @@ import Logo from "../../../Assets/Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import back20 from "../../Images/Back20Small.jpg";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import StoreIcon from "@mui/icons-material/Store";
 import { Link } from "react-router-dom";
 
 const pages = [
@@ -66,7 +66,7 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
       position="fixed"
       color="transparent"
       sx={{
-        margin: 1,
+        margin: { xs: 1, md: 1 },
         width: "99%",
         background: `url(${back20})`, // Replace 'path/to/your/image.jpg' with the actual path to your background image
         backgroundSize: "cover",
@@ -75,7 +75,7 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="a"
             href="/"
@@ -90,7 +90,7 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
               textDecoration: "none",
             }}
           >
-            <LazyLoadImage src={Logo} alt="Logo" className="h-[40px]" />
+            <LazyLoadImage src={Logo} alt="Logo" className="h-[35px]" />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -124,9 +124,9 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" href={page.link}>
-                    {page.label}
-                  </Typography>
+                  <Link to={page.link}>
+                    <Typography textAlign="center">{page.label}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -155,6 +155,7 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
                 key={page.label}
                 onClick={handleCloseNavMenu}
                 href={page.link}
+                size="small"
                 sx={{
                   my: 2,
                   color: "black",
@@ -176,6 +177,7 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
                 <Button
                   variant="contained"
                   onClick={handleCloseNavMenu}
+                  size="small"
                   sx={{
                     mx: 4,
                     color: "black",
@@ -191,18 +193,20 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             {visibilityOfOrderButton ? (
-              <Tooltip title="Order the T-Shirt">
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  // onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <ShoppingCartOutlinedIcon />
-                </IconButton>
-              </Tooltip>
+              <Link to="/OrderTShirtFormPage">
+                <Tooltip title="Order the T-Shirt">
+                  <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    // onClick={handleOpenNavMenu}
+                    color="inherit"
+                  >
+                    <StoreIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
             ) : null}
           </Box>
         </Toolbar>

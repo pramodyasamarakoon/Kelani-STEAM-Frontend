@@ -40,7 +40,7 @@ const ContactUs = () => {
         sx={{
           marginTop: 15,
           marginBottom: 5,
-          width: 1172,
+          width: "75%",
           marginX: "auto",
           display: { xs: "none", md: "flex" },
           borderRadius: "20px",
@@ -157,7 +157,7 @@ const ContactUs = () => {
             padding: 18,
           }}
         >
-          <p className="font-Poppins-SemiBold text-3xl mb-6 mt-4">
+          <p className="font-Poppins-SemiBold text-2xl mb-6 mt-4">
             {selectedIcon === "facebook"
               ? "Official Facebook Page"
               : selectedIcon === "instagram"
@@ -170,7 +170,7 @@ const ContactUs = () => {
               ? "Send a message from Whatsapp"
               : null}
           </p>
-          <p className="font-Poppins-regular text-[16px] mb-2">
+          <p className="font-Poppins-regular text-[14px] mb-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus,
             modi dolores voluptas sapiente autem quasi quia laudantium quis odio
             harum nostrum quaerat tenetur, voluptates aut quibusdam vero
@@ -180,6 +180,7 @@ const ContactUs = () => {
             <Button
               variant="contained"
               // onClick={handleCloseNavMenu}
+              size="small"
               sx={{
                 color: "black",
                 display: "end",
