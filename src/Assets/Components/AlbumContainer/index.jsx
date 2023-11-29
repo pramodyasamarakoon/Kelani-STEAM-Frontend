@@ -49,7 +49,7 @@ const AlbumContainer = () => {
           sx={{
             paddingLeft: "20px",
             paddingRight: "20px",
-            paddingY: "10px",
+            paddingY: "15px",
           }}
         >
           {AlbumData.map((album, index) => (
@@ -64,7 +64,8 @@ const AlbumContainer = () => {
                 cursor: "pointer",
                 height: "40px",
                 display: "flex",
-                alignItems: "center",
+                flexDirection: "column",
+                alignItems: "left",
                 paddingX: "15px",
                 marginBottom: "2px",
                 "&:hover": { backgroundColor: "#FF3737", color: "#ffffff" },
@@ -78,6 +79,9 @@ const AlbumContainer = () => {
               onClick={() => handleAlbumNameClick(index)}
             >
               <p className="font-OpenSans-Regular text-[14px]">{album.title}</p>
+              <p className="font-OpenSans-Regular text-[12px]">
+                Updated: {album.updated}
+              </p>
             </Grid>
           ))}
         </Grid>

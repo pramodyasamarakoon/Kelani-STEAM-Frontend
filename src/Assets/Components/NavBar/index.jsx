@@ -15,7 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Logo from "../../../Assets/Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import back20 from "../../Images/Back20Small.jpg";
+import back20 from "../../Images/Back30Small.jpg";
 import StoreIcon from "@mui/icons-material/Store";
 import { Link } from "react-router-dom";
 

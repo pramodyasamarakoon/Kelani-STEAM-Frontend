@@ -251,71 +251,82 @@ export const recent_albums = [
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,
         imgLinks: ['https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8','https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8','https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8','https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },
     {
         title: `AGM'23 - Statistics and Computer Science Students' Association`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },
     {
         title: `AGM'23 - Statistics and Computer Science Students' Association`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },
     {
         title: `AGM'23 - Statistics and Computer Science Students' Association`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },
     {
         title: `AGM'23 - Statistics and Computer Science Students' Association`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,
         imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
+        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        updated: '2023/11/28 10.54 am',
     },
 ]
 

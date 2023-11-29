@@ -427,17 +427,19 @@ function HomePage() {
                 </p>
               </Grid>
               <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>
-                <Button
-                  variant="contained"
-                  // onClick={handleCloseNavMenu}
-                  size="small"
-                  sx={{
-                    mx: 4,
-                    // color: "black",
-                  }}
-                >
-                  Read More...
-                </Button>
+                <Link to="/AboutUs">
+                  <Button
+                    variant="contained"
+                    // onClick={handleCloseNavMenu}
+                    size="small"
+                    sx={{
+                      mx: 4,
+                      // color: "black",
+                    }}
+                  >
+                    Read More...
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
             {/* </Collapse> */}
@@ -496,16 +498,18 @@ function HomePage() {
                 </p>
               </Grid>
               <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>
-                <Button
-                  variant="contained"
-                  // onClick={handleCloseNavMenu}
-                  sx={{
-                    mx: 4,
-                    // color: "black",
-                  }}
-                >
-                  Read More...
-                </Button>
+                <Link to="/AboutUs">
+                  <Button
+                    variant="contained"
+                    // onClick={handleCloseNavMenu}
+                    sx={{
+                      mx: 4,
+                      // color: "black",
+                    }}
+                  >
+                    Read More...
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Grid>
