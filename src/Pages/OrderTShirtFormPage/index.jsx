@@ -28,6 +28,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
 
 const OrderTShirtFormPage = () => {
   const departments = ["IM", "PS", "BS", "ENCM", "PE", "ECS", "AC", "SS", "SE"];
@@ -242,6 +243,7 @@ const OrderTShirtFormPage = () => {
   return (
     <div>
       <NavBar visibilityOfOrderButton={false} />
+      <ScrollToTopButton />
 
       {/* T shirt form Container PC */}
       <div

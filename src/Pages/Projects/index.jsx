@@ -7,6 +7,8 @@ import { Project_Data } from "../../Assets/Components/const";
 import ProjectSideBar from "../../Assets/Components/ProjectSideBar";
 import ProjectCardMini from "../../Assets/Components/ProjectCardMini";
 
+// You can edit Project Data from the Const.js file
+
 function Projects() {
   return (
     <div className="w-full">

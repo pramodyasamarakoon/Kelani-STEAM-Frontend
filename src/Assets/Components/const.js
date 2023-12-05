@@ -248,10 +248,10 @@ export const vide_bg_img = {
 export const recent_albums = [
     {
         title: `AGM'23 - Statistics and Computer Science Students' Association`,
-        imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
+        imgLinks: [ require('../Images/RecentAlbums/StatAGM23/01.JPG'),require('../Images/RecentAlbums/StatAGM23/02.JPG'),require('../Images/RecentAlbums/StatAGM23/03.JPG'),require('../Images/RecentAlbums/StatAGM23/04.JPG'),],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
-        albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
+        albumLink: 'https://www.facebook.com/kelanisteam',
         updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,

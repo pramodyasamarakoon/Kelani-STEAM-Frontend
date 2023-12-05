@@ -38,7 +38,14 @@ const pages = [
   },
 ];
 
-const NavBar = ({ visibilityOfOrderButton = true }) => {
+const adminPages = [
+  {
+    label: "Home",
+    link: "/AdminHome",
+  },
+];
+
+const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
   // console.log("NavBar visibilityOfOrderButton:", visibilityOfOrderButton);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -150,24 +157,44 @@ const NavBar = ({ visibilityOfOrderButton = true }) => {
             <img src={Logo} alt="" className="h-[40px]" />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page.label}
-                onClick={handleCloseNavMenu}
-                href={page.link}
-                size="small"
-                sx={{
-                  my: 2,
-                  color: "black",
-                  display: "block",
-                  backgroundColor: "transparent",
-                  borderRadius: "1rem",
-                  marginX: "1rem",
-                }}
-              >
-                {page.label}
-              </Button>
-            ))}
+            {!isAdmin &&
+              pages.map((page) => (
+                <Button
+                  key={page.label}
+                  onClick={handleCloseNavMenu}
+                  href={page.link}
+                  size="small"
+                  sx={{
+                    my: 2,
+                    color: "black",
+                    display: "block",
+                    backgroundColor: "transparent",
+                    borderRadius: "1rem",
+                    marginX: "1rem",
+                  }}
+                >
+                  {page.label}
+                </Button>
+              ))}
+            {isAdmin &&
+              adminPages.map((page) => (
+                <Button
+                  key={page.label}
+                  onClick={handleCloseNavMenu}
+                  href={page.link}
+                  size="small"
+                  sx={{
+                    my: 2,
+                    color: "black",
+                    display: "block",
+                    backgroundColor: "transparent",
+                    borderRadius: "1rem",
+                    marginX: "1rem",
+                  }}
+                >
+                  {page.label}
+                </Button>
+              ))}
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

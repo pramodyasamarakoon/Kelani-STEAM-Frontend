@@ -1,6 +1,7 @@
-import { Box, Fab, Grid } from "@mui/material";
+import { Box, Fab, Grid, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import EditIcon from "@mui/icons-material/Edit";
 
 function ScrollToTopButton() {
   // useEffect for scroll visibility and cleanup
@@ -44,21 +45,29 @@ function ScrollToTopButton() {
       behavior: "smooth",
     });
   };
+
+  //   Edit button Handle
+  const handleEditClick = () => {
+    // Handle edit button click logic
+    console.log("Edit button clicked");
+  };
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 20,
-        right: 20,
-        display: isVisible ? "block" : "none",
-        zIndex: 999,
-      }}
-    >
-      <Fab color="primary" aria-label="scroll to top" onClick={scrollToTop}>
-        <KeyboardArrowUpOutlinedIcon />
-        {/* <p>Up</p> */}
-      </Fab>
-    </div>
+    <>
+      <div
+        style={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          display: isVisible ? "block" : "none",
+          zIndex: 999,
+        }}
+      >
+        <Fab color="primary" aria-label="scroll to top" onClick={scrollToTop}>
+          <KeyboardArrowUpOutlinedIcon />
+          {/* <p>Up</p> */}
+        </Fab>
+      </div>
+    </>
   );
 }
 

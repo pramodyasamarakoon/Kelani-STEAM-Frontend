@@ -64,8 +64,8 @@ const AlbumContainer = () => {
                 cursor: "pointer",
                 height: "40px",
                 display: "flex",
-                flexDirection: "column",
-                alignItems: "left",
+                // flexDirection: "column",
+                alignItems: "center",
                 paddingX: "15px",
                 marginBottom: "2px",
                 "&:hover": { backgroundColor: "#FF3737", color: "#ffffff" },
@@ -79,9 +79,9 @@ const AlbumContainer = () => {
               onClick={() => handleAlbumNameClick(index)}
             >
               <p className="font-OpenSans-Regular text-[14px]">{album.title}</p>
-              <p className="font-OpenSans-Regular text-[12px]">
+              {/* <p className="font-OpenSans-Regular text-[12px]">
                 Updated: {album.updated}
-              </p>
+              </p> */}
             </Grid>
           ))}
         </Grid>

@@ -27,7 +27,54 @@ import CountingNumber from "../../Assets/Components/CountingNumber";
 import Logo from "../../../src/Assets/LogoWhite.png";
 import Team from "../../Assets/Images/BookNowImage/TeamMedium.jpg";
 
+// Recent Album details can change from the Const.js file
+
 function HomePage() {
+  const [formData, setFormData] = useState({
+    heroContainer: [
+      {
+        heroTopic: "Official Media Unit",
+        heroSubTopic: "Faculty of Science, University of Kelaniya",
+        countingNumbers: [
+          {
+            title: "Years of Excellence",
+            number: 6,
+            isPlus: true,
+          },
+          {
+            title: "Different Avenues",
+            number: 8,
+            isPlus: false,
+          },
+          {
+            title: "Undergraduates",
+            number: 300,
+            isPlus: true,
+          },
+          {
+            title: "Events Covered",
+            number: 110,
+            isPlus: true,
+          },
+        ],
+        heroCoverImage: Team,
+      },
+    ],
+    aboutUsContainer: [
+      {
+        aboutUsImage: AboutUsSmall,
+        text01: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Quaerat eos laborum sit? Repudiandae, dicta, aliquid eligendi
+        cum excepturi quod aliquam, alias quidem perspiciatis dolores
+        ab quisquam voluptatibus eos nobis impedit!`,
+        text02: `Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Nam cumque sit eligendi laudantium nesciunt numquam
+        odit? Id sunt, blanditiis dolores recusandae laudantium
+        maiores ex iste, impedit ducimus provident magnam quidem?`,
+      },
+    ],
+  });
+
   const [showAboutUs, setShowAboutUs] = useState(false);
   const [showGridBelow, setShowGridBelow] = useState(false);
   const [showEventContainer, setShowEventContainer] = useState(false);
@@ -150,7 +197,7 @@ function HomePage() {
                   style={{
                     width: "100%",
                     height: "100vh",
-                    backgroundImage: `url(${Team})`,
+                    backgroundImage: `url(${formData.heroContainer[0].heroCoverImage})`,
                     // backgroundImage:
                     //   "url(https://sltappbucket.s3.amazonaws.com/testimage.jpg?AWSAccessKeyId=ASIA46B2THDZ6OEGUQD2\u0026Expires=1858492301\u0026x-amz-security-token=IQoJb3JpZ2luX2VjEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJGMEQCIGpau1S4fx1XWAoxnkVUhJOkFCDVIommCzFFEbI5SyTpAiAxjzEkoAHFe3o0IactbY1fVcR%2F3l55xjRQFWVFpwxbEirqAggpEAAaDDg4OTE4MTEyNDg1MSIMkgvWmZjKE%2FnvSdrNKscCBs7ecW1YLeWO4Oyex6PW%2BM35yP3jCdGy9KSTh22voUmXKQ8xADqrktkYonrIs%2BKRvm8NjnUZxzrqtl2%2BGVKDgBFriI1CEqZkclXi0vtn%2FZ%2BILLwrizzPCe7UIqPnHU90CTLAGIK7oX72tZe0e0JYP%2Be%2FxjU%2B%2BqAJ37fTXa2gzPIrBCFNfWthsXw9GI%2BMgFLby8zsGiS7qWCyWXNTDWbxSzP37zlEcGPB1KbMqcON4fDEN44Sahngr8hyEEHRDQMFGap6WawOEiMIdIsBDVIU71Vq3XP%2FMhr%2BmFKp46icX8wxWtJ8slLc7S%2F%2FvNcbD8rUsUeWhFu2Ugcn2cAOksQfjg2NM1LBWwk4L4I4CfL3t5JEKLo5IggjKtMu1rP%2BoaZtPHQ%2FApHgmjR05lDa673G0i4scbZOJCK7JJc8eYhRnls6P%2F6kPBLlMIbm9qoGOp8BxMor0VGvQre7UeAMQ7jESA6RloDOdHawsixDqxjYU%2F8NDRbmPL4GQyyXhKCEzpVvU2JD9EP36yccHGH5oozLypDdB023KwEu6DDsPRqvf%2BQOGkESlI4NK9TICULc8l41m60XHp92FYx9yuvJ9S3LBDC%2FGX4eRguPbpjIzwQvJ%2BVOXIxNXIJZtDarGejUCPq6cwPLaBjIoczC9NLyXO%2Bi\u0026Signature=T3nkhQzwkYfpnJOB3EByPF6XuVM%3D)",
                     backgroundSize: "cover",
@@ -174,10 +221,10 @@ function HomePage() {
                     <img src={Logo} alt="" className="h-[120px] mb-4 mx-auto" />
                   </p>
                   <p className="font-Poppins-SemiBold text-5xl mx-4">
-                    Official Media Unit
+                    {formData.heroContainer[0].heroTopic}
                   </p>
                   <p className="font-Poppins-Light text-2xl">
-                    Faculty of Science, University of Kelaniya
+                    {formData.heroContainer[0].heroSubTopic}
                   </p>
                 </Box>
 
@@ -202,25 +249,44 @@ function HomePage() {
                     className="h-auto flex justify-center items-center "
                   >
                     <CountingNumber
-                      label="Years of Excellence"
+                      label={formData.heroContainer[0].countingNumbers[0].title}
                       initialValue={0}
-                      finalValue={5}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[0].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[0].isPlus
+                      }
                     />
                     <CountingNumber
-                      label="Different Avenues"
-                      initialValue={10}
-                      finalValue={6}
-                      isPlus={false}
+                      label={formData.heroContainer[0].countingNumbers[1].title}
+                      initialValue={0}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[1].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[1].isPlus
+                      }
                     />
                     <CountingNumber
-                      label="Undergraduates"
-                      initialValue={5}
-                      finalValue={300}
+                      label={formData.heroContainer[0].countingNumbers[2].title}
+                      initialValue={0}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[2].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[2].isPlus
+                      }
                     />
                     <CountingNumber
-                      label="Events Covered"
-                      initialValue={100}
-                      finalValue={110}
+                      label={formData.heroContainer[0].countingNumbers[3].title}
+                      initialValue={0}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[3].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[3].isPlus
+                      }
                     />
                   </Grid>
                 </Grid>
@@ -273,7 +339,7 @@ function HomePage() {
                   style={{
                     width: "100%",
                     height: "80vh",
-                    backgroundImage: `url(${Team})`,
+                    backgroundImage: `url(${formData.heroContainer[0].heroCoverImage})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -295,10 +361,10 @@ function HomePage() {
                     <img src={Logo} alt="" className="h-[60px] mb-4 mx-auto" />
                   </p>
                   <p className="font-Poppins-SemiBold text-3xl">
-                    Official Media Unit
+                    {formData.heroContainer[0].heroTopic}
                   </p>
                   <p className="font-Poppins-Light text-[16px">
-                    Faculty of Science, University of Kelaniya
+                    {formData.heroContainer[0].heroSubTopic}
                   </p>
                 </Box>
 
@@ -323,25 +389,44 @@ function HomePage() {
                     className="h-auto flex justify-center items-center "
                   >
                     <CountingNumber
-                      label="Years of Excellence"
+                      label={formData.heroContainer[0].countingNumbers[0].title}
                       initialValue={0}
-                      finalValue={5}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[0].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[0].isPlus
+                      }
                     />
                     <CountingNumber
-                      label="Different Avenues"
-                      initialValue={10}
-                      finalValue={6}
-                      isPlus={false}
+                      label={formData.heroContainer[0].countingNumbers[1].title}
+                      initialValue={0}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[1].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[1].isPlus
+                      }
                     />
                     <CountingNumber
-                      label="Undergraduates"
-                      initialValue={5}
-                      finalValue={300}
+                      label={formData.heroContainer[0].countingNumbers[2].title}
+                      initialValue={0}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[2].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[2].isPlus
+                      }
                     />
                     <CountingNumber
-                      label="Events Covered"
-                      initialValue={100}
-                      finalValue={110}
+                      label={formData.heroContainer[0].countingNumbers[3].title}
+                      initialValue={0}
+                      finalValue={
+                        formData.heroContainer[0].countingNumbers[3].number
+                      }
+                      isPlus={
+                        formData.heroContainer[0].countingNumbers[3].isPlus
+                      }
                     />
                   </Grid>
                 </Grid>
@@ -369,8 +454,8 @@ function HomePage() {
         {/* About US Grid PC */}
         <Grid
           container
-          spacing={2}
-          className="h-[500px] flex justify-center items-center "
+          // spacing={2}
+          className="h-auto flex justify-center items-center "
           id="about-us-section"
           sx={{
             marginX: 16,
@@ -397,7 +482,11 @@ function HomePage() {
             sx={{ padding: 6 }}
           >
             {/* <Collapse in={showAboutUs} timeout={1000}> */}{" "}
-            <img className="m-10" src={AboutUsSmall} alt="Team Photo" />
+            <img
+              className="m-10"
+              src={formData.aboutUsContainer[0].aboutUsImage}
+              alt="Team Photo"
+            />
             {/* </Collapse> */}
           </Grid>
           {/*About US Content */}
@@ -416,14 +505,8 @@ function HomePage() {
                 // sx={{ padding: 6 }}
               >
                 <p className=" font-Poppins-Regular text-[14px]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quaerat eos laborum sit? Repudiandae, dicta, aliquid eligendi
-                  cum excepturi quod aliquam, alias quidem perspiciatis dolores
-                  ab quisquam voluptatibus eos nobis impedit! <br />
-                  <br /> Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Nam cumque sit eligendi laudantium nesciunt numquam
-                  odit? Id sunt, blanditiis dolores recusandae laudantium
-                  maiores ex iste, impedit ducimus provident magnam quidem?
+                  {formData.aboutUsContainer[0].text01} <br />
+                  <br /> {formData.aboutUsContainer[0].text02}
                 </p>
               </Grid>
               <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>
@@ -470,7 +553,11 @@ function HomePage() {
             className="h-auto flex justify-center items-center "
             // sx={{ padding: 6 }}
           >
-            <img className="mr-4" src={AboutUsSmall} alt="Team Photo" />
+            <img
+              className="mr-4"
+              src={formData.aboutUsContainer[0].aboutUsImage}
+              alt="Team Photo"
+            />
           </Grid>
           {/*About US Content */}
           <Grid
@@ -487,14 +574,8 @@ function HomePage() {
                 // sx={{ padding: 6 }}
               >
                 <p className=" font-Poppins-Regular text-[14px]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quaerat eos laborum sit? Repudiandae, dicta, aliquid eligendi
-                  cum excepturi quod aliquam, alias quidem perspiciatis dolores
-                  ab quisquam voluptatibus eos nobis impedit! <br />
-                  <br /> Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Nam cumque sit eligendi laudantium nesciunt numquam
-                  odit? Id sunt, blanditiis dolores recusandae laudantium
-                  maiores ex iste, impedit ducimus provident magnam quidem?
+                  {formData.aboutUsContainer[0].text01} <br />
+                  <br /> {formData.aboutUsContainer[0].text02}
                 </p>
               </Grid>
               <Grid item xs={12} className="h-auto" sx={{ paddingY: 2 }}>

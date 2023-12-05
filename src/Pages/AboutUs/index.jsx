@@ -43,6 +43,14 @@ function srcset(image, size, rows = 1, cols = 1) {
 }
 
 function AboutUs() {
+  const [formData, setFormData] = useState({
+    heroContainer: [
+      {
+        heroTopic: "Official Media Unit",
+        heroSubTopic: "Faculty of Science, University of Kelaniya",
+      },
+    ],
+  });
   const [readM, setReadM] = useState(false);
 
   // useEffect for readM state
@@ -90,11 +98,11 @@ function AboutUs() {
               <p className="font-Poppins-Regular text-4xl">the</p> */}
               <div style={trackingInExpandStyles}>
                 <p className="font-Poppins-SemiBold text-4xl pt-4">
-                  Official Media Unit
+                  {formData.heroContainer[0].heroTopic}
                 </p>
               </div>
               <p className="font-Poppins-Regular text-[18px] py-2">
-                Faculty of Science, University of Kelaniya
+                {formData.heroContainer[0].heroSubTopic}
               </p>
             </Box>
           </Grid>
@@ -242,11 +250,11 @@ function AboutUs() {
               <Box sx={{}}>
                 <div style={trackingInExpandStyles}>
                   <p className="font-Poppins-SemiBold text-4xl pt-2">
-                    Official Media Unit
+                    {formData.heroContainer[0].heroTopic}
                   </p>
                 </div>
                 <p className="font-Poppins-SemiBold text-[16px]">
-                  Faculty of Science, University of Kelaniya
+                  {formData.heroContainer[0].heroSubTopic}
                 </p>
               </Box>
             </Grid>

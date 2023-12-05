@@ -6,6 +6,8 @@ import AboutUs from './Pages/AboutUs';
 import BookingForm from './Pages/BookingForm';
 import ContactUs from './Pages/ContactUs';
 import OrderTShirtFormPage from './Pages/OrderTShirtFormPage';
+import AdminHome from './Pages/Admin/AdminHome';
+import Home from './Pages/Admin/Home';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/BookingForm" element={<BookingForm/>} />
         <Route path="/ContactUs" element={<ContactUs/>} />
         <Route path="/OrderTShirtFormPage" element={<OrderTShirtFormPage/>} />
+        <Route path="/AdminHome" element={<AdminHome/>} />
+        <Route path="/Admin/Home" element={<Home/>} />
       </Routes>
     </BrowserRouter>
     </div>
