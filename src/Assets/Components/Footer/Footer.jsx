@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 
 function Footer() {
   return (
-    <Grid container spacing={2}>
+    <Grid>
       <Grid
         item
         xs={12}
@@ -23,7 +23,7 @@ function Footer() {
             alignItems: "center",
           }}
         >
-          <p className="text-white font-Poppins-SemiBold sx:text-[14px] md:text-[16px] p-8">
+          <p className="text-white font-Poppins-SemiBold xs:text-[12px] md:text-[16px] p-8">
             Copyright &copy; 2023 Kelani STEAM | Powered By Pramodya Samarakoon
             With &hearts;
           </p>

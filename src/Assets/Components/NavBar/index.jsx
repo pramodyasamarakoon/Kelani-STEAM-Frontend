@@ -40,8 +40,16 @@ const pages = [
 
 const adminPages = [
   {
-    label: "Home",
-    link: "/AdminHome",
+    label: "Bookings",
+    link: "/AdminBookings",
+  },
+  {
+    label: "Albums",
+    link: "/AdminAlbums",
+  },
+  {
+    label: "Projects",
+    link: "/AdminProjects",
   },
 ];
 

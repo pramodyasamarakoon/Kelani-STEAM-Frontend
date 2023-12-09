@@ -255,7 +255,7 @@ export const recent_albums = [
         updated: '2023/11/28 10.54 am',
     },{
         title: `AGM'23 - Chemical Society`,
-        imgLinks: ['https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8','https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8','https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8','https://images.unsplash.com/photo-1682686580433-2af05ee670ad?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',],
+        imgLinks: ['https://www.amazon.com/photos/shared/U3vVcoyYQ8iJbQ9hM1ymMg.iFx1YfHQc9S8JHTYN4zykJ'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda'],
         albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
@@ -263,7 +263,7 @@ export const recent_albums = [
     },
     {
         title: `AGM'23 - Statistics and Computer Science Students' Association`,
-        imgLinks: ['https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8', 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'],
+        imgLinks: ['https://sltappbucket.s3.ap-southeast-1.amazonaws.com/testimage2kumesh2.jpg'],
         photographed: ['Tharindu Dhanushka', 'Hashan Dhananjaya'],
         edited: ['Thisara Yashoda', 'Hashan Dhananjaya'],
         albumLink: 'https://images.unsplash.com/photo-1682685796467-89a6f149f07a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',

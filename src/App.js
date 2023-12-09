@@ -8,6 +8,8 @@ import ContactUs from './Pages/ContactUs';
 import OrderTShirtFormPage from './Pages/OrderTShirtFormPage';
 import AdminHome from './Pages/Admin/AdminHome';
 import Home from './Pages/Admin/Home';
+import AdminAlbums from './Pages/Admin/AdminAlbums';
+import AdminProjects from './Pages/Admin/AdminProjects';
 
 function App() {
   return (
@@ -20,8 +22,11 @@ function App() {
         <Route path="/BookingForm" element={<BookingForm/>} />
         <Route path="/ContactUs" element={<ContactUs/>} />
         <Route path="/OrderTShirtFormPage" element={<OrderTShirtFormPage/>} />
-        <Route path="/AdminHome" element={<AdminHome/>} />
-        <Route path="/Admin/Home" element={<Home/>} />
+
+        {/*  Admin */}
+        <Route path="/AdminBookings" element={<AdminHome/>} />
+        <Route path="/AdminAlbums" element={<AdminAlbums/>} />
+        <Route path="/AdminProjects" element={<AdminProjects/>} />
       </Routes>
     </BrowserRouter>
     </div>

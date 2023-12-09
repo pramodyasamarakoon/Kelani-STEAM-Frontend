@@ -1,23 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { recent_albums } from "../const";
 import Loader from "../Loader";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-const AlbumContainer = () => {
-  const AlbumData = recent_albums.slice(0, 9);
-  console.log(AlbumData, "AlbumData");
+const AlbumContainer = ({ AlbumData }) => {
+  useEffect(() => {
+    console.log("AlbumData in AlbumContainer:", AlbumData);
+  }, [AlbumData]); // Run this effect whenever AlbumData changes
+
+  // console.log(AlbumData, "AlbumData Loaded");
   const [albumIndex, setAlbumIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   const handleAlbumNameClick = (index) => {
     setAlbumIndex(index);
     console.log(`Grid at index ${index} clicked.`);
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
   };
 
   return (
@@ -52,38 +51,41 @@ const AlbumContainer = () => {
             paddingY: "15px",
           }}
         >
-          {AlbumData.map((album, index) => (
-            <Grid
-              key={index}
-              item
-              xs={12}
-              sx={{
-                backgroundColor: "#ffffff",
-                borderRadius: "10px",
-                textAlign: "left",
-                cursor: "pointer",
-                height: "40px",
-                display: "flex",
-                // flexDirection: "column",
-                alignItems: "center",
-                paddingX: "15px",
-                marginBottom: "2px",
-                "&:hover": { backgroundColor: "#FF3737", color: "#ffffff" },
-                ...(albumIndex === index
-                  ? {
-                      backgroundColor: "#ED1B1B",
-                      color: "#ffffff",
-                    }
-                  : {}),
-              }}
-              onClick={() => handleAlbumNameClick(index)}
-            >
-              <p className="font-OpenSans-Regular text-[14px]">{album.title}</p>
-              {/* <p className="font-OpenSans-Regular text-[12px]">
+          {AlbumData &&
+            AlbumData.map((album, index) => (
+              <Grid
+                key={index}
+                item
+                xs={12}
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  height: "40px",
+                  display: "flex",
+                  // flexDirection: "column",
+                  alignItems: "center",
+                  paddingX: "15px",
+                  marginBottom: "2px",
+                  "&:hover": { backgroundColor: "#FF3737", color: "#ffffff" },
+                  ...(albumIndex === index
+                    ? {
+                        backgroundColor: "#ED1B1B",
+                        color: "#ffffff",
+                      }
+                    : {}),
+                }}
+                onClick={() => handleAlbumNameClick(index)}
+              >
+                <p className="font-OpenSans-Regular text-[14px]">
+                  {album.albumName}
+                </p>
+                {/* <p className="font-OpenSans-Regular text-[12px]">
                 Updated: {album.updated}
               </p> */}
-            </Grid>
-          ))}
+              </Grid>
+            ))}
         </Grid>
       </Grid>
       {/* Album Title Mobile */}
@@ -106,34 +108,37 @@ const AlbumContainer = () => {
             paddingY: "10px",
           }}
         >
-          {AlbumData.map((album, index) => (
-            <Grid
-              key={index}
-              item
-              xs={12}
-              sx={{
-                backgroundColor: "#ffffff",
-                borderRadius: "10px",
-                textAlign: "left",
-                cursor: "pointer",
-                height: "50px",
-                display: "flex",
-                alignItems: "center",
-                padding: "15px",
-                marginBottom: "4px",
-                "&:hover": { backgroundColor: "#FF3737", color: "#ffffff" },
-                ...(albumIndex === index
-                  ? {
-                      backgroundColor: "#ED1B1B",
-                      color: "#ffffff",
-                    }
-                  : {}),
-              }}
-              onClick={() => handleAlbumNameClick(index)}
-            >
-              <p className="font-OpenSans-Regular text-[14px]">{album.title}</p>
-            </Grid>
-          ))}
+          {AlbumData &&
+            AlbumData.map((album, index) => (
+              <Grid
+                key={index}
+                item
+                xs={12}
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  height: "50px",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "15px",
+                  marginBottom: "4px",
+                  "&:hover": { backgroundColor: "#FF3737", color: "#ffffff" },
+                  ...(albumIndex === index
+                    ? {
+                        backgroundColor: "#ED1B1B",
+                        color: "#ffffff",
+                      }
+                    : {}),
+                }}
+                onClick={() => handleAlbumNameClick(index)}
+              >
+                <p className="font-OpenSans-Regular text-[14px]">
+                  {album.albumName}
+                </p>
+              </Grid>
+            ))}
         </Grid>
       </Grid>
       {/* Text Container PC */}
@@ -171,18 +176,40 @@ const AlbumContainer = () => {
             <p className="font-OpenSans-SemiBold text-[18px] ">
               Photographed By
             </p>
-            {AlbumData[albumIndex].photographed.map((photographed) => (
-              <p className="font-OpenSans-Regular text-[14px] pl-4">
-                {photographed}
-              </p>
-            ))}
+            {AlbumData &&
+              AlbumData.length > 0 &&
+              AlbumData[albumIndex].photographedBy && (
+                <div>
+                  {AlbumData[albumIndex].photographedBy.map(
+                    (photographed, index) => (
+                      <p
+                        key={index}
+                        className="font-OpenSans-Regular text-[14px] pl-4"
+                      >
+                        {photographed}
+                      </p>
+                    )
+                  )}
+                </div>
+              )}
 
             <p className="font-OpenSans-SemiBold text-[18px] mt-2 ">
               Edited By
             </p>
-            {AlbumData[albumIndex].edited.map((edited) => (
-              <p className="font-OpenSans-Regular text-[14px] pl-4">{edited}</p>
-            ))}
+            {AlbumData &&
+              AlbumData.length > 0 &&
+              AlbumData[albumIndex].editedBy && (
+                <div>
+                  {AlbumData[albumIndex].editedBy.map((edited, index) => (
+                    <p
+                      key={index}
+                      className="font-OpenSans-Regular text-[14px] pl-4"
+                    >
+                      {edited}
+                    </p>
+                  ))}
+                </div>
+              )}
           </Grid>
           <Grid
             item
@@ -191,18 +218,21 @@ const AlbumContainer = () => {
               textAlign: "right",
             }}
           >
-            <Button
-              variant="contained"
-              size="small"
-              //   onClick={() => setIsFormOpen(true)}
-              // onClick={() => openDialogForm()}
-              sx={{
-                mt: 2,
-                mr: 2,
-              }}
-            >
-              View Album
-            </Button>
+            {AlbumData &&
+              AlbumData.length > 0 &&
+              AlbumData[albumIndex].albumLink && (
+                <Link to={AlbumData[albumIndex].albumLink} target="_blank">
+                  <Button
+                    variant="contained"
+                    sx={{
+                      mt: 2,
+                      mr: 2,
+                    }}
+                  >
+                    View Album
+                  </Button>
+                </Link>
+              )}
           </Grid>
         </Grid>
       </Grid>
@@ -218,20 +248,21 @@ const AlbumContainer = () => {
           transform: "translate(-50%, -50%)",
         }}
       >
-        {loading ? (
-          <Loader />
-        ) : (
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              display: "flex",
-              justifyContent: "space-around",
-              width: "450px",
-            }}
-          >
-            {AlbumData[albumIndex].imgLinks.map((imgLinks) => (
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            width: "450px",
+          }}
+        >
+          {AlbumData &&
+            AlbumData.length > 0 &&
+            AlbumData[albumIndex].imageUrls &&
+            AlbumData[albumIndex].imageUrls.map((imgLinks, index) => (
               <Grid
+                key={index}
                 item
                 xs={5.9}
                 sx={{
@@ -245,8 +276,7 @@ const AlbumContainer = () => {
                 }}
               ></Grid>
             ))}
-          </Grid>
-        )}
+        </Grid>
       </Box>
       {/* Album Images Mobile */}
       <Box
@@ -257,34 +287,22 @@ const AlbumContainer = () => {
           marginY: 5,
         }}
       >
-        {loading ? (
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "300px",
-              height: "300px",
-              marginLeft: 1,
-            }}
-          >
-            <Loader />
-          </Grid>
-        ) : (
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              display: "flex",
-              justifyContent: "space-around",
-              width: "300px",
-              marginLeft: 1,
-            }}
-          >
-            {AlbumData[albumIndex].imgLinks.map((imgLinks) => (
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            width: "300px",
+            marginLeft: 1,
+          }}
+        >
+          {AlbumData &&
+            AlbumData.length > 0 &&
+            AlbumData[albumIndex].imageUrls &&
+            AlbumData[albumIndex].imageUrls.map((imgLinks, index) => (
               <Grid
+                key={index}
                 item
                 xs={5.9}
                 sx={{
@@ -298,8 +316,7 @@ const AlbumContainer = () => {
                 }}
               ></Grid>
             ))}
-          </Grid>
-        )}
+        </Grid>
       </Box>
       {/* Text Container Mobile */}
       <Grid
@@ -334,16 +351,38 @@ const AlbumContainer = () => {
             }}
           >
             <p className="font-OpenSans-SemiBold text-xl ">Photographed By</p>
-            {AlbumData[albumIndex].photographed.map((photographed) => (
-              <p className="font-OpenSans-Regular text-[16px] pl-4">
-                {photographed}
-              </p>
-            ))}
+            {AlbumData &&
+              AlbumData.length > 0 &&
+              AlbumData[albumIndex].photographedBy && (
+                <div>
+                  {AlbumData[albumIndex].photographedBy.map(
+                    (photographed, index) => (
+                      <p
+                        key={index}
+                        className="font-OpenSans-Regular text-[14px] pl-4"
+                      >
+                        {photographed}
+                      </p>
+                    )
+                  )}
+                </div>
+              )}
 
             <p className="font-OpenSans-SemiBold text-xl mt-2 ">Edited By</p>
-            {AlbumData[albumIndex].edited.map((edited) => (
-              <p className="font-OpenSans-Regular text-[16px] pl-4">{edited}</p>
-            ))}
+            {AlbumData &&
+              AlbumData.length > 0 &&
+              AlbumData[albumIndex].editedBy && (
+                <div>
+                  {AlbumData[albumIndex].editedBy.map((edited, index) => (
+                    <p
+                      key={index}
+                      className="font-OpenSans-Regular text-[14px] pl-4"
+                    >
+                      {edited}
+                    </p>
+                  ))}
+                </div>
+              )}
           </Grid>
           <Grid
             item
@@ -352,17 +391,24 @@ const AlbumContainer = () => {
               textAlign: "right",
             }}
           >
-            <Button
-              variant="contained"
-              //   onClick={() => setIsFormOpen(true)}
-              // onClick={() => openDialogForm()}
-              sx={{
-                mt: 2,
-                mr: 2,
-              }}
-            >
-              View Album
-            </Button>
+            {AlbumData &&
+              AlbumData.length > 0 &&
+              AlbumData[albumIndex].albumLink && (
+                <Link to={AlbumData[albumIndex].albumLink} target="_blank">
+                  <Button
+                    variant="contained"
+                    //   onClick={() => setIsFormOpen(true)}
+                    // onClick={() => openDialogForm()}
+                    size="small"
+                    sx={{
+                      mt: 2,
+                      mr: 2,
+                    }}
+                  >
+                    View Album
+                  </Button>
+                </Link>
+              )}
           </Grid>
         </Grid>
       </Grid>

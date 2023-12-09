@@ -11,13 +11,13 @@ const ProjectCardMini = ({ coverImage, images, title, description }) => {
       />
       {/* Container */}
       <div
-        className="absolute inset-0 flex flex-col  justify-center w-[90%] text-left"
-        style={{ zIndex: 1, left: "10%" }}
+        className="absolute inset-0 flex flex-col  justify-center w-[80%] mx-auto text-left"
+        style={{ zIndex: 1 }}
       >
         <p className="text-white text-3xl font-Lobster-Regular w-[90%] my-8">
           {title}
         </p>
-        <p className="text-white text-[12px] font-OpenSans-Regular w-[90%]">
+        <p className="text-white text-[12px] font-OpenSans-Regular ">
           {description}{" "}
         </p>
         {/* Image Boxes */}

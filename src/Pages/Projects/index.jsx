@@ -6,42 +6,91 @@ import img01 from "../../Assets/Images/ProjectImages/Mehewara/01.jpg";
 import { Project_Data } from "../../Assets/Components/const";
 import ProjectSideBar from "../../Assets/Components/ProjectSideBar";
 import ProjectCardMini from "../../Assets/Components/ProjectCardMini";
-
-// You can edit Project Data from the Const.js file
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Loader from "../../Assets/Components/Loader";
 
 function Projects() {
+  // State to hold form data
+  const [formData, setFormData] = useState({
+    projects: [],
+  });
+  const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    // Load album data when the component mounts
+    loadProjectData();
+  }, []);
+
+  // Load Project Data for the Table
+  const loadProjectData = () => {
+    setLoader(true);
+    axios
+      .get("http://localhost:8080/projects/getAll")
+      .then((response) => {
+        // response.data is an array of albums
+        const projects = response.data;
+
+        const projectData = projects.map((project) => ({
+          id: project.id,
+          projectName: project.projectName,
+          projectDescription: project.projectDescription,
+          coverImageUrl: project.coverImageUrl,
+          previewImageUrls: project.previewImageUrls,
+        }));
+
+        setFormData({
+          ...formData,
+          projects: projectData,
+        });
+
+        console.log("Projects data loaded:", projectData);
+        setLoader(false);
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="w-full">
       {/* Nav Bar */}
       <NavBar />
       <ScrollToTopButton />
-      <ProjectSideBar />
 
-      {/* Project Card PC  */}
-      <div className="hidden md:block">
-        {Project_Data.map((data) => (
-          <ProjectCard
-            key={data.title}
-            coverImage={data.coverImage}
-            images={[data.img02, data.img03, data.img04]}
-            title={data.title}
-            description={data.description}
-          />
-        ))}
-      </div>
+      {!loader ? (
+        <>
+          <ProjectSideBar data={formData.projects} />
 
-      {/* Project Card Mobile  */}
-      <div className="block md:hidden">
-        {Project_Data.map((data) => (
-          <ProjectCardMini
-            key={data.title}
-            coverImage={data.coverImage}
-            images={[data.img02, data.img03, data.img04]}
-            title={data.title}
-            description={data.description}
-          />
-        ))}
-      </div>
+          {/* Project Card PC  */}
+          <div className="hidden md:block">
+            {formData.projects.map((data) => (
+              <ProjectCard
+                key={data.id}
+                coverImage={data.coverImageUrl}
+                images={data.previewImageUrls}
+                title={data.projectName}
+                description={data.projectDescription}
+              />
+            ))}
+          </div>
+
+          {/* Project Card Mobile  */}
+          <div className="block md:hidden">
+            {formData.projects.map((data) => (
+              <ProjectCardMini
+                key={data.id}
+                coverImage={data.coverImageUrl}
+                images={data.previewImageUrls}
+                title={data.projectName}
+                description={data.projectDescription}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="w-[100%] h-screen flex justify-center items-center">
+          <Loader />
+        </div>
+      )}
 
       {/* Footer */}
       <div className="mt-4">

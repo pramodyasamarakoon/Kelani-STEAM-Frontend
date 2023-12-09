@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { Project_Data } from "../const";
 
-const ProjectSideBar = () => {
+const ProjectSideBar = ({ data }) => {
   // useEffect for scroll visibility and cleanup
   useEffect(() => {});
 
@@ -21,26 +21,26 @@ const ProjectSideBar = () => {
         transform: "translate(-50%, -50%)",
       }}
     >
-      {Project_Data.map((data) => (
+      {data.map((data) => (
         <Link
-          key={data.title}
-          to={data.title}
+          key={data.id}
+          to={data.projectName}
           spy={true}
           smooth={true}
           offset={-70} // Adjust the offset based on your layout
           duration={500}
-          onSetActive={() => setActiveTitle(data.title)}
+          onSetActive={() => setActiveTitle(data.id)}
         >
           <Fab
             variant="extended"
-            color={data.title === activeTitle ? "primary" : "default"}
+            color={data.id === activeTitle ? "primary" : "default"}
             size="small"
             sx={{
               my: "4px",
               width: 220,
             }}
           >
-            <p className="text-[12px] ">{data.title}</p>
+            <p className="text-[12px] ">{data.projectName}</p>
           </Fab>
         </Link>
       ))}

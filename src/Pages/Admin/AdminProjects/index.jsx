@@ -1,18 +1,11 @@
 import {
   Grid,
   Button,
-  FormLabel,
   IconButton,
-  Stack,
-  Box,
-  ImageList,
-  ImageListItem,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Divider,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import NavBar from "../../../Assets/Components/NavBar";
@@ -23,99 +16,33 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTopButton from "../../../Assets/Components/ScrollToTopButton";
 import { DataGrid } from "@mui/x-data-grid";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Loader from "../../../Assets/Components/Loader";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 
-// Event Data Table
-const columns = [
-  { field: "eventName", headerName: "Event", width: 500 },
-  { field: "society", headerName: "Society", width: 330 },
-  { field: "university", headerName: "University", width: 250 },
-];
-const rows = [
-  {
-    id: 1,
-    eventName: "Leo Nanasara Athwala",
-    society: "Leo Club",
-    university: "University of Kelaniya",
-  },
-  {
-    id: 2,
-    eventName: "Quiz Competition 23'",
-    society: "Society of Plant and Molecular Biology",
-    university: "University of Kelaniya",
-  },
-  {
-    id: 3,
-    eventName: "Speacial Party",
-    society: null,
-    university: "University of Kelaniya",
-  },
-  // {
-  //   id: 4,
-  //   eventName: "Leo Nanasara Athwala",
-  //   society: "Leo Club",
-  //   university: "University of Kelaniya",
-  // },
-  // {
-  //   id: 5,
-  //   eventName: "Quiz Competition 23'",
-  //   society: "Society of Plant and Molecular Biology",
-  //   university: "University of Kelaniya",
-  // },
-  // {
-  //   id: 6,
-  //   eventName: "Speacial Party",
-  //   society: null,
-  //   university: "University of Kelaniya",
-  // },
-];
-
-const AdminHome = () => {
+const AdminProjects = () => {
   useEffect(() => {
     // Load album data when the component mounts
-    // loadProjectData();
-    loadAlbumData();
+    loadProjectData();
   }, []);
 
   // State to hold form data
   const [formData, setFormData] = useState({
-    albumName: "",
-    albumLink: "",
-    photographedBy: [""],
-    editedBy: [""],
-    albumColumns: [
-      { field: "albumName", headerName: "Album Name", width: 400 },
-      { field: "photographedBy", headerName: "Photographed By", width: 280 },
-      { field: "editedBy", headerName: "Edited By", width: 280 },
+    projectColumns: [
+      { field: "projectName", headerName: "Project Name", width: 400 },
+      { field: "projectDescription", headerName: "Description", width: 550 },
       {
         field: "delete",
         headerName: "Delete",
         width: 80,
         renderCell: (params) => (
           <IconButton
-            // color="error"
-            onClick={() => handleDeleteRow(params.row.id)}
+            onClick={() =>
+              setDeleteConfirmation({
+                openDialog: true,
+                deleteRowId: params.row.id,
+              })
+            }
           >
-            <DeleteIcon />
-          </IconButton>
-        ),
-      },
-    ],
-    albumRows: [],
-    projectColumns: [
-      { field: "projectName", headerName: "Project Name", width: 400 },
-      { field: "projectDescription", headerName: "Description", width: 480 },
-      {
-        field: "delete",
-        headerName: "Delete",
-        width: 80,
-        renderCell: (params) => (
-          <IconButton onClick={() => handleDeleteProjectDataRow(params.row.id)}>
             <DeleteIcon />
           </IconButton>
         ),
@@ -127,10 +54,11 @@ const AdminHome = () => {
     coverImage: null,
     projectPreviewImages: [],
   });
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [albumLoader, setAlbumLoader] = useState(false);
-  const [albumTableLoader, setAlbumTableLoader] = useState(false);
   const [projectTableLoader, setProjectTableLoader] = useState(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState({
+    openDialog: false,
+    deleteRowId: "",
+  });
 
   // Function to handle input changes and update formData
   const handleChange = (event) => {
@@ -181,217 +109,6 @@ const AdminHome = () => {
       }));
     }
     console.log(`Handling change for ${name}: ${value}`);
-  };
-
-  // Handle Add and Remove Fields
-  const handleAddFieldPhoto = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      photographedBy: [...prevData.photographedBy, ""],
-    }));
-  };
-
-  const handleRemoveFieldPhoto = (index) => {
-    setFormData((prevData) => {
-      const updatedPhotographedBy = [...prevData.photographedBy];
-      updatedPhotographedBy.splice(index, 1);
-      return {
-        ...prevData,
-        photographedBy: updatedPhotographedBy,
-      };
-    });
-  };
-
-  const handleAddFieldEdit = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      editedBy: [...prevData.editedBy, ""],
-    }));
-  };
-
-  const handleRemoveFieldEdit = (index) => {
-    setFormData((prevData) => {
-      const updatedEditedBy = [...prevData.editedBy];
-      updatedEditedBy.splice(index, 1);
-      return {
-        ...prevData,
-        editedBy: updatedEditedBy,
-      };
-    });
-  };
-
-  // Handle Album Preview Image Uploads
-  const handleFileChangeDemo = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
-  };
-
-  // on Submit function for Albums
-  const onSubmitAlbums = async () => {
-    // Check if any field is empty
-    if (
-      formData.albumName.trim() === "" ||
-      formData.albumLink.trim() === "" ||
-      formData.photographedBy.some((item) => item.trim() === "") ||
-      formData.editedBy.some((item) => item.trim() === "") ||
-      selectedFiles.length !== 4
-    ) {
-      // Display toast error message
-      toast.error(`Please fill the All fields`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      return;
-    }
-
-    // Check each file size
-    for (const file of selectedFiles) {
-      const fileSizeMB = file.size / (1024 * 1024); // Convert to megabytes
-
-      if (fileSizeMB > 1) {
-        toast.error(
-          `File ${file.name} exceeds the maximum allowed size of 1MB`,
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          }
-        );
-
-        // Clear the input field
-        return;
-      }
-    }
-
-    setAlbumLoader(true);
-    // Send Images to the cloud
-    const uploadPromises = selectedFiles.map((file) => {
-      const data = new FormData();
-      data.append("file", file);
-      data.append("upload_preset", "ughnxbxn");
-      return axios.post(
-        "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
-        data
-      );
-    });
-
-    try {
-      const responses = await Promise.all(uploadPromises);
-      const uploadedImageUrls = responses.map((response) => response.data.url);
-
-      // Send all data to the database
-      try {
-        console.log("Before send it to the database:", uploadedImageUrls);
-        const response = await axios.post(
-          "http://localhost:8080/albums/create",
-          {
-            albumName: formData.albumName,
-            albumLink: formData.albumLink,
-            photographedBy: formData.photographedBy,
-            editedBy: formData.editedBy,
-            imageUrls: uploadedImageUrls,
-          }
-        );
-
-        console.log("Album created successfully:");
-        toast.success(`Album created successfully!`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      } catch (error) {
-        console.error(
-          "Error creating album:",
-          error.response ? error.response.data : error.message
-        );
-        toast.error(`Error in Creating Album!`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      }
-    } catch (error) {
-      console.error("Error uploading images:", error);
-      toast.error(`Error in Uploading Images!`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-    }
-
-    setAlbumLoader(false);
-    loadAlbumData();
-    // Clear the variables at the end
-    // setFormData({
-    //   albumName: "",
-    //   albumLink: "",
-    //   photographedBy: [""],
-    //   editedBy: [""],
-    // });
-    // setImageUrls([]);
-    // setSelectedFiles([]);
-  };
-
-  // Load Album Data for the Table
-  const loadAlbumData = () => {
-    setAlbumTableLoader(true);
-    axios
-      .get("http://localhost:8080/albums/getAll")
-      .then((response) => {
-        // Assuming response.data is an array of albums
-        const albums = response.data;
-
-        const albumRowsData = albums.map((album) => ({
-          id: album.id,
-          albumName: album.albumName,
-          photographedBy: album.photographedBy,
-          editedBy: album.editedBy,
-        }));
-
-        setFormData({
-          ...formData,
-          albumRows: albumRowsData,
-        });
-
-        console.log("Album data loaded:", albumRowsData);
-        setAlbumTableLoader(false);
-      })
-      .catch((error) => console.error(error));
-  };
-
-  // Handle delete Row from the Album Data Table
-  const handleDeleteRow = (rowId) => {
-    console.log("Clicked");
-    // Find the index of the row with the specified ID
-    setAlbumTableLoader(true);
-
-    const params = {
-      albumId: rowId,
-    };
-    axios
-      .delete("http://localhost:8080/albums/delete", { params })
-      .then((response) => {
-        console.log("Album deleted:", rowId);
-        setAlbumTableLoader(false);
-        loadAlbumData();
-      })
-      .catch((error) => console.error(error));
   };
 
   // Handle Project's Cover Image
@@ -619,8 +336,36 @@ const AdminHome = () => {
         console.log("Project deleted:", rowId);
         setProjectTableLoader(false);
         loadProjectData();
+        toast.success(`Project Deleted!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       })
       .catch((error) => console.error(error));
+  };
+
+  const handleDialogClose = () => {
+    // Close the dialog without deleting
+    setDeleteConfirmation({
+      openDialog: false,
+      deleteRowId: "",
+    });
+  };
+
+  const handleDeleteConfirm = () => {
+    // Perform the delete action using deleteRowId
+    console.log(`Deleting row with ID: ${deleteConfirmation.deleteRowId}`);
+    handleDeleteProjectDataRow(deleteConfirmation.deleteRowId);
+
+    // Close the dialog
+    setDeleteConfirmation({
+      openDialog: false,
+      deleteRowId: "",
+    });
   };
 
   return (
@@ -638,40 +383,230 @@ const AdminHome = () => {
         }}
       >
         <Grid container spacing={0} sx={{ marginTop: 12 }}>
-          {/* Form Title */}
-          <Grid item xs={12} sx={{ marginY: "10px" }}>
-            <p className="font-OpenSans-SemiBold text-[25px]">
-              Booking Details
-            </p>
-          </Grid>
           <Grid item xs={12} sx={{}}>
-            {/* White background box */}
-            <div
-              className="w-full h-auto mx-auto"
-              style={{
-                background: "#FFFFFF90",
-                padding: "30px",
-                position: "relative",
-              }}
-            >
-              {/*Table */}
+            {/* Project Container */}
+            <div className="w-full mx-auto my-10">
+              <p className="font-OpenSans-SemiBold text-[25px]">Add Projects</p>
               <div
-                style={{ minHeight: "500px", height: "auto", width: "100%" }}
+                className="w-full px-[5%] mx-auto my-4 pb-8"
+                style={{
+                  background: "#FFFFFF90",
+                }}
               >
-                <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  initialState={{
-                    pagination: {
-                      paginationModel: { page: 0, pageSize: 10 },
-                    },
+                {/* Form */}
+                <div
+                  style={{
+                    textAlign: "left",
                   }}
-                  pageSizeOptions={[5, 10]}
-                  // checkboxSelection
-                />
+                >
+                  <ValidatorForm>
+                    {/* Name */}
+                    <TextValidator
+                      name="projectName"
+                      label="Project Name"
+                      variant="standard"
+                      fullWidth
+                      sx={{
+                        marginY: "5px",
+                      }}
+                      value={formData.projectName}
+                      onChange={handleChange}
+                    />
+
+                    {/* Description */}
+                    <TextValidator
+                      name="projectDescription"
+                      label="Project Description"
+                      variant="standard"
+                      fullWidth
+                      multiLine
+                      sx={{
+                        marginY: "5px",
+                      }}
+                      value={formData.projectDescription}
+                      onChange={handleChange}
+                    />
+
+                    {/* Upload Cover */}
+                    <div className="w-full my-8">
+                      {/* File Upload Button */}
+                      <label
+                        htmlFor="file"
+                        style={{ color: "black", marginRight: "4px" }}
+                      >
+                        Upload Cover Image
+                      </label>
+                      <div className="mt-[20px] flex">
+                        {/* Hidden file input */}
+                        <input
+                          ref={fileInputRef}
+                          id="file"
+                          type="file"
+                          style={{ display: "none" }}
+                          onChange={handleCoverImageChange}
+                        />
+
+                        {/* Preview Image */}
+                        {formData.coverImage && (
+                          <img
+                            src={URL.createObjectURL(formData.coverImage)}
+                            alt="Preview"
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              objectFit: "cover",
+                              marginRight: "10px",
+                            }}
+                          />
+                        )}
+
+                        {/* Plus mark div (hidden upload button) */}
+                        {!formData.coverImage && (
+                          <div
+                            onClick={handlePlusClick}
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              backgroundColor: "#BFBFBF",
+                              color: "white",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              cursor: "pointer",
+                              marginRight: "10px", // adjust spacing as needed
+                            }}
+                          >
+                            +
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Upload Preview Images */}
+                    <div className="w-full my-8">
+                      {/* File Upload Button */}
+                      <label
+                        htmlFor="file"
+                        style={{ color: "black", marginRight: "4px" }}
+                      >
+                        Upload 3 images for preview
+                      </label>
+                      <div className="mt-[20px] flex ">
+                        {/* Hidden file input */}
+                        {[...Array(3)].map((_, index) => (
+                          <input
+                            key={index}
+                            id={`fileInput-${index}`}
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={handleProjectPreviewImageChange}
+                          />
+                        ))}
+
+                        {/* Preview Images */}
+                        {formData.projectPreviewImages.map((file, index) => (
+                          <div key={index} style={{ marginRight: "10px" }}>
+                            <img
+                              src={URL.createObjectURL(file)}
+                              alt={`Preview ${index + 1}`}
+                              style={{
+                                width: "100px",
+                                height: "100px",
+                                objectFit: "cover",
+                              }}
+                            />
+                          </div>
+                        ))}
+
+                        {/* Plus mark div (hidden upload button) */}
+                        {[
+                          ...Array(3 - formData.projectPreviewImages.length),
+                        ].map((_, index) => (
+                          <div
+                            key={index}
+                            onClick={() =>
+                              document
+                                .getElementById(`fileInput-${index}`)
+                                .click()
+                            }
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              backgroundColor: "#BFBFBF",
+                              color: "white",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              cursor: "pointer",
+                              marginRight: "10px",
+                            }}
+                          >
+                            +
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Submit Button */}
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      onClick={onSubmitProjects}
+                      size="small"
+                      disabled={projectTableLoader}
+                    >
+                      Submit
+                    </Button>
+                  </ValidatorForm>
+                </div>
+                {/*Album Table */}
+                <div
+                  style={{
+                    minHeight: "200px",
+                    height: "auto",
+                    width: "100%",
+                    marginTop: 40,
+                  }}
+                >
+                  {!projectTableLoader ? (
+                    <DataGrid
+                      rows={formData.projectRows}
+                      columns={formData.projectColumns}
+                      initialState={{
+                        pagination: {
+                          paginationModel: { page: 0, pageSize: 5 },
+                        },
+                      }}
+                      pageSizeOptions={[5, 10]}
+                      // checkboxSelection
+                    />
+                  ) : (
+                    <Loader />
+                  )}
+                </div>
               </div>
             </div>
           </Grid>
+
+          {/* Delete confirmation dialog */}
+          <Dialog
+            open={deleteConfirmation.openDialog}
+            onClose={handleDialogClose}
+          >
+            <DialogTitle>Confirm Delete</DialogTitle>
+            <DialogContent>
+              <p>Are you sure you want to delete?</p>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDialogClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={handleDeleteConfirm} color="error">
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Grid>
       </div>
 
@@ -681,4 +616,4 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
+export default AdminProjects;

@@ -26,6 +26,7 @@ import AlbumContainer from "../../Assets/Components/AlbumContainer";
 import CountingNumber from "../../Assets/Components/CountingNumber";
 import Logo from "../../../src/Assets/LogoWhite.png";
 import Team from "../../Assets/Images/BookNowImage/TeamMedium.jpg";
+import axios from "axios";
 
 // Recent Album details can change from the Const.js file
 
@@ -74,12 +75,17 @@ function HomePage() {
       },
     ],
   });
+  const [AlbumData, setAlbumData] = useState([]);
+  const [isAlbumContainerLoading, setAlbumContainerLoading] = useState(false);
 
   const [showAboutUs, setShowAboutUs] = useState(false);
   const [showGridBelow, setShowGridBelow] = useState(false);
   const [showEventContainer, setShowEventContainer] = useState(false);
 
   useEffect(() => {
+    // Load Album Data
+    loadAlbumData();
+
     const aboutUsObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -158,6 +164,29 @@ function HomePage() {
       setIsLoading(false);
       console.log("Form Data Submitted:", formData);
     }, 2000);
+  };
+
+  // Load Album Data for the Table
+  const loadAlbumData = () => {
+    setAlbumContainerLoading(true);
+    // setAlbumTableLoader(true);
+
+    axios
+      .get("http://localhost:8080/albums/getAll")
+      .then((response) => {
+        // Assuming response.data is an array of albums
+        const albums = response.data;
+
+        // Update the state with the fetched data
+        setAlbumData(albums);
+
+        console.log("Album data loaded:", albums);
+        setAlbumContainerLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error loading album data:", error);
+        setAlbumContainerLoading(false);
+      });
   };
 
   return (
@@ -723,7 +752,13 @@ function HomePage() {
             </p>
           </Grid>
         </Grid>
-        <AlbumContainer />
+        {!isAlbumContainerLoading ? (
+          <AlbumContainer AlbumData={AlbumData} />
+        ) : (
+          <div style={{ height: "auto", width: "100%", marginTop: 40 }}>
+            <Loader />
+          </div>
+        )}
 
         {/* Book Now Grid PC */}
         <Grid
