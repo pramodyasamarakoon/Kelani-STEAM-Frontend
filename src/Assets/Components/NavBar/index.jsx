@@ -51,6 +51,10 @@ const adminPages = [
     label: "Projects",
     link: "/AdminProjects",
   },
+  {
+    label: "Committee",
+    link: "/AdminCommittee",
+  },
 ];
 
 const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {

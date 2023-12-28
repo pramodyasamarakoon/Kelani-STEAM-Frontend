@@ -10,6 +10,7 @@ import AdminHome from './Pages/Admin/AdminHome';
 import Home from './Pages/Admin/Home';
 import AdminAlbums from './Pages/Admin/AdminAlbums';
 import AdminProjects from './Pages/Admin/AdminProjects';
+import AdminCommittee from './Pages/Admin/AdminCommittee';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/AdminBookings" element={<AdminHome/>} />
         <Route path="/AdminAlbums" element={<AdminAlbums/>} />
         <Route path="/AdminProjects" element={<AdminProjects/>} />
+        <Route path="/AdminCommittee" element={<AdminCommittee/>} />
       </Routes>
     </BrowserRouter>
     </div>
