@@ -21,6 +21,7 @@ import {
   ToggleButton,
   Chip,
   Avatar,
+  TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useRef, useState } from "react";
@@ -42,6 +43,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import img from "../../../Assets/Images/Committee/ViDe/President.jpg";
+// import LoadingButton from "@mui/lab/LoadingButton";
 
 const sidebarWidth = 250;
 const videCommitteePoints = [
@@ -96,29 +98,23 @@ const AdminCommittee = () => {
     albumRows: [],
     slideToggle: [
       {
-        activeSlide: "",
+        activeSlide: "01",
       },
     ],
-    committeeData: {
-      committeeSlide1: [
-        {
-          name: "abs",
-          position: "gfd",
-          url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-          name: "abs",
-          position: "gfd",
-          url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-          name: "kfhs",
-          position: "gfd",
-          url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-      ],
-    },
+    activeTab: "steam",
+    committeeData: {},
+    tempImage: null,
   });
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogFormData, setDialogFormData] = useState({
+    id: "",
+    club: formData.activeTab,
+    name: "",
+    position: "",
+    imageUrl: "",
+  });
+
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [albumLoader, setAlbumLoader] = useState(false);
   const [albumTableLoader, setAlbumTableLoader] = useState(false);
@@ -126,6 +122,10 @@ const AdminCommittee = () => {
     openDialog: false,
     deleteRowId: "",
   });
+  const [dialogUploadImageLoader, setDialogUploadImageLoader] = useState(false);
+  const [saveDialogLoader, setSaveDialogLoader] = useState(false);
+  const [slideContainerLoader, setSlideContainerLoader] = useState(false);
+  const [activeSlideLength, setActiveSlideLength] = useState(0);
 
   // Function to handle input changes and update formData
   const handleChange = (event) => {
@@ -397,13 +397,13 @@ const AdminCommittee = () => {
       .catch((error) => console.error(error));
   };
 
-  const handleDialogClose = () => {
-    // Close the dialog without deleting
-    setDeleteConfirmation({
-      openDialog: false,
-      deleteRowId: "",
-    });
-  };
+  // const handleDialogClose = () => {
+  //   // Close the dialog without deleting
+  //   setDeleteConfirmation({
+  //     openDialog: false,
+  //     deleteRowId: "",
+  //   });
+  // };
 
   const handleDeleteConfirm = () => {
     // Perform the delete action using deleteRowId
@@ -472,6 +472,18 @@ const AdminCommittee = () => {
   };
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
+    console.log(newAlignment);
+    if (newAlignment === "center") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        activeTab: "vide",
+      }));
+    } else if (newAlignment === "left") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        activeTab: "steam",
+      }));
+    }
   };
 
   //   STEAM Positions
@@ -519,21 +531,444 @@ const AdminCommittee = () => {
   ];
 
   //   Handle Slide bar Click
-  const handleSlideToggle = () => {
+  const handleSlideToggle = (toggleSlide) => {
+    console.log("Clicked Slide", toggleSlide);
     // Update formData with the new toggle value
     setFormData((prevFormData) => {
       const newSlideToggle = [...prevFormData.slideToggle];
       // newSlideToggle[0].slide1 = !newSlideToggle[0].slide1;
-      if (newSlideToggle[0].activeSlide == "01") {
+      if (newSlideToggle[0].activeSlide === toggleSlide) {
         newSlideToggle[0].activeSlide = "";
       } else {
-        newSlideToggle[0].activeSlide = "01";
+        newSlideToggle[0].activeSlide = toggleSlide;
       }
       return {
         ...prevFormData,
         slideToggle: newSlideToggle,
       };
     });
+  };
+
+  const handleGridClick = (memberId) => {
+    // Check if formData.slideToggle[0] exists before accessing activeSlide
+    // const activeSlide = formData.slideToggle[0]?.activeSlide;
+    console.log("Clicked Id", memberId);
+    // console.log("Active Slide:", activeSlide);
+    const activeSlideKey = `committeeSlide${formData.slideToggle[0].activeSlide}`;
+    const activeSlideData = formData.committeeData[activeSlideKey];
+    // console.log("activeSlideData", activeSlideData);
+
+    // Finding is there any same ID
+    const memberData = activeSlideData?.find(
+      (member) => member.id === memberId
+    );
+    console.log("memberData", memberData);
+
+    if (memberData) {
+      // Clicked on an existing member grid
+      const [slideNumber, position] = memberId.split("-");
+      setDialogFormData({
+        id: memberId,
+        name: memberData.name,
+        position: memberData.position,
+        imageUrl: memberData.imageUrl,
+      });
+    } else {
+      // Clicked on "Before Upload a Member" grid to add a new member
+      setDialogFormData({
+        id: memberId,
+        name: "",
+        position: "",
+        imageUrl: "",
+      });
+    }
+
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  // Handle Dialog Box Image Upload
+  const handleImageUpload = (e) => {
+    // Set dialogUploadImageLoader to true before the upload
+    setDialogUploadImageLoader(true);
+
+    // Set the tempImage in the state
+    setFormData({
+      ...formData,
+      tempImage: e.target.files[0],
+    });
+
+    console.log("Set to the Temp Image");
+
+    // Delay setting dialogUploadImageLoader to false by 1 second
+    setTimeout(() => {
+      setDialogUploadImageLoader(false);
+    }, 1000);
+  };
+
+  // Handle Member Save from the Dialog Box
+  const handleDialogSave = async () => {
+    // Check if name and position are empty
+    if (!dialogFormData.name || !dialogFormData.position) {
+      toast.error("Name and Position are required fields", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+
+    // Check if the image is empty
+    if (!formData.tempImage) {
+      if (dialogFormData.imageUrl === "") {
+        console.log("Empty Image");
+        toast.error("Image is required", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        return;
+      }
+    }
+
+    // Check Cover file size
+    console.log("Going to Check the Size");
+    const fileSizeMB = formData.tempImage.size / (1024 * 1024); // Convert to megabytes
+    console.log("File Size", fileSizeMB);
+    if (fileSizeMB > 1) {
+      toast.error("Image size exceeds the maximum allowed size of 1MB", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      // Clear the input field
+      return;
+    }
+    console.log("File Size is Okay");
+
+    setSaveDialogLoader(true);
+    // Upload Image to Cloudinary
+    const data = new FormData();
+    data.append("file", formData.tempImage);
+    data.append("upload_preset", "ughnxbxn");
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+        data
+      );
+      const uploadedImageUrl = response.data.url;
+      console.log("Uploaded Image URL:", uploadedImageUrl);
+
+      // Send all data to the database
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/committee/addCommittee",
+          {
+            id: dialogFormData.id,
+            club: dialogFormData.club,
+            name: dialogFormData.name,
+            position: dialogFormData.position,
+            imageUrl: uploadedImageUrl,
+          }
+        );
+
+        console.log("Member Added successfully:");
+        toast.success(`Committee Member Added successfully!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        setSaveDialogLoader(false);
+        loadSlideData(formData.slideToggle[0].activeSlide);
+      } catch (error) {
+        setSaveDialogLoader(false);
+        console.error(
+          "Error Adding Member:",
+          error.response ? error.response.data : error.message
+        );
+        toast.error(`Error in  Adding Member!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+
+      // Close the dialog box after saving
+      setDialogOpen(false);
+    } catch (error) {
+      setSaveDialogLoader(false);
+      console.error("Error uploading image:", error);
+      toast.error("Error uploading image. Please try again later.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
+
+  // Handle Member Save from the Dialog Box
+  const handleDialogUpdate = async () => {
+    // Check if name and position are empty
+    if (!dialogFormData.name || !dialogFormData.position) {
+      toast.error("Name and Position are required fields", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+
+    // Check if the image is empty
+    if (!formData.tempImage) {
+      if (dialogFormData.imageUrl === "") {
+        console.log("Empty Image");
+        toast.error("Image is required", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        return;
+      }
+    }
+
+    // Check Cover file size
+    if (formData.tempImage) {
+      console.log("Going to Check the Size");
+      const fileSizeMB = formData.tempImage.size / (1024 * 1024); // Convert to megabytes
+      console.log("File Size", fileSizeMB);
+      if (fileSizeMB > 1) {
+        toast.error("Image size exceeds the maximum allowed size of 1MB", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        // Clear the input field
+        return;
+      }
+      console.log("File Size is Okay");
+    }
+
+    setSaveDialogLoader(true);
+
+    if (formData.tempImage) {
+      // Upload Image to Cloudinary
+      const data = new FormData();
+      data.append("file", formData.tempImage);
+      data.append("upload_preset", "ughnxbxn");
+
+      try {
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+          data
+        );
+        const uploadedImageUrl = response.data.url;
+        console.log("Uploaded Image URL:", uploadedImageUrl);
+
+        // Send all data to the database
+        try {
+          const response = await axios.put(
+            `http://localhost:8080/committee/updateCommittee/${dialogFormData.id}`,
+            {
+              club: dialogFormData.club,
+              name: dialogFormData.name,
+              position: dialogFormData.position,
+              imageUrl: uploadedImageUrl,
+            }
+          );
+
+          console.log("Member Added successfully:");
+          toast.success(`Committee Member Added successfully!`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          setSaveDialogLoader(false);
+          loadSlideData(formData.slideToggle[0].activeSlide);
+        } catch (error) {
+          setSaveDialogLoader(false);
+          console.error(
+            "Error Adding Member:",
+            error.response ? error.response.data : error.message
+          );
+          toast.error(`Error in  Adding Member!`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+
+        // Close the dialog box after saving
+        setDialogOpen(false);
+      } catch (error) {
+        setSaveDialogLoader(false);
+        console.error("Error uploading image:", error);
+        toast.error("Error uploading image. Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    } else {
+      // Send all data to the database
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/committee/updateCommittee/${dialogFormData.id}`,
+          {
+            club: dialogFormData.club,
+            name: dialogFormData.name,
+            position: dialogFormData.position,
+            imageUrl: dialogFormData.imageUrl,
+          }
+        );
+
+        console.log("Member Updated successfully:");
+        toast.success(`Committee Member Updated successfully!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        setSaveDialogLoader(false);
+        loadSlideData(formData.slideToggle[0].activeSlide);
+      } catch (error) {
+        setSaveDialogLoader(false);
+        console.error(
+          "Error Updating Member:",
+          error.response ? error.response.data : error.message
+        );
+        toast.error(`Error in  Updating Member!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+
+      // Close the dialog box after saving
+      setDialogOpen(false);
+    }
+  };
+
+  const deleteById = async () => {
+    try {
+      const response = await axios.delete(
+        "http://localhost:8080/committee/deleteById",
+        {
+          params: {
+            id: dialogFormData.id,
+          },
+        }
+      );
+
+      console.log("Member Deleted successfully:");
+      toast.success(`Committee Member Deleted successfully!`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      loadSlideData(formData.slideToggle[0].activeSlide);
+    } catch (error) {
+      console.error(
+        "Error Deleting Member:",
+        error.response ? error.response.data : error.message
+      );
+      toast.error(`Error in  Deleting Member!`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
+
+  // Use Effect
+  useEffect(() => {
+    // Call loadSlideData when the component mounts and whenever formData.activeSlide changes
+    loadSlideData(formData.slideToggle[0].activeSlide);
+
+    // Return a cleanup function if needed
+    return () => {
+      // Cleanup logic if needed
+    };
+  }, [formData.slideToggle[0].activeSlide, formData.activeTab]);
+
+  // Load Slide Data
+  const loadSlideData = (activeSlide) => {
+    setSlideContainerLoader(true);
+    axios
+      .get("http://localhost:8080/committee/getByPartialId", {
+        params: {
+          partialId: `${formData.activeTab}-${activeSlide}`,
+        },
+      })
+      .then((response) => {
+        const activeSlide = formData.slideToggle[0].activeSlide;
+        const committeeDataKey = `committeeSlide${activeSlide}`;
+        const responseDataLength = response.data.length;
+        console.log("Length of Slide", responseDataLength);
+
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          committeeData: {
+            ...prevFormData.committeeData,
+            [committeeDataKey]: response.data,
+          },
+        }));
+        setActiveSlideLength(responseDataLength);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    setSlideContainerLoader(false);
   };
 
   return (
@@ -577,45 +1012,6 @@ const AdminCommittee = () => {
           </Paper>
         </div>
 
-        {/* Flex Fab Buttons */}
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            position: "fixed",
-            top: "85px",
-            left: "30%",
-            zIndex: 20,
-            // transform: "translateY(-50%)",
-          }}
-        >
-          {data.map((data) => (
-            <Link
-              key={data.id}
-              to={data.id}
-              spy={true}
-              smooth={true}
-              offset={-70} // Adjust the offset based on your layout
-              duration={500}
-              onSetActive={() => setActiveTitle(data.id)}
-            >
-              <Fab
-                variant="extended"
-                color={data.id === activeTitle ? "primary" : "default"}
-                size="small"
-                sx={{
-                  my: "4px",
-                  width: "auto",
-                  paddingX: 2,
-                  marginRight: "5px",
-                }}
-              >
-                <p className="text-[12px] ">{data.name}</p>
-              </Fab>
-            </Link>
-          ))}
-        </div> */}
-
         {/* Content */}
         <div
           className="absolute w-[90%] mx-[5%] mt-[55px]"
@@ -625,87 +1021,6 @@ const AdminCommittee = () => {
           }}
         >
           {/* Section 01 */}
-          <Grid container spacing={0} id="section01">
-            {/* Title Grid */}
-            {/* <Grid
-              item
-              xs={8}
-              style={{
-                marginTop: 15,
-                marginBottom: 5,
-                textAlign: "left",
-                paddingLeft: 30,
-              }}
-            >
-              <p className="font-OpenSans-SemiBold text-[25px]">
-                Kelani STEAM Committee Positions
-              </p>
-            </Grid> */}
-            {/*  Update Button */}
-            {/* <Grid
-              item
-              xs={4}
-              style={{
-                marginTop: 15,
-                marginBottom: 5,
-                textAlign: "right",
-                paddingRight: 20,
-              }}
-            >
-              <Button
-                variant="outlined"
-                //   onClick={handleCloseNavMenu}
-                size="small"
-                sx={{
-                  mx: 4,
-                  color: "black",
-                  display: "end",
-                  justifyContent: "end",
-                }}
-              >
-                Update Positions
-              </Button>
-            </Grid> */}
-            {/* Positions View */}
-            {/* <Grid
-              item
-              xs={12}
-              style={{
-                marginTop: 15,
-                marginBottom: 15,
-                textAlign: "right",
-                marginLeft: 20,
-                marginRight: 20,
-              }}
-            >
-              <Grid container style={{ textAlign: "left" }}>
-                <Grid item xs={12}>
-                  <Grid container className="flex justify-center items-center">
-                    <Grid item xs={5} style={{ padding: 10 }}>
-                      <p className="font-OpenSans-regular text-[16px]">
-                        Position
-                      </p>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={1}
-                      style={{ padding: 5 }}
-                      className="flex justify-center items-center"
-                    >
-                      <Avatar
-                        alt="Natacha"
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      />
-                    </Grid>
-
-                    <Grid item xs={6} style={{ padding: 10 }}>
-                      <p className="font-OpenSans-regular text-[16px]">Name</p>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid> */}
-          </Grid>
           <Grid
             container
             spacing={0}
@@ -724,7 +1039,11 @@ const AdminCommittee = () => {
               }}
             >
               <p className="font-OpenSans-SemiBold text-[24px]">
-                Kelani STEAM Committee Positions
+                {formData.activeTab === "steam"
+                  ? "Kelani STEAM Committee Positions"
+                  : formData.activeTab === "vide"
+                  ? "ViDe Committee Positions"
+                  : null}
               </p>
             </Grid>
             {/* Content */}
@@ -750,7 +1069,7 @@ const AdminCommittee = () => {
                     borderRadius: 5,
                     cursor: "pointer",
                   }}
-                  onClick={handleSlideToggle}
+                  onClick={() => handleSlideToggle("01")}
                 >
                   <Grid container className="flex items-center">
                     <Grid
@@ -793,94 +1112,1334 @@ const AdminCommittee = () => {
                       borderRadius: 5,
                     }}
                   >
-                    <Grid
-                      container
-                      spacing={2}
-                      className="flex items-center justify-center"
-                      style={{
-                        marginBottom: 5,
-                        marginTop: 5,
-                      }}
-                    >
-                      {/* Uploaded Member */}
-                      {formData.committeeData.committeeSlide1 &&
-                        formData.committeeData.committeeSlide1.map((member) => (
+                    {" "}
+                    {!slideContainerLoader ? (
+                      <Grid
+                        container
+                        // spacing={2}
+                        className="flex items-center justify-center"
+                      >
+                        {/* Uploaded Member */}
+                        {formData.committeeData[
+                          `committeeSlide${formData.slideToggle[0].activeSlide}`
+                        ] &&
+                          formData.committeeData[
+                            `committeeSlide${formData.slideToggle[0].activeSlide}`
+                          ].map((member, index) => (
+                            <Grid
+                              item
+                              xs={1.8}
+                              key={`member-${formData.activeTab}-${
+                                formData.slideToggle[0].activeSlide
+                              }-${index + 1}`}
+                              style={{
+                                height: "220px",
+                                borderRadius: "5px",
+                                textAlign: "center",
+                                position: "relative",
+                                cursor: "pointer",
+                                marginLeft: 1,
+                                marginRight: 1,
+                                backgroundImage: `url(${member.imageUrl})`,
+                                backgroundSize: "cover",
+                                color: "#ffffff",
+                              }}
+                              onClick={() =>
+                                handleGridClick(
+                                  `${formData.activeTab}-${
+                                    formData.slideToggle[0].activeSlide
+                                  }-${index + 1}`
+                                )
+                              }
+                            >
+                              {/* Text on the image */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  backgroundColor: "#000000",
+                                  padding: "10px",
+                                  color: "#ffffff",
+                                  textAlign: "center",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[14px]">
+                                    {member.name}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[12px]">
+                                    {member.position}
+                                  </p>
+                                </div>
+                              </div>
+                            </Grid>
+                          ))}
+
+                        {/* Before Upload a Member */}
+                        {activeSlideLength < 6 ? (
                           <Grid
                             item
                             xs={1.8}
                             style={{
                               height: "220px",
+                              border: "1px dotted",
                               borderRadius: "5px",
                               textAlign: "center",
                               position: "relative",
                               cursor: "pointer",
                               marginLeft: 1,
                               marginRight: 1,
-                              backgroundImage: `url(${member.url})`,
-                              backgroundSize: "cover",
-                              color: "#ffffff",
                             }}
+                            onClick={() =>
+                              handleGridClick(
+                                `${formData.activeTab}-${
+                                  formData.slideToggle[0].activeSlide
+                                }-${
+                                  formData.committeeData[
+                                    `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                  ]
+                                    ? formData.committeeData[
+                                        `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                      ].length + 1
+                                    : 1
+                                }`
+                              )
+                            }
                           >
-                            {/* Text on the image */}
+                            {/* Plus Icon */}
                             <div
                               style={{
                                 position: "absolute",
-                                //   top: "75%",
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                //   transform: "translate(-50%, -50%)",
-                                backgroundColor: "#000000", // Black color for the box
-                                padding: "10px", // Add padding for better visibility
-                                color: "#ffffff", // Text color on the black box
-                                textAlign: "center", // Center the text
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
                               }}
                             >
-                              <div>
-                                <p className="font-OpenSans-Regular text-[14px]">
-                                  {member.name}
-                                </p>
-                              </div>
-                              <div>
-                                <p className="font-OpenSans-Regular text-[12px]">
-                                  {member.position}
-                                </p>
-                              </div>
+                              <AddCircleOutlineIcon
+                                style={{ fontSize: "40px" }}
+                              />
                             </div>
                           </Grid>
-                        ))}
-
-                      {/* Before Upload a Member */}
-                      <Grid
-                        item
-                        xs={1.8}
-                        style={{
-                          height: "220px",
-                          border: "1px dotted",
-                          borderRadius: "5px",
-                          textAlign: "center",
-                          position: "relative",
-                          cursor: "pointer",
-                          marginLeft: 1,
-                          marginRight: 1,
-                        }}
-                      >
-                        {/* Plus Icon */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                          }}
-                        >
-                          <AddCircleOutlineIcon style={{ fontSize: "40px" }} />
-                        </div>
+                        ) : null}
                       </Grid>
-                    </Grid>
+                    ) : (
+                      <Loader
+                        size="2rem"
+                        className="flex items-center justify-center my-4"
+                      />
+                    )}
                   </Grid>
                 ) : null}
               </Grid>
+
+              {/* Slide 02 */}
+              <Grid container style={{ marginBottom: 20 }}>
+                {/* Slide Number Bar */}
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    marginBottom: 10,
+                    padding: 5,
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 5,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleSlideToggle("02")}
+                >
+                  <Grid container className="flex items-center">
+                    <Grid
+                      item
+                      xs={11}
+                      style={{
+                        paddingLeft: 10,
+                      }}
+                    >
+                      <p className="font-OpenSans-Regular text-[16px]">
+                        Slide 02
+                      </p>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={1}
+                      style={{
+                        textAlign: "right",
+                        paddingRight: 10,
+                      }}
+                    >
+                      <IconButton>
+                        {formData.slideToggle[0].activeSlide === "02" ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                {formData.slideToggle[0].activeSlide === "02" ? (
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      marginBottom: 10,
+                      padding: 5,
+                      backgroundColor: "#D9D9D9",
+                      borderRadius: 5,
+                    }}
+                  >
+                    {" "}
+                    {!slideContainerLoader ? (
+                      <Grid
+                        container
+                        // spacing={2}
+                        className="flex items-center justify-center"
+                      >
+                        {/* Uploaded Member */}
+                        {formData.committeeData[
+                          `committeeSlide${formData.slideToggle[0].activeSlide}`
+                        ] &&
+                          formData.committeeData[
+                            `committeeSlide${formData.slideToggle[0].activeSlide}`
+                          ].map((member, index) => (
+                            <Grid
+                              item
+                              xs={1.8}
+                              key={`member-${formData.activeTab}-${
+                                formData.slideToggle[0].activeSlide
+                              }-${index + 1}`}
+                              style={{
+                                height: "220px",
+                                borderRadius: "5px",
+                                textAlign: "center",
+                                position: "relative",
+                                cursor: "pointer",
+                                marginLeft: 1,
+                                marginRight: 1,
+                                backgroundImage: `url(${member.imageUrl})`,
+                                backgroundSize: "cover",
+                                color: "#ffffff",
+                              }}
+                              onClick={() =>
+                                handleGridClick(
+                                  `${formData.activeTab}-${
+                                    formData.slideToggle[0].activeSlide
+                                  }-${index + 1}`
+                                )
+                              }
+                            >
+                              {/* Text on the image */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  backgroundColor: "#000000",
+                                  padding: "10px",
+                                  color: "#ffffff",
+                                  textAlign: "center",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[14px]">
+                                    {member.name}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[12px]">
+                                    {member.position}
+                                  </p>
+                                </div>
+                              </div>
+                            </Grid>
+                          ))}
+
+                        {/* Before Upload a Member */}
+                        {activeSlideLength < 6 ? (
+                          <Grid
+                            item
+                            xs={1.8}
+                            style={{
+                              height: "220px",
+                              border: "1px dotted",
+                              borderRadius: "5px",
+                              textAlign: "center",
+                              position: "relative",
+                              cursor: "pointer",
+                              marginLeft: 1,
+                              marginRight: 1,
+                            }}
+                            onClick={() =>
+                              handleGridClick(
+                                `${formData.activeTab}-${
+                                  formData.slideToggle[0].activeSlide
+                                }-${
+                                  formData.committeeData[
+                                    `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                  ]
+                                    ? formData.committeeData[
+                                        `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                      ].length + 1
+                                    : 1
+                                }`
+                              )
+                            }
+                          >
+                            {/* Plus Icon */}
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              <AddCircleOutlineIcon
+                                style={{ fontSize: "40px" }}
+                              />
+                            </div>
+                          </Grid>
+                        ) : null}
+                      </Grid>
+                    ) : (
+                      <Loader
+                        size="2rem"
+                        className="flex items-center justify-center my-4"
+                      />
+                    )}
+                  </Grid>
+                ) : null}
+              </Grid>
+
+              {/* Slide 03 */}
+              <Grid container style={{ marginBottom: 20 }}>
+                {/* Slide Number Bar */}
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    marginBottom: 10,
+                    padding: 5,
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 5,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleSlideToggle("03")}
+                >
+                  <Grid container className="flex items-center">
+                    <Grid
+                      item
+                      xs={11}
+                      style={{
+                        paddingLeft: 10,
+                      }}
+                    >
+                      <p className="font-OpenSans-Regular text-[16px]">
+                        Slide 03
+                      </p>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={1}
+                      style={{
+                        textAlign: "right",
+                        paddingRight: 10,
+                      }}
+                    >
+                      <IconButton>
+                        {formData.slideToggle[0].activeSlide === "03" ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                {formData.slideToggle[0].activeSlide === "03" ? (
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      marginBottom: 10,
+                      padding: 5,
+                      backgroundColor: "#D9D9D9",
+                      borderRadius: 5,
+                    }}
+                  >
+                    {" "}
+                    {!slideContainerLoader ? (
+                      <Grid
+                        container
+                        // spacing={2}
+                        className="flex items-center justify-center"
+                      >
+                        {/* Uploaded Member */}
+                        {formData.committeeData[
+                          `committeeSlide${formData.slideToggle[0].activeSlide}`
+                        ] &&
+                          formData.committeeData[
+                            `committeeSlide${formData.slideToggle[0].activeSlide}`
+                          ].map((member, index) => (
+                            <Grid
+                              item
+                              xs={1.8}
+                              key={`member-${formData.activeTab}-${
+                                formData.slideToggle[0].activeSlide
+                              }-${index + 1}`}
+                              style={{
+                                height: "220px",
+                                borderRadius: "5px",
+                                textAlign: "center",
+                                position: "relative",
+                                cursor: "pointer",
+                                marginLeft: 1,
+                                marginRight: 1,
+                                backgroundImage: `url(${member.imageUrl})`,
+                                backgroundSize: "cover",
+                                color: "#ffffff",
+                              }}
+                              onClick={() =>
+                                handleGridClick(
+                                  `${formData.activeTab}-${
+                                    formData.slideToggle[0].activeSlide
+                                  }-${index + 1}`
+                                )
+                              }
+                            >
+                              {/* Text on the image */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  backgroundColor: "#000000",
+                                  padding: "10px",
+                                  color: "#ffffff",
+                                  textAlign: "center",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[14px]">
+                                    {member.name}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[12px]">
+                                    {member.position}
+                                  </p>
+                                </div>
+                              </div>
+                            </Grid>
+                          ))}
+
+                        {/* Before Upload a Member */}
+                        {activeSlideLength < 6 ? (
+                          <Grid
+                            item
+                            xs={1.8}
+                            style={{
+                              height: "220px",
+                              border: "1px dotted",
+                              borderRadius: "5px",
+                              textAlign: "center",
+                              position: "relative",
+                              cursor: "pointer",
+                              marginLeft: 1,
+                              marginRight: 1,
+                            }}
+                            onClick={() =>
+                              handleGridClick(
+                                `${formData.activeTab}-${
+                                  formData.slideToggle[0].activeSlide
+                                }-${
+                                  formData.committeeData[
+                                    `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                  ]
+                                    ? formData.committeeData[
+                                        `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                      ].length + 1
+                                    : 1
+                                }`
+                              )
+                            }
+                          >
+                            {/* Plus Icon */}
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              <AddCircleOutlineIcon
+                                style={{ fontSize: "40px" }}
+                              />
+                            </div>
+                          </Grid>
+                        ) : null}
+                      </Grid>
+                    ) : (
+                      <Loader
+                        size="2rem"
+                        className="flex items-center justify-center my-4"
+                      />
+                    )}
+                  </Grid>
+                ) : null}
+              </Grid>
+
+              {/* Slide 04 */}
+              <Grid container style={{ marginBottom: 20 }}>
+                {/* Slide Number Bar */}
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    marginBottom: 10,
+                    padding: 5,
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 5,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleSlideToggle("04")}
+                >
+                  <Grid container className="flex items-center">
+                    <Grid
+                      item
+                      xs={11}
+                      style={{
+                        paddingLeft: 10,
+                      }}
+                    >
+                      <p className="font-OpenSans-Regular text-[16px]">
+                        Slide 04
+                      </p>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={1}
+                      style={{
+                        textAlign: "right",
+                        paddingRight: 10,
+                      }}
+                    >
+                      <IconButton>
+                        {formData.slideToggle[0].activeSlide === "04" ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                {formData.slideToggle[0].activeSlide === "04" ? (
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      marginBottom: 10,
+                      padding: 5,
+                      backgroundColor: "#D9D9D9",
+                      borderRadius: 5,
+                    }}
+                  >
+                    {" "}
+                    {!slideContainerLoader ? (
+                      <Grid
+                        container
+                        // spacing={2}
+                        className="flex items-center justify-center"
+                      >
+                        {/* Uploaded Member */}
+                        {formData.committeeData[
+                          `committeeSlide${formData.slideToggle[0].activeSlide}`
+                        ] &&
+                          formData.committeeData[
+                            `committeeSlide${formData.slideToggle[0].activeSlide}`
+                          ].map((member, index) => (
+                            <Grid
+                              item
+                              xs={1.8}
+                              key={`member-${formData.activeTab}-${
+                                formData.slideToggle[0].activeSlide
+                              }-${index + 1}`}
+                              style={{
+                                height: "220px",
+                                borderRadius: "5px",
+                                textAlign: "center",
+                                position: "relative",
+                                cursor: "pointer",
+                                marginLeft: 1,
+                                marginRight: 1,
+                                backgroundImage: `url(${member.imageUrl})`,
+                                backgroundSize: "cover",
+                                color: "#ffffff",
+                              }}
+                              onClick={() =>
+                                handleGridClick(
+                                  `${formData.activeTab}-${
+                                    formData.slideToggle[0].activeSlide
+                                  }-${index + 1}`
+                                )
+                              }
+                            >
+                              {/* Text on the image */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  backgroundColor: "#000000",
+                                  padding: "10px",
+                                  color: "#ffffff",
+                                  textAlign: "center",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[14px]">
+                                    {member.name}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[12px]">
+                                    {member.position}
+                                  </p>
+                                </div>
+                              </div>
+                            </Grid>
+                          ))}
+
+                        {/* Before Upload a Member */}
+                        {activeSlideLength < 6 ? (
+                          <Grid
+                            item
+                            xs={1.8}
+                            style={{
+                              height: "220px",
+                              border: "1px dotted",
+                              borderRadius: "5px",
+                              textAlign: "center",
+                              position: "relative",
+                              cursor: "pointer",
+                              marginLeft: 1,
+                              marginRight: 1,
+                            }}
+                            onClick={() =>
+                              handleGridClick(
+                                `${formData.activeTab}-${
+                                  formData.slideToggle[0].activeSlide
+                                }-${
+                                  formData.committeeData[
+                                    `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                  ]
+                                    ? formData.committeeData[
+                                        `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                      ].length + 1
+                                    : 1
+                                }`
+                              )
+                            }
+                          >
+                            {/* Plus Icon */}
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              <AddCircleOutlineIcon
+                                style={{ fontSize: "40px" }}
+                              />
+                            </div>
+                          </Grid>
+                        ) : null}
+                      </Grid>
+                    ) : (
+                      <Loader
+                        size="2rem"
+                        className="flex items-center justify-center my-4"
+                      />
+                    )}
+                  </Grid>
+                ) : null}
+              </Grid>
+
+              {/* Slide 05 */}
+              <Grid container style={{ marginBottom: 20 }}>
+                {/* Slide Number Bar */}
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    marginBottom: 10,
+                    padding: 5,
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 5,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleSlideToggle("05")}
+                >
+                  <Grid container className="flex items-center">
+                    <Grid
+                      item
+                      xs={11}
+                      style={{
+                        paddingLeft: 10,
+                      }}
+                    >
+                      <p className="font-OpenSans-Regular text-[16px]">
+                        Slide 05
+                      </p>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={1}
+                      style={{
+                        textAlign: "right",
+                        paddingRight: 10,
+                      }}
+                    >
+                      <IconButton>
+                        {formData.slideToggle[0].activeSlide === "05" ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                {formData.slideToggle[0].activeSlide === "05" ? (
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      marginBottom: 10,
+                      padding: 5,
+                      backgroundColor: "#D9D9D9",
+                      borderRadius: 5,
+                    }}
+                  >
+                    {" "}
+                    {!slideContainerLoader ? (
+                      <Grid
+                        container
+                        // spacing={2}
+                        className="flex items-center justify-center"
+                      >
+                        {/* Uploaded Member */}
+                        {formData.committeeData[
+                          `committeeSlide${formData.slideToggle[0].activeSlide}`
+                        ] &&
+                          formData.committeeData[
+                            `committeeSlide${formData.slideToggle[0].activeSlide}`
+                          ].map((member, index) => (
+                            <Grid
+                              item
+                              xs={1.8}
+                              key={`member-${formData.activeTab}-${
+                                formData.slideToggle[0].activeSlide
+                              }-${index + 1}`}
+                              style={{
+                                height: "220px",
+                                borderRadius: "5px",
+                                textAlign: "center",
+                                position: "relative",
+                                cursor: "pointer",
+                                marginLeft: 1,
+                                marginRight: 1,
+                                backgroundImage: `url(${member.imageUrl})`,
+                                backgroundSize: "cover",
+                                color: "#ffffff",
+                              }}
+                              onClick={() =>
+                                handleGridClick(
+                                  `${formData.activeTab}-${
+                                    formData.slideToggle[0].activeSlide
+                                  }-${index + 1}`
+                                )
+                              }
+                            >
+                              {/* Text on the image */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  backgroundColor: "#000000",
+                                  padding: "10px",
+                                  color: "#ffffff",
+                                  textAlign: "center",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[14px]">
+                                    {member.name}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[12px]">
+                                    {member.position}
+                                  </p>
+                                </div>
+                              </div>
+                            </Grid>
+                          ))}
+
+                        {/* Before Upload a Member */}
+                        {activeSlideLength < 6 ? (
+                          <Grid
+                            item
+                            xs={1.8}
+                            style={{
+                              height: "220px",
+                              border: "1px dotted",
+                              borderRadius: "5px",
+                              textAlign: "center",
+                              position: "relative",
+                              cursor: "pointer",
+                              marginLeft: 1,
+                              marginRight: 1,
+                            }}
+                            onClick={() =>
+                              handleGridClick(
+                                `${formData.activeTab}-${
+                                  formData.slideToggle[0].activeSlide
+                                }-${
+                                  formData.committeeData[
+                                    `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                  ]
+                                    ? formData.committeeData[
+                                        `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                      ].length + 1
+                                    : 1
+                                }`
+                              )
+                            }
+                          >
+                            {/* Plus Icon */}
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              <AddCircleOutlineIcon
+                                style={{ fontSize: "40px" }}
+                              />
+                            </div>
+                          </Grid>
+                        ) : null}
+                      </Grid>
+                    ) : (
+                      <Loader
+                        size="2rem"
+                        className="flex items-center justify-center my-4"
+                      />
+                    )}
+                  </Grid>
+                ) : null}
+              </Grid>
+
+              {/* Slide 06 */}
+              <Grid container style={{ marginBottom: 20 }}>
+                {/* Slide Number Bar */}
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    marginBottom: 10,
+                    padding: 5,
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 5,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleSlideToggle("06")}
+                >
+                  <Grid container className="flex items-center">
+                    <Grid
+                      item
+                      xs={11}
+                      style={{
+                        paddingLeft: 10,
+                      }}
+                    >
+                      <p className="font-OpenSans-Regular text-[16px]">
+                        Slide 06
+                      </p>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={1}
+                      style={{
+                        textAlign: "right",
+                        paddingRight: 10,
+                      }}
+                    >
+                      <IconButton>
+                        {formData.slideToggle[0].activeSlide === "06" ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                {formData.slideToggle[0].activeSlide === "06" ? (
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      marginBottom: 10,
+                      padding: 5,
+                      backgroundColor: "#D9D9D9",
+                      borderRadius: 5,
+                    }}
+                  >
+                    {" "}
+                    {!slideContainerLoader ? (
+                      <Grid
+                        container
+                        // spacing={2}
+                        className="flex items-center justify-center"
+                      >
+                        {/* Uploaded Member */}
+                        {formData.committeeData[
+                          `committeeSlide${formData.slideToggle[0].activeSlide}`
+                        ] &&
+                          formData.committeeData[
+                            `committeeSlide${formData.slideToggle[0].activeSlide}`
+                          ].map((member, index) => (
+                            <Grid
+                              item
+                              xs={1.8}
+                              key={`member-${formData.activeTab}-${
+                                formData.slideToggle[0].activeSlide
+                              }-${index + 1}`}
+                              style={{
+                                height: "220px",
+                                borderRadius: "5px",
+                                textAlign: "center",
+                                position: "relative",
+                                cursor: "pointer",
+                                marginLeft: 1,
+                                marginRight: 1,
+                                backgroundImage: `url(${member.imageUrl})`,
+                                backgroundSize: "cover",
+                                color: "#ffffff",
+                              }}
+                              onClick={() =>
+                                handleGridClick(
+                                  `${formData.activeTab}-${
+                                    formData.slideToggle[0].activeSlide
+                                  }-${index + 1}`
+                                )
+                              }
+                            >
+                              {/* Text on the image */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  backgroundColor: "#000000",
+                                  padding: "10px",
+                                  color: "#ffffff",
+                                  textAlign: "center",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[14px]">
+                                    {member.name}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[12px]">
+                                    {member.position}
+                                  </p>
+                                </div>
+                              </div>
+                            </Grid>
+                          ))}
+
+                        {/* Before Upload a Member */}
+                        {activeSlideLength < 6 ? (
+                          <Grid
+                            item
+                            xs={1.8}
+                            style={{
+                              height: "220px",
+                              border: "1px dotted",
+                              borderRadius: "5px",
+                              textAlign: "center",
+                              position: "relative",
+                              cursor: "pointer",
+                              marginLeft: 1,
+                              marginRight: 1,
+                            }}
+                            onClick={() =>
+                              handleGridClick(
+                                `${formData.activeTab}-${
+                                  formData.slideToggle[0].activeSlide
+                                }-${
+                                  formData.committeeData[
+                                    `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                  ]
+                                    ? formData.committeeData[
+                                        `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                      ].length + 1
+                                    : 1
+                                }`
+                              )
+                            }
+                          >
+                            {/* Plus Icon */}
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              <AddCircleOutlineIcon
+                                style={{ fontSize: "40px" }}
+                              />
+                            </div>
+                          </Grid>
+                        ) : null}
+                      </Grid>
+                    ) : (
+                      <Loader
+                        size="2rem"
+                        className="flex items-center justify-center my-4"
+                      />
+                    )}
+                  </Grid>
+                ) : null}
+              </Grid>
+
+              {/* Slide 07 */}
+              <Grid container style={{ marginBottom: 20 }}>
+                {/* Slide Number Bar */}
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    marginBottom: 10,
+                    padding: 5,
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 5,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleSlideToggle("07")}
+                >
+                  <Grid container className="flex items-center">
+                    <Grid
+                      item
+                      xs={11}
+                      style={{
+                        paddingLeft: 10,
+                      }}
+                    >
+                      <p className="font-OpenSans-Regular text-[16px]">
+                        Slide 07
+                      </p>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={1}
+                      style={{
+                        textAlign: "right",
+                        paddingRight: 10,
+                      }}
+                    >
+                      <IconButton>
+                        {formData.slideToggle[0].activeSlide === "07" ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                {formData.slideToggle[0].activeSlide === "07" ? (
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      marginBottom: 10,
+                      padding: 5,
+                      backgroundColor: "#D9D9D9",
+                      borderRadius: 5,
+                    }}
+                  >
+                    {" "}
+                    {!slideContainerLoader ? (
+                      <Grid
+                        container
+                        // spacing={2}
+                        className="flex items-center justify-center"
+                      >
+                        {/* Uploaded Member */}
+                        {formData.committeeData[
+                          `committeeSlide${formData.slideToggle[0].activeSlide}`
+                        ] &&
+                          formData.committeeData[
+                            `committeeSlide${formData.slideToggle[0].activeSlide}`
+                          ].map((member, index) => (
+                            <Grid
+                              item
+                              xs={1.8}
+                              key={`member-${formData.activeTab}-${
+                                formData.slideToggle[0].activeSlide
+                              }-${index + 1}`}
+                              style={{
+                                height: "220px",
+                                borderRadius: "5px",
+                                textAlign: "center",
+                                position: "relative",
+                                cursor: "pointer",
+                                marginLeft: 1,
+                                marginRight: 1,
+                                backgroundImage: `url(${member.imageUrl})`,
+                                backgroundSize: "cover",
+                                color: "#ffffff",
+                              }}
+                              onClick={() =>
+                                handleGridClick(
+                                  `${formData.activeTab}-${
+                                    formData.slideToggle[0].activeSlide
+                                  }-${index + 1}`
+                                )
+                              }
+                            >
+                              {/* Text on the image */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  backgroundColor: "#000000",
+                                  padding: "10px",
+                                  color: "#ffffff",
+                                  textAlign: "center",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[14px]">
+                                    {member.name}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="font-OpenSans-Regular text-[12px]">
+                                    {member.position}
+                                  </p>
+                                </div>
+                              </div>
+                            </Grid>
+                          ))}
+
+                        {/* Before Upload a Member */}
+                        {activeSlideLength < 6 ? (
+                          <Grid
+                            item
+                            xs={1.8}
+                            style={{
+                              height: "220px",
+                              border: "1px dotted",
+                              borderRadius: "5px",
+                              textAlign: "center",
+                              position: "relative",
+                              cursor: "pointer",
+                              marginLeft: 1,
+                              marginRight: 1,
+                            }}
+                            onClick={() =>
+                              handleGridClick(
+                                `${formData.activeTab}-${
+                                  formData.slideToggle[0].activeSlide
+                                }-${
+                                  formData.committeeData[
+                                    `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                  ]
+                                    ? formData.committeeData[
+                                        `committeeSlide${formData.slideToggle[0].activeSlide}`
+                                      ].length + 1
+                                    : 1
+                                }`
+                              )
+                            }
+                          >
+                            {/* Plus Icon */}
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              <AddCircleOutlineIcon
+                                style={{ fontSize: "40px" }}
+                              />
+                            </div>
+                          </Grid>
+                        ) : null}
+                      </Grid>
+                    ) : (
+                      <Loader
+                        size="2rem"
+                        className="flex items-center justify-center my-4"
+                      />
+                    )}
+                  </Grid>
+                ) : null}
+              </Grid>
+
+              {/* Dialog Box */}
+              <Dialog
+                open={dialogOpen}
+                onClose={handleDialogClose}
+                style={{ padding: 40 }}
+              >
+                <DialogTitle style={{ marginTop: 20, marginBottom: 10 }}>
+                  {dialogFormData.name === ""
+                    ? "Add New Committee Member"
+                    : "Edit Committee Member Details"}
+                </DialogTitle>
+                <DialogContent>
+                  <Grid container spacing={1}>
+                    <Grid item xs={12} style={{ marginTop: 10 }}>
+                      <TextField
+                        label="Name"
+                        fullWidth
+                        value={dialogFormData.name}
+                        onChange={(e) =>
+                          setDialogFormData({
+                            ...dialogFormData,
+                            name: e.target.value,
+                          })
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        label="Position"
+                        fullWidth
+                        value={dialogFormData.position}
+                        onChange={(e) =>
+                          setDialogFormData({
+                            ...dialogFormData,
+                            position: e.target.value,
+                          })
+                        }
+                      />
+                    </Grid>
+                    {dialogUploadImageLoader ? (
+                      <Grid item xs={12}>
+                        <Loader size="2rem" className="" />
+                      </Grid>
+                    ) : (
+                      <Grid item xs={12}>
+                        <input
+                          // accept="image/*"
+                          style={{ display: "none" }}
+                          id="image-upload-button"
+                          type="file"
+                          onChange={handleImageUpload}
+                        />
+                        <label htmlFor="image-upload-button">
+                          <Button
+                            variant="contained"
+                            component="span"
+                            color="secondary"
+                            size="small"
+                          >
+                            Upload Image
+                          </Button>
+                        </label>
+                      </Grid>
+                    )}
+                  </Grid>
+
+                  {dialogFormData.name === "" ? (
+                    <Grid item xs={12} className="flex justify-center">
+                      {saveDialogLoader ? (
+                        <Loader
+                          size="2rem"
+                          className="flex items-center justify-center my-[40px]"
+                        />
+                      ) : (
+                        <Button
+                          onClick={handleDialogSave}
+                          variant="contained"
+                          color="primary"
+                          style={{ marginTop: 40, marginBottom: 40 }}
+                          size="small"
+                        >
+                          Save
+                        </Button>
+                      )}
+                    </Grid>
+                  ) : (
+                    <Grid item xs={12} className="flex justify-center">
+                      <Button
+                        onClick={handleDialogUpdate}
+                        variant="contained"
+                        color="primary"
+                        style={{
+                          marginTop: 40,
+                          marginBottom: 40,
+                          marginRight: 5,
+                        }}
+                        size="small"
+                      >
+                        Update
+                      </Button>
+
+                      {parseInt(dialogFormData.id.slice(-1)) ===
+                      activeSlideLength ? (
+                        <Button
+                          onClick={deleteById}
+                          variant="contained"
+                          color="primary"
+                          style={{ marginTop: 40, marginBottom: 40 }}
+                          size="small"
+                        >
+                          Delete
+                        </Button>
+                      ) : null}
+                    </Grid>
+                  )}
+                </DialogContent>
+              </Dialog>
             </Grid>
           </Grid>
         </div>

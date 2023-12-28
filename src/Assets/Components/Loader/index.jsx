@@ -1,10 +1,13 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const Loader = () => {
+const Loader = ({
+  size = "3rem",
+  className = "flex items-center justify-center",
+}) => {
   return (
-    <div className="flex items-center justify-center" sx={{ zIndex: 102 }}>
-      <CircularProgress color="primary" />
+    <div className={className} sx={{ zIndex: 102 }}>
+      <CircularProgress size={size} color="primary" />
     </div>
   );
 };
