@@ -23,7 +23,7 @@ const CommitteeSwiper = ({
 }) => {
   // Select the appropriate committee based on isPresident value
   const committee = isPresident ? videCommittee : steamCommittee;
-  console.log("Committee", committee);
+  // console.log("Committee", committee);
   return (
     <Swiper
       style={{

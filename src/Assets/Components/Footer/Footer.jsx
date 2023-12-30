@@ -24,8 +24,7 @@ function Footer() {
           }}
         >
           <p className="text-white font-Poppins-SemiBold xs:text-[12px] md:text-[16px] p-8">
-            Copyright &copy; 2023 Kelani STEAM | Powered By Pramodya Samarakoon
-            With &hearts;
+            Copyright &copy; 2023 | Powered By කැලණි STEAM Team With &hearts;
           </p>
         </Box>
       </Grid>

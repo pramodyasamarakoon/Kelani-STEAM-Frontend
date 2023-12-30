@@ -229,14 +229,6 @@ const OrderTShirtFormPage = () => {
         progress: undefined,
         theme: "light",
       });
-      // axios
-      //   .post("your_api_endpoint", formDataToSend)
-      //   .then((response) => {
-      //     console.log("Data sent successfully:", response.data);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error sending data:", error);
-      //   });
     }
   };
 

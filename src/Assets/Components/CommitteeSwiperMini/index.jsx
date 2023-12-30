@@ -23,7 +23,7 @@ const CommitteeSwiperMini = ({
 }) => {
   // Select the appropriate committee based on isPresident value
   const committee = isPresident ? videCommittee : steamCommittee;
-  console.log("Committee", committee);
+  // console.log("Committee", committee);
 
   //   Align Items
   const alignRows = ["10%", "25%", "40%", "55%", "70%", "85%"];

@@ -30,6 +30,7 @@ import CountingNumber from "../../Assets/Components/CountingNumber";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { aboutUsImageList } from "../../Assets/Components/const";
 import CommitteeSwiperMini from "../../Assets/Components/CommitteeSwiperMini";
+import axios from "axios";
 
 const limitedItemData = aboutUsImageList.slice(0, 12);
 
@@ -50,12 +51,16 @@ function AboutUs() {
         heroSubTopic: "Faculty of Science, University of Kelaniya",
       },
     ],
+    SteamCommitteeData: [],
+    VideCommitteeData: [],
   });
   const [readM, setReadM] = useState(false);
+  const [committeeDataLoader, setCommitteeDataLoader] = useState(false);
 
   // useEffect for readM state
   useEffect(() => {
     console.log(readM, "Updated!");
+    loadCommitteeData();
   }, [readM]);
 
   const readMore = () => {
@@ -74,6 +79,39 @@ function AboutUs() {
     animation:
       "tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1.000) both",
     // Add other styles or Tailwind classes as needed
+  };
+
+  // loading the committee data from the database
+  const loadCommitteeData = async () => {
+    setCommitteeDataLoader(true);
+
+    try {
+      const [steamResponse, videResponse] = await Promise.all([
+        axios.get("http://localhost:8080/committee/getByPartialId", {
+          params: {
+            partialId: "steam",
+          },
+        }),
+        axios.get("http://localhost:8080/committee/getByPartialId", {
+          params: {
+            partialId: "vide",
+          },
+        }),
+      ]);
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        SteamCommitteeData: steamResponse.data,
+        VideCommitteeData: videResponse.data,
+      }));
+
+      console.log("Steam Committee Data loaded", steamResponse.data);
+      console.log("Vide Committee Data loaded", videResponse.data);
+    } catch (error) {
+      console.error("Error loading committee data:", error);
+    } finally {
+      setCommitteeDataLoader(false);
+    }
   };
 
   return (

@@ -893,6 +893,7 @@ const AdminCommittee = () => {
     }
   };
 
+  // delete member by Id
   const deleteById = async () => {
     try {
       const response = await axios.delete(
