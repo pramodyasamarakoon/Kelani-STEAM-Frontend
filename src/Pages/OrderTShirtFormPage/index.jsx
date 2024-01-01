@@ -29,6 +29,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
+import Loader from "../../Assets/Components/Loader";
 
 const OrderTShirtFormPage = () => {
   const departments = ["IM", "PS", "BS", "ENCM", "PE", "ECS", "AC", "SS", "SE"];
@@ -89,8 +90,10 @@ const OrderTShirtFormPage = () => {
     size: "",
     paymentMethod: "",
     paymentAmount: "",
-    file: null,
+    imageUrl: "",
+    tempImg: null,
   });
+  const [formLoader, setFormLoader] = useState(false);
 
   // Function to handle input changes and update formData
   const handleChange = (event) => {
@@ -123,28 +126,15 @@ const OrderTShirtFormPage = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      file,
+    setFormData(() => ({
+      ...formData,
+      tempImg: file,
     }));
-
-    // Simulating file upload progress (remove this in actual implementation)
-    const interval = setInterval(() => {
-      setUploadProgress((prevProgress) =>
-        prevProgress < 100 ? prevProgress + 10 : prevProgress
-      );
-    }, 500);
-
-    // Simulating file upload completion (remove this in actual implementation)
-    setTimeout(() => {
-      clearInterval(interval);
-      setUploadProgress(100);
-      setIsFileUploaded(true);
-    }, 3000);
+    setIsFileUploaded(true);
   };
 
   // Submit Function
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Check if any required fields are empty or null
     const requiredFields = [
       "name",
@@ -155,7 +145,7 @@ const OrderTShirtFormPage = () => {
       "size",
       "paymentMethod",
       "paymentAmount",
-      "file",
+      "tempImg",
     ];
     const emptyFields = requiredFields.filter((field) => !formData[field]);
 
@@ -203,32 +193,103 @@ const OrderTShirtFormPage = () => {
       });
       return;
     } else {
-      // send data to the database
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("department", formData.department);
-      formDataToSend.append("studentNumber", formData.studentNumber);
-      formDataToSend.append("contactNumber", formData.contactNumber);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("size", formData.size);
-      formDataToSend.append("paymentMethod", formData.paymentMethod);
-      formDataToSend.append("paymentAmount", formData.paymentAmount);
-      formDataToSend.append("file", formData.file);
-      // Log the entered data
-      console.log("Data Stored successfully:");
-      for (const [key, value] of formDataToSend.entries()) {
-        console.log(`${key}: ${value}`);
+      // Check the Image file size
+      const fileSizeMB = formData.tempImg.size / (1024 * 1024); // Convert to megabytes
+      console.log("File Size", fileSizeMB);
+      if (fileSizeMB > 1) {
+        toast.error("Image size exceeds the maximum allowed size of 1MB", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          tempImg: null,
+        }));
+        setIsFileUploaded(false);
+        return;
+      } else {
+        setFormLoader(true);
+        // Send payment proof to the Cloudinary
+        const data = new FormData();
+        data.append("file", formData.tempImg);
+        data.append("upload_preset", "ughnxbxn");
+
+        try {
+          const response = await axios.post(
+            "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+            data
+          );
+          const uploadedImageUrl = response.data.url;
+          console.log("Uploaded Image URL:", uploadedImageUrl);
+
+          // Send all data to the database
+          try {
+            const response = await axios.post(
+              "http://localhost:8080/tshirt-orders/addTShirtOrder",
+              {
+                name: formData.name,
+                department: formData.department,
+                studentNumber: formData.studentNumber,
+                contactNumber: formData.contactNumber,
+                email: formData.email,
+                size: formData.size,
+                paymentMethod: formData.paymentMethod,
+                paymentAmount: formData.paymentAmount,
+                imageUrl: uploadedImageUrl,
+              }
+            );
+
+            console.log("Order Placed successfully");
+            toast.success("Successfully Placed the Order!", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setFormLoader(false);
+
+            // Clear all the fields
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              name: "",
+              department: "",
+              studentNumber: "",
+              contactNumber: "",
+              email: "",
+              size: "",
+              paymentMethod: "",
+              paymentAmount: "",
+              imageUrl: "",
+              tempImg: null,
+            }));
+          } catch (error) {
+            setFormLoader(false);
+            console.error(
+              "Error Order:",
+              error.response ? error.response.data : error.message
+            );
+            toast.error(`Error in  the Order!`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          setFormLoader(false);
+        }
       }
-      toast.success("Successfully Placed the Order!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
     }
   };
 
@@ -622,11 +683,7 @@ const OrderTShirtFormPage = () => {
                         component="span"
                         variant="outlined"
                         startIcon={<CloudUploadIcon />}
-                        disabled={
-                          uploadProgress > 0 ||
-                          isFileUploaded ||
-                          !formData.paymentMethod
-                        }
+                        disabled={isFileUploaded || !formData.paymentMethod}
                       >
                         {isFileUploaded ? "Done" : "Upload file"}
                       </Button>
@@ -634,28 +691,32 @@ const OrderTShirtFormPage = () => {
                         type="file"
                         style={{ display: "none" }}
                         onChange={handleFileChange}
-                        disabled={uploadProgress > 0 || isFileUploaded}
+                        // disabled={uploadProgress > 0 || isFileUploaded}
                       />
                     </label>
 
                     {/* Progress Bar */}
-                    {uploadProgress > 0 && !isFileUploaded && (
+                    {/* {uploadProgress > 0 && !isFileUploaded && (
                       <LinearProgress
                         variant="determinate"
                         value={uploadProgress}
                       />
-                    )}
+                    )} */}
                   </div>
 
                   {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
+                  {formLoader ? (
+                    <Loader size="2rem" />
+                  ) : (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  )}
                 </ValidatorForm>
               </div>
             </div>
@@ -1070,23 +1131,28 @@ const OrderTShirtFormPage = () => {
                     </label>
 
                     {/* Progress Bar */}
-                    {uploadProgress > 0 && !isFileUploaded && (
+                    {/* {uploadProgress > 0 && !isFileUploaded && (
                       <LinearProgress
                         variant="determinate"
                         value={uploadProgress}
                       />
-                    )}
+                    )} */}
                   </div>
 
                   {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
+
+                  {formLoader ? (
+                    <Loader size="2rem" />
+                  ) : (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  )}
                 </ValidatorForm>
               </div>
             </div>
