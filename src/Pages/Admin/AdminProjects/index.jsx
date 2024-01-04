@@ -18,6 +18,7 @@ import ScrollToTopButton from "../../../Assets/Components/ScrollToTopButton";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Loader from "../../../Assets/Components/Loader";
+import { cloudinaryName, cloudinaryPreset } from "../../../Assets/Components/const";
 
 const AdminProjects = () => {
   useEffect(() => {
@@ -206,9 +207,9 @@ const AdminProjects = () => {
       (file) => {
         const data = new FormData();
         data.append("file", file);
-        data.append("upload_preset", "ughnxbxn");
+        data.append("upload_preset", cloudinaryPreset);
         return axios.post(
-          "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+          `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
           data
         );
       }
@@ -216,12 +217,12 @@ const AdminProjects = () => {
     // Upload Cover Image
     const data = new FormData();
     data.append("file", formData.coverImage);
-    data.append("upload_preset", "ughnxbxn");
+    data.append("upload_preset", cloudinaryPreset);
 
     try {
       // Response for Cover Image
       const responseForCoverImage = await axios.post(
-        "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
         data
       );
       const uploadedCoverImageUrl = responseForCoverImage.data.url;

@@ -25,6 +25,8 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Loader from "../../../Assets/Components/Loader";
+import { cloudinaryPreset } from "../../../Assets/Components/const";
+import { cloudinaryName } from "../../../Assets/Components/const";
 
 const AdminAlbums = () => {
   useEffect(() => {
@@ -213,9 +215,9 @@ const AdminAlbums = () => {
     const uploadPromises = selectedFiles.map((file) => {
       const data = new FormData();
       data.append("file", file);
-      data.append("upload_preset", "ughnxbxn");
+      data.append("upload_preset", cloudinaryPreset);
       return axios.post(
-        "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
         data
       );
     });

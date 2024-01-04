@@ -30,6 +30,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTopButton from "../../Assets/Components/ScrollToTopButton";
 import Loader from "../../Assets/Components/Loader";
+import {
+  cloudinaryName,
+  cloudinaryPreset,
+} from "../../Assets/Components/const";
 
 const OrderTShirtFormPage = () => {
   const departments = ["IM", "PS", "BS", "ENCM", "PE", "ECS", "AC", "SS", "SE"];
@@ -216,11 +220,11 @@ const OrderTShirtFormPage = () => {
         // Send payment proof to the Cloudinary
         const data = new FormData();
         data.append("file", formData.tempImg);
-        data.append("upload_preset", "ughnxbxn");
+        data.append("upload_preset", cloudinaryPreset);
 
         try {
           const response = await axios.post(
-            "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+            `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
             data
           );
           const uploadedImageUrl = response.data.url;

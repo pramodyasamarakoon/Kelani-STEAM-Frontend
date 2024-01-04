@@ -12,7 +12,14 @@ import { universities } from "../../Assets/Components/const";
 
 const BookingForm = ({ onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
-    // Initialize form data here if needed
+    name: "",
+    university: "",
+    event: "",
+    email: "",
+    mobile: "",
+    description: "",
+    expectation: "",
+    whatWeGet: "",
   });
 
   const handleChange = (event) => {
@@ -21,10 +28,12 @@ const BookingForm = ({ onSubmit, onClose }) => {
       ...formData,
       [name]: value,
     });
+    console.log(`Edited : ${name}:`, value);
   };
 
   const handleSubmit = () => {
     console.log("Form Submitted");
+
     // Handle form submission logic here
     onSubmit(formData);
     // Clear form data after submission if needed
@@ -41,12 +50,27 @@ const BookingForm = ({ onSubmit, onClose }) => {
       <Grid container spacing={1}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label="Name of the Society" required />
+            <TextField
+              fullWidth
+              label="Name of the Society"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth required>
+            <FormControl fullWidth>
               <InputLabel>Select the University</InputLabel>
-              <Select label="Select the University">
+              <Select
+                label="Select the University"
+                name="university"
+                value={formData.university}
+                onChange={handleChange}
+                inputProps={{
+                  name: "university",
+                  id: "university",
+                }}
+              >
                 {universities.map((university, index) => (
                   <MenuItem key={index} value={university}>
                     {university}
@@ -56,27 +80,63 @@ const BookingForm = ({ onSubmit, onClose }) => {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <TextField fullWidth label="Event" required />
+            <TextField
+              fullWidth
+              label="Event"
+              name="event"
+              value={formData.event}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label="E-mail" type="email" required />
+            <TextField
+              fullWidth
+              label="E-mail"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label="Mobile Number" type="tel" required />
+            <TextField
+              fullWidth
+              label="Mobile Number"
+              type="tel"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
               label="Description of the Event"
               multiline
-              required
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField fullWidth label="Your Expectations" multiline required />
+            <TextField
+              fullWidth
+              label="Your Expectations"
+              multiline
+              name="expectations"
+              value={formData.expectations}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={12}>
-            <TextField fullWidth label="What do we get?" multiline required />
+            <TextField
+              fullWidth
+              label="What do we get?"
+              multiline
+              name="whatWeGet"
+              value={formData.whatWeGet}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={12}>
             <InputLabel>Proposal (PDF)</InputLabel>
@@ -89,7 +149,14 @@ const BookingForm = ({ onSubmit, onClose }) => {
           </Grid>
 
           <Grid item xs={12}>
-            <TextField fullWidth label="Other" multiline />
+            <TextField
+              fullWidth
+              label="Other"
+              multiline
+              name="other"
+              value={formData.other}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid
             item

@@ -43,6 +43,10 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import img from "../../../Assets/Images/Committee/ViDe/President.jpg";
+import {
+  cloudinaryName,
+  cloudinaryPreset,
+} from "../../../Assets/Components/const";
 // import LoadingButton from "@mui/lab/LoadingButton";
 
 const sidebarWidth = 250;
@@ -270,9 +274,9 @@ const AdminCommittee = () => {
     const uploadPromises = selectedFiles.map((file) => {
       const data = new FormData();
       data.append("file", file);
-      data.append("upload_preset", "ughnxbxn");
+      data.append("upload_preset", cloudinaryPreset);
       return axios.post(
-        "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
         data
       );
     });
@@ -662,11 +666,11 @@ const AdminCommittee = () => {
     // Upload Image to Cloudinary
     const data = new FormData();
     data.append("file", formData.tempImage);
-    data.append("upload_preset", "ughnxbxn");
+    data.append("upload_preset", cloudinaryPreset);
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
         data
       );
       const uploadedImageUrl = response.data.url;
@@ -785,11 +789,11 @@ const AdminCommittee = () => {
       // Upload Image to Cloudinary
       const data = new FormData();
       data.append("file", formData.tempImage);
-      data.append("upload_preset", "ughnxbxn");
+      data.append("upload_preset", cloudinaryPreset);
 
       try {
         const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dbcrlylnv/image/upload",
+          `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
           data
         );
         const uploadedImageUrl = response.data.url;

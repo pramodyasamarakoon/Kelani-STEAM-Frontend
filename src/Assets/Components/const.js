@@ -516,3 +516,6 @@ export const universities = [
     "Sri Lanka Technological Campus (SLTC)",
     "Sri Lanka Institute of Information Technology (SLIIT)",
   ];
+
+  export const cloudinaryPreset = "ughnxbxn"
+  export const cloudinaryName = "dbcrlylnv"

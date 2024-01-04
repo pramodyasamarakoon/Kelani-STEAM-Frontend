@@ -55,6 +55,10 @@ const adminPages = [
     label: "Committee",
     link: "/AdminCommittee",
   },
+  {
+    label: "T Shirt Orders",
+    link: "/AdminBookings",
+  },
 ];
 
 const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
