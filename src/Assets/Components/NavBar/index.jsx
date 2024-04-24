@@ -57,7 +57,7 @@ const adminPages = [
   },
   {
     label: "T Shirt Orders",
-    link: "/AdminBookings",
+    link: "/AdminTShirtOrders",
   },
 ];
 

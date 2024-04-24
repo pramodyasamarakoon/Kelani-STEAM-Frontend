@@ -27,6 +27,14 @@ const ContactUs = () => {
   const handleContact = (selectedIcon) => {
     setSelectedIcon(selectedIcon);
   };
+
+  const visitOnclick = () => {
+    window.open(
+      `https://www.facebook.com/kelanisteam/posts/764020515745112?ref=embed_post`,
+      "_blank"
+    );
+  };
+
   return (
     <div className="w-full">
       <NavBar />
@@ -179,7 +187,7 @@ const ContactUs = () => {
           <Box sx={{ display: "flex", justifyContent: "center", marginTop: 5 }}>
             <Button
               variant="contained"
-              // onClick={handleCloseNavMenu}
+              onClick={visitOnclick}
               size="small"
               sx={{
                 color: "black",
@@ -358,6 +366,29 @@ const ContactUs = () => {
           </Box>
         </div>
       </Grid>
+      <div>
+        <iframe
+          src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fkelanisteam%2Fposts%2Fpfbid027oRXquKtTTPZW7Z2zFPzHEtJ7ucQkmuQUZr6bfHp8jw72j4wgKKPjP2Xm3Mgh1Uzl&show_text=true&width=500"
+          width="500"
+          height="790"
+          // style="border:none;overflow:hidden"
+          scrolling="no"
+          frameborder="0"
+          allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+      </div>
+      <div>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/7Vwfm38nogs?si=L1p_t8GKowCwaMeM"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
 
       {/* Footer */}
       <Footer />

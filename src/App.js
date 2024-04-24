@@ -11,6 +11,7 @@ import Home from './Pages/Admin/Home';
 import AdminAlbums from './Pages/Admin/AdminAlbums';
 import AdminProjects from './Pages/Admin/AdminProjects';
 import AdminCommittee from './Pages/Admin/AdminCommittee';
+import AdminTShirt from './Pages/Admin/AdminTShirt';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/AdminAlbums" element={<AdminAlbums/>} />
         <Route path="/AdminProjects" element={<AdminProjects/>} />
         <Route path="/AdminCommittee" element={<AdminCommittee/>} />
+        <Route path="/AdminTShirtOrders" element={<AdminTShirt/>} />
       </Routes>
     </BrowserRouter>
     </div>
