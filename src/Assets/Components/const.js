@@ -519,3 +519,4 @@ export const universities = [
 
   export const cloudinaryPreset = "ughnxbxn"
   export const cloudinaryName = "dbcrlylnv"
+  export const mainEndpoint = "https://localhost:7168/api/"

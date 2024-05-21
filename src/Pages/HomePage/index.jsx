@@ -27,6 +27,7 @@ import CountingNumber from "../../Assets/Components/CountingNumber";
 import Logo from "../../../src/Assets/LogoWhite.png";
 import Team from "../../Assets/Images/BookNowImage/TeamMedium.jpg";
 import axios from "axios";
+import { mainEndpoint } from "../../Assets/Components/const";
 
 // Recent Album details can change from the Const.js file
 
@@ -48,8 +49,8 @@ function HomePage() {
             isPlus: false,
           },
           {
-            title: "Undergraduates",
-            number: 300,
+            title: "Total Members",
+            number: 500,
             isPlus: true,
           },
           {
@@ -64,14 +65,9 @@ function HomePage() {
     aboutUsContainer: [
       {
         aboutUsImage: AboutUsSmall,
-        text01: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Quaerat eos laborum sit? Repudiandae, dicta, aliquid eligendi
-        cum excepturi quod aliquam, alias quidem perspiciatis dolores
-        ab quisquam voluptatibus eos nobis impedit!`,
-        text02: `Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Nam cumque sit eligendi laudantium nesciunt numquam
-        odit? Id sunt, blanditiis dolores recusandae laudantium
-        maiores ex iste, impedit ducimus provident magnam quidem?`,
+        text01: `"Welcome to VidE Club, where creativity meets opportunity!"
+        Our club was founded with the aim of creating and nurturing creativity in individuals to develop a unique and outgoing personality and providing resources for success in professional aspects of life.`,
+        text02: `Join us on this exciting journey of self-discovery and growth, where every idea is valued, and every member is empowered to shine. Explore our avenues, dive into our projects, and be part of a community that celebrates creativity in all its forms. Welcome to a world where your creativity knows no bounds!`,
       },
     ],
   });
@@ -172,7 +168,8 @@ function HomePage() {
     // setAlbumTableLoader(true);
 
     axios
-      .get("http://localhost:8080/albums/getAll")
+      // .get("https://localhost:7168/api/albums/getAll")
+      .get(`${mainEndpoint}albums/getAll`)
       .then((response) => {
         // Assuming response.data is an array of albums
         const albums = response.data;
@@ -488,8 +485,7 @@ function HomePage() {
           id="about-us-section"
           sx={{
             marginX: 16,
-            marginTop: 7,
-            marginBottom: 5,
+            marginTop: 5,
             display: { xs: "none", md: "flex" },
           }}
         >
@@ -500,7 +496,7 @@ function HomePage() {
             className="h-auto flex justify-center items-center "
           >
             {/* <Collapse in={showAboutUs} timeout={1000}> */}
-            <p className="font-Poppins-SemiBold text-5xl pt-4">About Us</p>
+            <p className="font-Poppins-SemiBold text-5xl pt-2">About Us</p>
             {/* </Collapse> */}
           </Grid>
           {/*About US Group Photo */}
@@ -632,7 +628,7 @@ function HomePage() {
           id="grid-below-section"
           sx={{
             marginX: 16,
-            marginBottom: 10,
+            marginBottom: 5,
             display: { xs: "none", md: "flex" },
           }}
         >
@@ -643,7 +639,7 @@ function HomePage() {
             className="h-auto flex justify-center items-center "
           >
             {/* <Collapse in={showGridBelow} timeout={1000}> */}
-            <p className="font-Poppins-SemiBoldItalic text-5xl pt-4">
+            <p className="font-Poppins-SemiBoldItalic text-5xl pt-2">
               Member T Shirts Are Available Now
             </p>
             {/* </Collapse> */}
@@ -651,6 +647,19 @@ function HomePage() {
           {/*T Shirt Content */}
 
           <Grid container spacing={2} sx={{ marginX: 36 }}>
+            
+            {/*T Shirt Photo */}
+            <Grid
+              item
+              xs={8}
+              className="h-auto flex justify-center items-center "
+              // sx={{ marginX: 36 }}
+            >
+              {" "}
+              {/* <Collapse in={showGridBelow} timeout={1000}> */}
+              <img className="m-10" src={TShirtSmall} alt="T Shirt Flyer" />
+              {/* </Collapse> */}
+            </Grid>
             {/*T Shirt Button */}
             <Grid
               item
@@ -667,24 +676,12 @@ function HomePage() {
                   size="small"
                   sx={{
                     mx: 4,
-                    // color: "black",
+                    width: 90
                   }}
                 >
                   Order Now
                 </Button>
               </Link>
-              {/* </Collapse> */}
-            </Grid>
-            {/*T Shirt Photo */}
-            <Grid
-              item
-              xs={8}
-              className="h-auto flex justify-center items-center "
-              // sx={{ marginX: 36 }}
-            >
-              {" "}
-              {/* <Collapse in={showGridBelow} timeout={1000}> */}
-              <img className="m-10" src={TShirtSmall} alt="T Shirt Flyer" />
               {/* </Collapse> */}
             </Grid>
           </Grid>

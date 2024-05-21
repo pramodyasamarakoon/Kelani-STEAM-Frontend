@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import {
   cloudinaryName,
   cloudinaryPreset,
+  mainEndpoint,
   universities,
 } from "../../Assets/Components/const";
 import axios from "axios";
@@ -18,16 +19,16 @@ import { ToastContainer, toast } from "react-toastify";
 
 const BookingForm = ({ onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    university: "",
-    event: "",
-    email: "",
-    mobile: "",
-    description: "",
-    expectation: "",
-    whatWeGet: "",
-    proposalLink: "",
-    other: "",
+    Name: "",
+    University: "",
+    Event: "",
+    Email: "",
+    Mobile: "",
+    Description: "",
+    Expectation: "",
+    WhatWeGet: "",
+    ProposalLink: "",
+    Other: "",
     tempImg: null,
   });
   const [formLoader, setFormLoader] = useState(false);
@@ -35,10 +36,10 @@ const BookingForm = ({ onSubmit, onClose }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     // Validate the Mobile Number
-    if (name === "mobile") {
+    if (name === "Mobile") {
       handleContactNumberChange(event);
     }
-    if (name === "email") {
+    if (name === "Email") {
       handleEmailChange(event);
     }
     setFormData({
@@ -65,13 +66,13 @@ const BookingForm = ({ onSubmit, onClose }) => {
   };
 
   // E mail Number Validation
-  const [emailError, setEmailError] = useState("");
+  const [EmailError, setEmailError] = useState("");
   const handleEmailChange = (event) => {
     const inputValue = event.target.value;
 
-    // Perform real-time email validation here
+    // Perform real-time Email validation here
     if (!/^\S+@\S+\.\S+$/.test(inputValue)) {
-      setEmailError("Invalid email address");
+      setEmailError("Invalid Email address");
     } else {
       setEmailError("");
     }
@@ -95,14 +96,14 @@ const BookingForm = ({ onSubmit, onClose }) => {
     setFormLoader(true);
     // Check if any required fields are empty or null
     const requiredFields = [
-      "name",
-      "university",
-      "event",
-      "email",
-      "mobile",
-      "description",
-      "expectation",
-      "whatWeGet",
+      "Name",
+      "University",
+      "Event",
+      "Email",
+      "Mobile",
+      "Description",
+      "Expectation",
+      "WhatWeGet",
       "tempImg",
     ];
     const emptyFields = requiredFields.filter((field) => !formData[field]);
@@ -139,7 +140,7 @@ const BookingForm = ({ onSubmit, onClose }) => {
       });
       setFormLoader(false);
       return;
-    } else if (emailError) {
+    } else if (EmailError) {
       console.error("Error: Please fix the e mail error");
       toast.error("Invalid E mail!", {
         position: "top-right",
@@ -158,7 +159,7 @@ const BookingForm = ({ onSubmit, onClose }) => {
       const fileSizeMB = formData.tempImg.size / (1024 * 1024); // Convert to megabytes
       console.log("File Size", fileSizeMB);
       if (fileSizeMB > 10) {
-        toast.error("Image size exceeds the maximum allowed size of 10MB", {
+        toast.error("Proposal size exceeds the maximum allowed size of 10MB", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -188,18 +189,20 @@ const BookingForm = ({ onSubmit, onClose }) => {
           // Send Data to the Database
           try {
             const response = await axios.post(
-              "http://localhost:8080/bookings/createBooking",
+              // "http://localhost:8080/bookings/createBooking",
+              `${mainEndpoint}booking/create`,
               {
-                name: formData.name,
-                university: formData.university,
-                event: formData.event,
-                email: formData.email,
-                mobile: formData.mobile,
-                description: formData.description,
-                expectation: formData.expectation,
-                whatWeGet: formData.whatWeGet,
-                proposalLink: uploadedFileUrl,
-                other: formData.other,
+                Name: formData.Name,
+                University: formData.University,
+                Event: formData.Event,
+                Email: formData.Email,
+                Mobile: formData.Mobile,
+                Description: formData.Description,
+                Expectation: formData.Expectation,
+                WhatWeGet: formData.WhatWeGet,
+                ProposalLink: uploadedFileUrl,
+                Other: formData.Other,
+                Status: false,
               }
             );
 
@@ -217,17 +220,17 @@ const BookingForm = ({ onSubmit, onClose }) => {
 
             // Clear all the fields
             setFormData({
-              name: "",
-              university: "",
-              event: "",
-              email: "",
-              mobile: "",
-              description: "",
-              expectation: "",
-              whatWeGet: "",
+              Name: "",
+              University: "",
+              Event: "",
+              Email: "",
+              Mobile: "",
+              Description: "",
+              Expectation: "",
+              WhatWeGet: "",
               imageUrl: "",
               tempImg: null,
-              other: "",
+              Other: "",
             });
             setFormLoader(false);
             // onClose();
@@ -245,6 +248,7 @@ const BookingForm = ({ onSubmit, onClose }) => {
               pauseOnHover: true,
               draggable: true,
             });
+            setFormLoader(false);
           }
         } catch (error) {
           console.log("File Upload Booking2");
@@ -256,6 +260,7 @@ const BookingForm = ({ onSubmit, onClose }) => {
             pauseOnHover: true,
             draggable: true,
           });
+          setFormLoader(false);
         }
       }
     }
@@ -263,7 +268,7 @@ const BookingForm = ({ onSubmit, onClose }) => {
 
   return (
     <div
-      className="w-[90%] m-auto mt-8"
+      className="w-[90%] m-auto mt-8" 
       // style={{ backgroundColor: "rgba(255, 255, 255, 1)" }}
     >
       <Grid container spacing={1}>
@@ -272,27 +277,29 @@ const BookingForm = ({ onSubmit, onClose }) => {
             <TextField
               fullWidth
               label="Name of the Society"
-              name="name"
-              value={formData.name}
+              name="Name"
+              value={formData.Name}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
-              <InputLabel>Select the University</InputLabel>
+              <InputLabel size="small" >Select the University</InputLabel>
               <Select
                 label="Select the University"
-                name="university"
-                value={formData.university}
+                name="University"
+                value={formData.University}
                 onChange={handleChange}
                 inputProps={{
-                  name: "university",
-                  id: "university",
+                  name: "University",
+                  id: "University",
                 }}
+                size="small"
               >
-                {universities.map((university, index) => (
-                  <MenuItem key={index} value={university}>
-                    {university}
+                {universities.map((University, index) => (
+                  <MenuItem key={index} value={University}>
+                    {University}
                   </MenuItem>
                 ))}
               </Select>
@@ -302,20 +309,22 @@ const BookingForm = ({ onSubmit, onClose }) => {
             <TextField
               fullWidth
               label="Event"
-              name="event"
-              value={formData.event}
+              name="Event"
+              value={formData.Event}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label={Boolean(emailError) ? emailError : "E-mail"}
-              type="email"
-              name="email"
-              error={Boolean(emailError)}
-              value={formData.email}
+              label={Boolean(EmailError) ? EmailError : "E-mail"}
+              type="Email"
+              name="Email"
+              error={Boolean(EmailError)}
+              value={formData.Email}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -328,9 +337,10 @@ const BookingForm = ({ onSubmit, onClose }) => {
               }
               error={Boolean(contactNumberError)}
               type="tel"
-              name="mobile"
-              value={formData.mobile}
+              name="Mobile"
+              value={formData.Mobile}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -338,9 +348,10 @@ const BookingForm = ({ onSubmit, onClose }) => {
               fullWidth
               label="Description of the Event"
               multiline
-              name="description"
-              value={formData.description}
+              name="Description"
+              value={formData.Description}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -348,9 +359,10 @@ const BookingForm = ({ onSubmit, onClose }) => {
               fullWidth
               label="Your Expectations"
               multiline
-              name="expectation"
-              value={formData.expectation}
+              name="Expectation"
+              value={formData.Expectation}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -358,9 +370,10 @@ const BookingForm = ({ onSubmit, onClose }) => {
               fullWidth
               label="What do we get?"
               multiline
-              name="whatWeGet"
-              value={formData.whatWeGet}
+              name="WhatWeGet"
+              value={formData.WhatWeGet}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -379,9 +392,10 @@ const BookingForm = ({ onSubmit, onClose }) => {
               fullWidth
               label="Other"
               multiline
-              name="other"
-              value={formData.other}
+              name="Other"
+              value={formData.Other}
               onChange={handleChange}
+              size="small"
             />
           </Grid>
           <Grid

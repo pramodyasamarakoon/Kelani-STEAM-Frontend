@@ -25,7 +25,10 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Loader from "../../../Assets/Components/Loader";
-import { cloudinaryPreset } from "../../../Assets/Components/const";
+import {
+  cloudinaryPreset,
+  mainEndpoint,
+} from "../../../Assets/Components/const";
 import { cloudinaryName } from "../../../Assets/Components/const";
 
 const AdminAlbums = () => {
@@ -36,18 +39,18 @@ const AdminAlbums = () => {
 
   // State to hold form data
   const [formData, setFormData] = useState({
-    albumName: "",
-    albumLink: "",
-    photographedBy: [""],
-    editedBy: [""],
+    AlbumName: "",
+    AlbumLink: "",
+    PhotographedBy: [""],
+    EditedBy: [""],
     albumColumns: [
-      { field: "albumName", headerName: "Album Name", width: 400 },
-      { field: "photographedBy", headerName: "Photographed By", width: 280 },
-      { field: "editedBy", headerName: "Edited By", width: 280 },
+      { field: "AlbumName", headerName: "Album Name", flex: 4 },
+      { field: "PhotographedBy", headerName: "Photographed By", flex: 4 },
+      { field: "EditedBy", headerName: "Edited By", flex: 4 },
       {
         field: "delete",
         headerName: "Delete",
-        width: 80,
+        flex: 1,
         renderCell: (params) => (
           <IconButton
             onClick={() =>
@@ -76,26 +79,26 @@ const AdminAlbums = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name.startsWith("photographedBy-")) {
+    if (name.startsWith("PhotographedBy-")) {
       // Handle changes for album names
       const index = parseInt(name.split("-")[1], 10);
       setFormData((prevData) => {
-        const updatedPhotographedBy = [...prevData.photographedBy];
+        const updatedPhotographedBy = [...prevData.PhotographedBy];
         updatedPhotographedBy[index] = value;
         return {
           ...prevData,
-          photographedBy: updatedPhotographedBy,
+          PhotographedBy: updatedPhotographedBy,
         };
       });
-    } else if (name.startsWith("editedBy-")) {
+    } else if (name.startsWith("EditedBy-")) {
       // Handle changes for album names
       const index = parseInt(name.split("-")[1], 10);
       setFormData((prevData) => {
-        const updatedEditedBy = [...prevData.editedBy];
+        const updatedEditedBy = [...prevData.EditedBy];
         updatedEditedBy[index] = value;
         return {
           ...prevData,
-          editedBy: updatedEditedBy,
+          EditedBy: updatedEditedBy,
         };
       });
     }
@@ -127,17 +130,17 @@ const AdminAlbums = () => {
   const handleAddFieldPhoto = () => {
     setFormData((prevData) => ({
       ...prevData,
-      photographedBy: [...prevData.photographedBy, ""],
+      PhotographedBy: [...prevData.PhotographedBy, ""],
     }));
   };
 
   const handleRemoveFieldPhoto = (index) => {
     setFormData((prevData) => {
-      const updatedPhotographedBy = [...prevData.photographedBy];
+      const updatedPhotographedBy = [...prevData.PhotographedBy];
       updatedPhotographedBy.splice(index, 1);
       return {
         ...prevData,
-        photographedBy: updatedPhotographedBy,
+        PhotographedBy: updatedPhotographedBy,
       };
     });
   };
@@ -145,17 +148,17 @@ const AdminAlbums = () => {
   const handleAddFieldEdit = () => {
     setFormData((prevData) => ({
       ...prevData,
-      editedBy: [...prevData.editedBy, ""],
+      EditedBy: [...prevData.EditedBy, ""],
     }));
   };
 
   const handleRemoveFieldEdit = (index) => {
     setFormData((prevData) => {
-      const updatedEditedBy = [...prevData.editedBy];
+      const updatedEditedBy = [...prevData.EditedBy];
       updatedEditedBy.splice(index, 1);
       return {
         ...prevData,
-        editedBy: updatedEditedBy,
+        EditedBy: updatedEditedBy,
       };
     });
   };
@@ -170,10 +173,10 @@ const AdminAlbums = () => {
   const onSubmitAlbums = async () => {
     // Check if any field is empty
     if (
-      formData.albumName.trim() === "" ||
-      formData.albumLink.trim() === "" ||
-      formData.photographedBy.some((item) => item.trim() === "") ||
-      formData.editedBy.some((item) => item.trim() === "") ||
+      formData.AlbumName.trim() === "" ||
+      formData.AlbumLink.trim() === "" ||
+      formData.PhotographedBy.some((item) => item.trim() === "") ||
+      formData.EditedBy.some((item) => item.trim() === "") ||
       selectedFiles.length !== 4
     ) {
       // Display toast error message
@@ -230,13 +233,14 @@ const AdminAlbums = () => {
       try {
         console.log("Before send it to the database:", uploadedImageUrls);
         const response = await axios.post(
-          "http://localhost:8080/albums/create",
+          // "https://localhost:7168/api/albums/create",
+          `${mainEndpoint}albums/create`,
           {
-            albumName: formData.albumName,
-            albumLink: formData.albumLink,
-            photographedBy: formData.photographedBy,
-            editedBy: formData.editedBy,
-            imageUrls: uploadedImageUrls,
+            AlbumName: formData.AlbumName,
+            AlbumLink: formData.AlbumLink,
+            PhotographedBy: formData.PhotographedBy,
+            EditedBy: formData.EditedBy,
+            ImageUrls: uploadedImageUrls,
           }
         );
 
@@ -249,6 +253,7 @@ const AdminAlbums = () => {
           pauseOnHover: true,
           draggable: true,
         });
+        setSelectedFiles([]);
       } catch (error) {
         console.error(
           "Error creating album:",
@@ -279,10 +284,10 @@ const AdminAlbums = () => {
     loadAlbumData();
     // Clear the variables at the end
     // setFormData({
-    //   albumName: "",
-    //   albumLink: "",
-    //   photographedBy: [""],
-    //   editedBy: [""],
+    //   AlbumName: "",
+    //   AlbumLink: "",
+    //   PhotographedBy: [""],
+    //   EditedBy: [""],
     // });
     // setImageUrls([]);
     // setSelectedFiles([]);
@@ -292,16 +297,16 @@ const AdminAlbums = () => {
   const loadAlbumData = () => {
     setAlbumTableLoader(true);
     axios
-      .get("http://localhost:8080/albums/getAll")
+      .get("https://localhost:7168/api/albums/getAll")
       .then((response) => {
         // Assuming response.data is an array of albums
         const albums = response.data;
 
         const albumRowsData = albums.map((album) => ({
-          id: album.id,
-          albumName: album.albumName,
-          photographedBy: album.photographedBy,
-          editedBy: album.editedBy,
+          id: album.Id,
+          AlbumName: album.AlbumName,
+          PhotographedBy: album.PhotographedBy,
+          EditedBy: album.EditedBy,
         }));
 
         setFormData({
@@ -320,12 +325,8 @@ const AdminAlbums = () => {
     console.log("Clicked");
     // Find the index of the row with the specified ID
     setAlbumTableLoader(true);
-
-    const params = {
-      albumId: rowId,
-    };
     axios
-      .delete("http://localhost:8080/albums/delete", { params })
+      .delete(`${mainEndpoint}albums/deleteAlbumById/${rowId}`)
       .then((response) => {
         console.log("Album deleted:", rowId);
         setAlbumTableLoader(false);
@@ -397,33 +398,33 @@ const AdminAlbums = () => {
                   <ValidatorForm>
                     {/* Name */}
                     <TextValidator
-                      name="albumName"
+                      name="AlbumName"
                       label="Album Name"
                       variant="standard"
                       fullWidth
                       sx={{
                         marginY: "5px",
                       }}
-                      value={formData.albumName}
+                      value={formData.AlbumName}
                       onChange={handleChange}
                     />
 
                     {/* Link */}
                     <TextValidator
-                      name="albumLink"
+                      name="AlbumLink"
                       label="Album Link"
                       variant="standard"
                       fullWidth
                       sx={{
                         marginY: "5px",
                       }}
-                      value={formData.albumLink}
+                      value={formData.AlbumLink}
                       onChange={handleChange}
                     />
 
                     {/* Photographed By */}
                     <div className="flex">
-                      {formData.photographedBy.map((photographedBy, index) => (
+                      {formData.PhotographedBy.map((PhotographedBy, index) => (
                         <Stack
                           key={index}
                           direction="row"
@@ -431,15 +432,15 @@ const AdminAlbums = () => {
                           marginRight={4}
                         >
                           <TextValidator
-                            name={`photographedBy-${index}`}
+                            name={`PhotographedBy-${index}`}
                             label={`Photographed By ${index + 1}`}
                             variant="standard"
                             fullWidth
-                            value={photographedBy}
+                            value={PhotographedBy}
                             onChange={(event) => handleChange(event, index)}
                           />
                           <div className="flex mt-3 ml-1">
-                            {index === formData.photographedBy.length - 1 &&
+                            {index === formData.PhotographedBy.length - 1 &&
                             index < 3 ? (
                               <IconButton
                                 sx={{ width: 20, height: 20 }}
@@ -462,7 +463,7 @@ const AdminAlbums = () => {
 
                     {/* Edited By */}
                     <div className="flex w-full">
-                      {formData.editedBy.map((editedBy, index) => (
+                      {formData.EditedBy.map((EditedBy, index) => (
                         <Stack
                           key={index}
                           direction="row"
@@ -471,15 +472,15 @@ const AdminAlbums = () => {
                           // width="30%"
                         >
                           <TextValidator
-                            name={`editedBy-${index}`}
+                            name={`EditedBy-${index}`}
                             label={`Edited By ${index + 1}`}
                             variant="standard"
                             fullWidth
-                            value={editedBy}
+                            value={EditedBy}
                             onChange={(event) => handleChange(event, index)}
                           />
                           <div className="flex mt-3 ml-1">
-                            {index === formData.editedBy.length - 1 &&
+                            {index === formData.EditedBy.length - 1 &&
                             index < 3 ? (
                               <IconButton
                                 sx={{ width: 20, height: 20 }}

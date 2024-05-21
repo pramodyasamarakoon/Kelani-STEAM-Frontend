@@ -79,7 +79,7 @@ const AlbumContainer = ({ AlbumData }) => {
                 onClick={() => handleAlbumNameClick(index)}
               >
                 <p className="font-OpenSans-Regular text-[14px]">
-                  {album.albumName}
+                  {album.AlbumName}
                 </p>
                 {/* <p className="font-OpenSans-Regular text-[12px]">
                 Updated: {album.updated}
@@ -135,7 +135,7 @@ const AlbumContainer = ({ AlbumData }) => {
                 onClick={() => handleAlbumNameClick(index)}
               >
                 <p className="font-OpenSans-Regular text-[14px]">
-                  {album.albumName}
+                  {album.AlbumName}
                 </p>
               </Grid>
             ))}
@@ -178,9 +178,9 @@ const AlbumContainer = ({ AlbumData }) => {
             </p>
             {AlbumData &&
               AlbumData.length > 0 &&
-              AlbumData[albumIndex].photographedBy && (
+              AlbumData[albumIndex].PhotographedBy && (
                 <div>
-                  {AlbumData[albumIndex].photographedBy.map(
+                  {AlbumData[albumIndex].PhotographedBy.map(
                     (photographed, index) => (
                       <p
                         key={index}
@@ -198,9 +198,9 @@ const AlbumContainer = ({ AlbumData }) => {
             </p>
             {AlbumData &&
               AlbumData.length > 0 &&
-              AlbumData[albumIndex].editedBy && (
+              AlbumData[albumIndex].EditedBy && (
                 <div>
-                  {AlbumData[albumIndex].editedBy.map((edited, index) => (
+                  {AlbumData[albumIndex].EditedBy.map((edited, index) => (
                     <p
                       key={index}
                       className="font-OpenSans-Regular text-[14px] pl-4"
@@ -220,8 +220,8 @@ const AlbumContainer = ({ AlbumData }) => {
           >
             {AlbumData &&
               AlbumData.length > 0 &&
-              AlbumData[albumIndex].albumLink && (
-                <Link to={AlbumData[albumIndex].albumLink} target="_blank">
+              AlbumData[albumIndex].AlbumLink && (
+                <Link to={AlbumData[albumIndex].AlbumLink} target="_blank">
                   <Button
                     variant="contained"
                     sx={{
@@ -242,7 +242,7 @@ const AlbumContainer = ({ AlbumData }) => {
           display: { xs: "none", md: "flex" },
           position: "absolute",
           top: "52%",
-          left: "58%",
+          left: "56%",
           zIndex: 100,
           color: "white",
           transform: "translate(-50%, -50%)",
@@ -259,8 +259,8 @@ const AlbumContainer = ({ AlbumData }) => {
         >
           {AlbumData &&
             AlbumData.length > 0 &&
-            AlbumData[albumIndex].imageUrls &&
-            AlbumData[albumIndex].imageUrls.map((imgLinks, index) => (
+            AlbumData[albumIndex].ImageUrls &&
+            AlbumData[albumIndex].ImageUrls.map((imgLinks, index) => (
               <Grid
                 key={index}
                 item
@@ -299,8 +299,8 @@ const AlbumContainer = ({ AlbumData }) => {
         >
           {AlbumData &&
             AlbumData.length > 0 &&
-            AlbumData[albumIndex].imageUrls &&
-            AlbumData[albumIndex].imageUrls.map((imgLinks, index) => (
+            AlbumData[albumIndex].ImageUrls &&
+            AlbumData[albumIndex].ImageUrls.map((imgLinks, index) => (
               <Grid
                 key={index}
                 item
@@ -353,9 +353,9 @@ const AlbumContainer = ({ AlbumData }) => {
             <p className="font-OpenSans-SemiBold text-xl ">Photographed By</p>
             {AlbumData &&
               AlbumData.length > 0 &&
-              AlbumData[albumIndex].photographedBy && (
+              AlbumData[albumIndex].PhotographedBy && (
                 <div>
-                  {AlbumData[albumIndex].photographedBy.map(
+                  {AlbumData[albumIndex].PhotographedBy.map(
                     (photographed, index) => (
                       <p
                         key={index}
@@ -371,9 +371,9 @@ const AlbumContainer = ({ AlbumData }) => {
             <p className="font-OpenSans-SemiBold text-xl mt-2 ">Edited By</p>
             {AlbumData &&
               AlbumData.length > 0 &&
-              AlbumData[albumIndex].editedBy && (
+              AlbumData[albumIndex].EditedBy && (
                 <div>
-                  {AlbumData[albumIndex].editedBy.map((edited, index) => (
+                  {AlbumData[albumIndex].EditedBy.map((edited, index) => (
                     <p
                       key={index}
                       className="font-OpenSans-Regular text-[14px] pl-4"
@@ -393,8 +393,8 @@ const AlbumContainer = ({ AlbumData }) => {
           >
             {AlbumData &&
               AlbumData.length > 0 &&
-              AlbumData[albumIndex].albumLink && (
-                <Link to={AlbumData[albumIndex].albumLink} target="_blank">
+              AlbumData[albumIndex].AlbumLink && (
+                <Link to={AlbumData[albumIndex].AlbumLink} target="_blank">
                   <Button
                     variant="contained"
                     //   onClick={() => setIsFormOpen(true)}
