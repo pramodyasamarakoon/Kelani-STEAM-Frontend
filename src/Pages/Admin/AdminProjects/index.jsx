@@ -18,7 +18,11 @@ import ScrollToTopButton from "../../../Assets/Components/ScrollToTopButton";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Loader from "../../../Assets/Components/Loader";
-import { cloudinaryName, cloudinaryPreset } from "../../../Assets/Components/const";
+import {
+  cloudinaryName,
+  cloudinaryPreset,
+  mainEndpoint,
+} from "../../../Assets/Components/const";
 
 const AdminProjects = () => {
   useEffect(() => {
@@ -29,12 +33,12 @@ const AdminProjects = () => {
   // State to hold form data
   const [formData, setFormData] = useState({
     projectColumns: [
-      { field: "projectName", headerName: "Project Name", width: 400 },
-      { field: "projectDescription", headerName: "Description", width: 550 },
+      { field: "ProjectName", headerName: "Project Name", flex: 3 },
+      { field: "ProjectDescription", headerName: "Description", flex: 6 },
       {
         field: "delete",
         headerName: "Delete",
-        width: 80,
+        flex: 1,
         renderCell: (params) => (
           <IconButton
             onClick={() =>
@@ -50,8 +54,8 @@ const AdminProjects = () => {
       },
     ],
     projectRows: [],
-    projectName: "",
-    projectDescription: "",
+    ProjectName: "",
+    ProjectDescription: "",
     coverImage: null,
     projectPreviewImages: [],
   });
@@ -142,8 +146,8 @@ const AdminProjects = () => {
   const onSubmitProjects = async () => {
     // Check if any field is empty
     if (
-      formData.projectName.trim() === "" ||
-      formData.projectDescription.trim() === ""
+      formData.ProjectName.trim() === "" ||
+      formData.ProjectDescription.trim() === ""
       // formData.coverImage.length !== 1 ||
       // formData.projectPreviewImages.length !== 3
     ) {
@@ -247,15 +251,12 @@ const AdminProjects = () => {
           "Before send it to the database - Preview Images :",
           uploadedPreviewImageUrls
         );
-        const response = await axios.post(
-          "http://localhost:8080/projects/create",
-          {
-            projectName: formData.projectName,
-            projectDescription: formData.projectDescription,
-            coverImageUrl: uploadedCoverImageUrl,
-            previewImageUrls: uploadedPreviewImageUrls,
-          }
-        );
+        const response = await axios.post(`${mainEndpoint}project/create`, {
+          ProjectName: formData.ProjectName,
+          ProjectDescription: formData.ProjectDescription,
+          CoverImageUrl: uploadedCoverImageUrl,
+          PreviewImageUrls: uploadedPreviewImageUrls,
+        });
 
         console.log("Project created successfully:");
         toast.success(`Project created successfully!`, {
@@ -300,15 +301,15 @@ const AdminProjects = () => {
   const loadProjectData = () => {
     setProjectTableLoader(true);
     axios
-      .get("http://localhost:8080/projects/getAll")
+      .get(`${mainEndpoint}project/getAll`)
       .then((response) => {
         // Assuming response.data is an array of albums
         const projects = response.data;
 
         const projectRowsData = projects.map((project) => ({
-          id: project.id,
-          projectName: project.projectName,
-          projectDescription: project.projectDescription,
+          id: project.Id,
+          ProjectName: project.ProjectName,
+          ProjectDescription: project.ProjectDescription,
         }));
 
         setFormData({
@@ -332,7 +333,7 @@ const AdminProjects = () => {
       id: rowId,
     };
     axios
-      .delete("http://localhost:8080/projects/delete", { params })
+      .delete(`${mainEndpoint}project/deleteProjectById/${rowId}`)
       .then((response) => {
         console.log("Project deleted:", rowId);
         setProjectTableLoader(false);
@@ -403,20 +404,20 @@ const AdminProjects = () => {
                   <ValidatorForm>
                     {/* Name */}
                     <TextValidator
-                      name="projectName"
+                      name="ProjectName"
                       label="Project Name"
                       variant="standard"
                       fullWidth
                       sx={{
                         marginY: "5px",
                       }}
-                      value={formData.projectName}
+                      value={formData.ProjectName}
                       onChange={handleChange}
                     />
 
                     {/* Description */}
                     <TextValidator
-                      name="projectDescription"
+                      name="ProjectDescription"
                       label="Project Description"
                       variant="standard"
                       fullWidth
@@ -424,7 +425,7 @@ const AdminProjects = () => {
                       sx={{
                         marginY: "5px",
                       }}
-                      value={formData.projectDescription}
+                      value={formData.ProjectDescription}
                       onChange={handleChange}
                     />
 

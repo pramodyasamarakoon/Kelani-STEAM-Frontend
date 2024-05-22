@@ -23,24 +23,24 @@ const ProjectSideBar = ({ data }) => {
     >
       {data.map((data) => (
         <Link
-          key={data.id}
-          to={data.projectName}
+          key={data.Id}
+          to={data.ProjectName}
           spy={true}
           smooth={true}
-          offset={-70} // Adjust the offset based on your layout
+          offset={-20}
           duration={500}
-          onSetActive={() => setActiveTitle(data.id)}
+          onSetActive={() => setActiveTitle(data.Id)}
         >
           <Fab
             variant="extended"
-            color={data.id === activeTitle ? "primary" : "default"}
+            color={data.Id === activeTitle ? "primary" : "default"}
             size="small"
             sx={{
               my: "4px",
               width: 220,
             }}
           >
-            <p className="text-[12px] ">{data.projectName}</p>
+            <p className="text-[12px] ">{data.ProjectName}</p>
           </Fab>
         </Link>
       ))}

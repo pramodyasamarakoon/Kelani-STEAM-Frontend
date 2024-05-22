@@ -40,12 +40,12 @@ const pages = [
 
 const adminPages = [
   {
-    label: "Bookings",
-    link: "/AdminBookings",
-  },
-  {
     label: "Albums",
     link: "/AdminAlbums",
+  },
+  {
+    label: "Bookings",
+    link: "/AdminBookings",
   },
   {
     label: "Projects",
