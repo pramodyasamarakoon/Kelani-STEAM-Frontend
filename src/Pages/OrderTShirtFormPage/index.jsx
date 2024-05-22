@@ -311,184 +311,122 @@ const OrderTShirtFormPage = () => {
           // display: { xs: "hidden", md: "block" },
         }}
       >
-        <Grid container spacing={0} sx={{ marginTop: 8 }}>
+        <Grid container sx={{ marginTop: 8 }}>
           {/* Form Title */}
           <Grid item xs={12} sx={{ marginY: "30px" }}>
             <p className="font-OpenSans-SemiBold text-[30px]">
               Kelani STEAM Member's T Shirt Order Form
             </p>
           </Grid>
-          <Grid item xs={12} sx={{}}>
-            {/* White background box */}
-            <div
-              className="w-full h-[490px] mx-auto"
-              style={{
-                background: "#FFFFFF90",
+          <Grid container sx={{ background: "#FFFFFF90" }}>
+            <Grid
+              item
+              xs={4}
+              sx={{
                 padding: "30px",
-                position: "relative",
+                display: "flex",
+                alignItems: "center",
               }}
             >
               {/* Shirt Image */}
-              <div className="w-[390px] h-[390px] ">
+              <div className="w-full h-auto">
                 <img className="" src={TShirtSmall} alt="T Shirt Flyer" />
               </div>
-              {/* Right text grid */}
+            </Grid>
+            <Grid
+              item
+              xs={8}
+              sx={{
+                padding: "20px",
+                paddingRight: "-10px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <div
                 style={{
-                  position: "absolute",
-                  left: "69%",
-                  top: "50%",
-                  transform: "translate(-50%, -50%)",
-                  width: "700px",
+                  width: "100%",
                   textAlign: "left",
                 }}
               >
-                <Grid container spacing={1}>
+                <Grid container>
                   {/* T shirt details */}
                   <Grid item xs={12} sx={{}}>
-                    <p className="font-OpenSans-SemiBold text-[16px]">
+                    <p className="font-OpenSans-SemiBold text-[14px]">
                       T-Shirt Details
                     </p>
                     <Grid container spacing={1}>
                       <Grid item xs={4} sx={{}}>
-                        <p className="font-OpenSans-regular text-[14px]">
+                        <p className="font-OpenSans-regular text-[12px]">
                           Color - Black
                         </p>
                       </Grid>
                       <Grid item xs={4} sx={{}}>
-                        <p className="font-OpenSans-regular text-[14px]">
+                        <p className="font-OpenSans-regular text-[12px]">
                           Material: 220 gsm crocodile
                         </p>
                       </Grid>
                       <Grid item xs={4} sx={{}}>
-                        <p className="font-OpenSans-regular text-[14px]">
+                        <p className="font-OpenSans-regular text-[12px]">
                           Price: 1800.00 LKR
                         </p>
                       </Grid>
                     </Grid>
                   </Grid>
                   {/* Instructions */}
-                  <Grid item xs={12} sx={{ marginTop: 2 }}>
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        position: "relative",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 673,
-                          color: "black",
-                          fontSize: 16,
-                          fontFamily: "Open Sans",
-                          fontWeight: "600",
-                          wordWrap: "break-word",
-                        }}
-                      >
+                  <Grid item xs={12} sx={{ marginTop: 1 }}>
+                    <Grid item xs={12} sx={{}}>
+                      <p className="font-OpenSans-SemiBold text-[14px]">
                         Online Payment Details
-                      </div>
-                      <div
-                        style={{
-                          width: 664,
-                          color: "black",
-                          fontSize: 14,
-                          fontFamily: "Open Sans",
-                          fontWeight: "400",
-                          wordWrap: "break-word",
-                        }}
-                      >
-                        ***Note that if you are willing to do the initial
-                        payment using online payment method, you have to do the
-                        payment before submitting the form.
-                        <br />
-                        <br />
-                        Account No: 055200420012203
-                        <br />
-                        Account Holder: SNYA GUNASEKARA
-                        <br />
-                        Bank: Peoples' Bank
-                        <br />
-                        Branch: Kelaniya
-                      </div>
-                    </div>
+                      </p>
+                      <Grid container spacing={1}>
+                        <Grid item xs={12} sx={{}}>
+                          <p className="font-OpenSans-regular text-[12px]">
+                            ***Note that if you are willing to do the initial
+                            payment using online payment method, you have to do
+                            the payment before submitting the form.
+                          </p>
+                        </Grid>
+                        <Grid item xs={4} sx={{}}>
+                          <p className="font-OpenSans-regular text-[12px]">
+                            Account No: 055200420012203 <br />
+                            Account Holder: SNYA GUNASEKARA
+                            <br />
+                            Bank: Peoples' Bank
+                            <br />
+                            Branch: Kelaniya
+                          </p>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} sx={{ marginTop: 2 }}>
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        position: "relative",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 673,
-                          color: "black",
-                          fontSize: 16,
-                          fontFamily: "Open Sans",
-                          fontWeight: "600",
-                          wordWrap: "break-word",
-                        }}
-                      >
+                  <Grid item xs={12} sx={{ marginTop: 1 }}>
+                    <Grid item xs={12} sx={{}}>
+                      <p className="font-OpenSans-SemiBold text-[14px]">
                         Handover Details
-                      </div>
-                      <div
-                        style={{
-                          width: "100%",
-                          color: "black",
-                          fontSize: 14,
-                          fontFamily: "Open Sans",
-                          fontWeight: "400",
-                          wordWrap: "break-word",
-                        }}
-                      >
+                      </p>
+                    </Grid>
+                    <Grid item xs={12} sx={{}}>
+                      <p className="font-OpenSans-regular text-[12px]">
                         ***Note that if you are willing to hand over the initial
                         payment, you have to do the payment to one of below
                         mentioned members before submitting the form.
                         <br />
-                        <br />
                         Sithumi: 071 495 6554
                         <br />
                         Pathum: 077 217 3607
-                      </div>
-                    </div>
+                      </p>
+                    </Grid>
                   </Grid>
                 </Grid>
               </div>
-
-              {/* Deadline */}
-              <div
-                style={{
-                  position: "absolute",
-                  left: "20%",
-                  top: "90%",
-                  transform: "translate(-50%, -50%)",
-                  width: "415px",
-                  textAlign: "center",
-                }}
-              >
-                <p className="font-OpenSans-SemiBold text-[18px]">
-                  Deadline: 30th October 2023
-                </p>
-              </div>
-            </div>
+            </Grid>
 
             {/* Form */}
             <div className="w-[960px] mx-auto my-10">
-              <div
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  color: "black",
-                  fontSize: 24,
-                  fontFamily: "Open Sans",
-                  fontWeight: "400",
-                  wordWrap: "break-word",
-                }}
-              >
+              <p className="font-OpenSans-semiBold text-[24px]">
                 Order Details
-              </div>
+              </p>
               <div className="w-full my-8" style={{ position: "relative" }}>
                 {/* Shirt Image */}
                 <div className="w-[350px] h-[350px] ">
@@ -884,7 +822,7 @@ const OrderTShirtFormPage = () => {
               </div>
 
               {/* Deadline */}
-              <div
+              {/* <div
                 style={{
                   // position: "absolute",
                   // left: "20%",
@@ -898,7 +836,7 @@ const OrderTShirtFormPage = () => {
                 <p className="font-OpenSans-SemiBold text-[18px]">
                   Deadline: 30th October 2023
                 </p>
-              </div>
+              </div> */}
             </div>
 
             {/* Form */}
