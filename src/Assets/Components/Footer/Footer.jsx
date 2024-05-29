@@ -13,6 +13,9 @@ import {
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import axios from "axios";
+import { mainEndpoint } from "../const";
+import Loader from "../Loader";
 
 function Footer() {
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -22,8 +25,10 @@ function Footer() {
   const [error, setError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const handleSignIn = () => {
+    setLoader(true);
     let valid = true;
 
     if (username.trim() === "") {
@@ -44,15 +49,25 @@ function Footer() {
       return;
     }
     // Send credentials to backend
-    // Example code to send credentials to backend
-    // axios.post('/api/admin/login', { username, password })
-    //   .then(response => {
-    //     // Handle successful login
-    //   })
-    //   .catch(error => {
-    //     setError('Invalid username or password');
-    //   });
+    axios
+      .post(`${mainEndpoint}auth/login`, {
+        UserName: username,
+        Password: password,
+      })
+      .then((response) => {
+        // Check if the response contains the authToken
+        if (response.data && response.data.Token) {
+          // Save authToken to localStorage
+          localStorage.setItem("AuthToken", response.data.Token);
+          // Navigate to the home page
+          window.location.href = "../AdminAlbums";
+        }
+      })
+      .catch((error) => {
+        setError("Invalid username or password");
+      });
     console.log("Signing in with:", username, password);
+    setLoader(false);
   };
 
   const toggleShowPassword = () => {
@@ -136,8 +151,9 @@ function Footer() {
             color="primary"
             variant="contained"
             size="small"
+            disabled={loader}
           >
-            Sign In
+            {loader ? <Loader /> : "Sign In"}
           </Button>
           <Button
             onClick={handleClose}

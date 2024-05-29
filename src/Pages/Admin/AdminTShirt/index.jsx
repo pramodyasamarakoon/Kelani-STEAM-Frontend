@@ -22,7 +22,16 @@ import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 
 const AdminTShirt = () => {
   useEffect(() => {
-    loadOrderData();
+    // Check for the AuthToken in local storage
+    const authToken = localStorage.getItem("AuthToken");
+
+    if (authToken) {
+      // AuthToken is available, load the album data
+      loadOrderData();
+    } else {
+      // AuthToken is not available, navigate to the home page
+      window.location.href = "/";
+    }
   }, []);
 
   const handleStatus = async (event, id) => {

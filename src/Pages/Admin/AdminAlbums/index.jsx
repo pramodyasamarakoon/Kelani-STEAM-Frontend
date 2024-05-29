@@ -33,8 +33,16 @@ import { cloudinaryName } from "../../../Assets/Components/const";
 
 const AdminAlbums = () => {
   useEffect(() => {
-    // Load album data when the component mounts
-    loadAlbumData();
+    // Check for the AuthToken in local storage
+    const authToken = localStorage.getItem("AuthToken");
+
+    if (authToken) {
+      // AuthToken is available, load the album data
+      loadAlbumData();
+    } else {
+      // AuthToken is not available, navigate to the home page
+      window.location.href = "/";
+    }
   }, []);
 
   // State to hold form data
