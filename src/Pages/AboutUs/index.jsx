@@ -527,7 +527,7 @@ function AboutUs() {
         id="Committee"
         sx={{
           marginY: 8,
-          display: { xs: "none", md: "flex" },
+          display: { xs: "none", lg: "flex" },
         }}
       >
         <Grid
@@ -541,7 +541,7 @@ function AboutUs() {
         </Grid>
         {/* Committee Container */}
         <Grid item xs={12} className="h-auto flex justify-center items-center ">
-          <Grid container spacing={0}>
+          <Grid container>
             <Grid
               item
               xs={12}
@@ -567,7 +567,7 @@ function AboutUs() {
         id="Committee"
         sx={{
           marginY: 5,
-          display: { xs: "flex", md: "none" },
+          display: { xs: "flex", lg: "none" },
         }}
       >
         <Grid

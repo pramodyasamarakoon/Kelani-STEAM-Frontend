@@ -1,6 +1,67 @@
-import { Box, Grid } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+  Button,
+} from "@mui/material";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import { useState } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Footer() {
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const handleSignIn = () => {
+    let valid = true;
+
+    if (username.trim() === "") {
+      setUsernameError("User Name is required");
+      valid = false;
+    } else {
+      setUsernameError("");
+    }
+
+    if (password.trim() === "") {
+      setPasswordError("Password is required");
+      valid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    if (!valid) {
+      return;
+    }
+    // Send credentials to backend
+    // Example code to send credentials to backend
+    // axios.post('/api/admin/login', { username, password })
+    //   .then(response => {
+    //     // Handle successful login
+    //   })
+    //   .catch(error => {
+    //     setError('Invalid username or password');
+    //   });
+    console.log("Signing in with:", username, password);
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
   return (
     <Grid>
       <Grid
@@ -23,11 +84,71 @@ function Footer() {
             alignItems: "center",
           }}
         >
+          <p
+            onClick={() => setDialogOpen(true)}
+            className="text-white font-Poppins-SemiBold xs:text-[12px] md:text-[16px] p-8 cursor-pointer"
+          >
+            <PermIdentityIcon />
+          </p>
           <p className="text-white font-Poppins-SemiBold xs:text-[12px] md:text-[16px] p-8">
             Copyright &copy; 2023 | Powered By කැලණි STEAM Team With &hearts;
           </p>
         </Box>
       </Grid>
+
+      {/* Login Dialog */}
+      <Dialog open={isDialogOpen} onClose={handleClose}>
+        <DialogTitle>Admin Login</DialogTitle>
+        <DialogContent>
+          <TextField
+            margin="dense"
+            size="small"
+            label="User Name"
+            fullWidth
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            error={!!usernameError}
+            helperText={usernameError}
+          />
+          <TextField
+            margin="dense"
+            size="small"
+            label="Password"
+            fullWidth
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <IconButton onClick={toggleShowPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              ),
+            }}
+            error={!!passwordError}
+            helperText={passwordError}
+          />
+          {error && <Typography color="error">{error}</Typography>}
+        </DialogContent>
+        <DialogActions sx={{ marginRight: "10px", marginBottom: "10px" }}>
+          <Button
+            onClick={handleSignIn}
+            color="primary"
+            variant="contained"
+            size="small"
+          >
+            Sign In
+          </Button>
+          <Button
+            onClick={handleClose}
+            color="secondary"
+            variant="outlined"
+            size="small"
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   );
 }

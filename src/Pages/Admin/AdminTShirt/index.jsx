@@ -1,4 +1,11 @@
-import { Grid, Button } from "@mui/material";
+import {
+  Grid,
+  Button,
+  ToggleButtonGroup,
+  ToggleButton,
+  Tooltip,
+  Checkbox,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import NavBar from "../../../Assets/Components/NavBar";
 import Footer from "../../../Assets/Components/Footer/Footer";
@@ -8,32 +15,115 @@ import "react-toastify/dist/ReactToastify.css";
 import ScrollToTopButton from "../../../Assets/Components/ScrollToTopButton";
 import { DataGrid } from "@mui/x-data-grid";
 import Loader from "../../../Assets/Components/Loader";
+import { mainEndpoint } from "../../../Assets/Components/const";
+import BeenhereIcon from "@mui/icons-material/Beenhere";
+import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 
 const AdminTShirt = () => {
   useEffect(() => {
     loadOrderData();
   }, []);
 
+  const handleStatus = async (event, id) => {
+    const newStatus = event.target.checked;
+    if (newStatus !== null) {
+      setTableLoader(true);
+      // Update the local state
+      setFormData((prevFormData) => {
+        const updatedOrders = prevFormData.ordersData.map((order) => {
+          if (order.Id === id) {
+            return { ...order, Status: newStatus };
+          }
+          return order;
+        });
+        return { ...prevFormData, ordersData: updatedOrders };
+      });
+
+      // Send update request to the backend
+      try {
+        await axios.put(
+          `${mainEndpoint}tshirtOrder/updateTshirtOrderById/${id}`,
+          {
+            Status: newStatus,
+          }
+        );
+      } catch (error) {
+        console.error("Failed to update status:", error);
+      }
+      setTableLoader(false);
+    }
+  };
+
   // State to hold form data
   const [formData, setFormData] = useState({
     orderColumns: [
-      { field: "name", headerName: "Name", width: 200 },
-      { field: "size", headerName: "Size", width: 70 },
-      { field: "paymentAmount", headerName: "Amount", width: 80 },
-      { field: "department", headerName: "Department", width: 100 },
-      { field: "studentNumber", headerName: "Student Number", width: 130 },
-      { field: "contactNumber", headerName: "Contact No.", width: 130 },
-      { field: "email", headerName: "E Mail", width: 200 },
-      { field: "paymentMethod", headerName: "Payment Method", width: 200 },
+      // {
+      //   field: "Status",
+      //   headerName: "Status",
+      //   width: 150,
+      //   renderCell: (params) => {
+      //     // console.log("Rendering cell:", params.row);
+      //     return (
+      //       <ToggleButtonGroup
+      //         value={params.row.Status}
+      //         exclusive
+      //         onChange={(event, newStatus) =>
+      //           handleStatus(event, newStatus, params.row.Id)
+      //         }
+      //         aria-label="Status"
+      //       >
+      //         <Tooltip title="Not Yet Started">
+      //           <ToggleButton value="NotYetStarted" aria-label="NotYetStarted">
+      //             <AccessAlarmIcon />
+      //           </ToggleButton>
+      //         </Tooltip>
+      //         <Tooltip title="In Process">
+      //           <ToggleButton value="InProcess" aria-label="InProcess">
+      //             <AirportShuttleIcon />
+      //           </ToggleButton>
+      //         </Tooltip>
+      //         <Tooltip title="Delivered">
+      //           <ToggleButton value="Delivered" aria-label="Delivered">
+      //             <BeenhereIcon />
+      //           </ToggleButton>
+      //         </Tooltip>
+      //       </ToggleButtonGroup>
+      //     );
+      //   },
+      // },
       {
-        field: "imageUrl",
+        field: "Status",
+        headerName: "Status",
+        flex: 1,
+        renderCell: (params) => {
+          const isChecked = params.row.Status;
+          return (
+            <Checkbox
+              checked={isChecked}
+              onChange={(event) => handleStatus(event, params.row.Id)}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+          );
+        },
+      },
+      { field: "Name", headerName: "Name", flex: 3 },
+      { field: "Size", headerName: "Size", flex: 1 },
+      { field: "PaymentAmount", headerName: "Amount", flex: 1 },
+      { field: "Department", headerName: "Department", flex: 2 },
+      { field: "StudentNumber", headerName: "Student Number", flex: 2 },
+      { field: "ContactNumber", headerName: "Contact No.", flex: 2 },
+      { field: "Email", headerName: "E Mail", flex: 3 },
+      { field: "PaymentMethod", headerName: "Payment Method", flex: 2 },
+      {
+        field: "ImageUrl",
         headerName: "Payment Proof",
-        width: 150,
+        flex: 2,
         renderCell: (params) => (
           <Button
             variant="outlined"
             color="primary"
-            onClick={() => handleViewButtonClick(params.row.imageUrl)}
+            onClick={() => handleViewButtonClick(params.row.ImageUrl)}
           >
             View
           </Button>
@@ -54,29 +144,17 @@ const AdminTShirt = () => {
   const loadOrderData = () => {
     setTableLoader(true);
     axios
-      .get("http://localhost:8080/tshirt-orders/getAll")
+      .get(`${mainEndpoint}tshirtOrder/getAll`)
       .then((response) => {
         const data = response.data;
 
-        const ordersRowsData = data.map((data) => ({
-          id: data.id,
-          name: data.name,
-          size: data.size,
-          paymentAmount: data.paymentAmount,
-          department: data.department,
-          studentNumber: data.studentNumber,
-          contactNumber: data.contactNumber,
-          email: data.email,
-          paymentMethod: data.paymentMethod,
-          imageUrl: data.imageUrl,
-        }));
-
         setFormData({
           ...formData,
-          ordersData: ordersRowsData,
+          // ordersData: ordersRowsData,
+          ordersData: data,
         });
 
-        console.log("Orders data loaded:", ordersRowsData);
+        console.log("Orders data loaded:", data);
         setTableLoader(false);
       })
       .catch((error) => console.error(error));
@@ -121,6 +199,7 @@ const AdminTShirt = () => {
                   <Loader size="2rem" />
                 ) : (
                   <DataGrid
+                    getRowId={(row) => row.Id}
                     rows={formData.ordersData}
                     columns={formData.orderColumns}
                     initialState={{

@@ -33,6 +33,7 @@ import Loader from "../../Assets/Components/Loader";
 import {
   cloudinaryName,
   cloudinaryPreset,
+  mainEndpoint,
 } from "../../Assets/Components/const";
 
 const OrderTShirtFormPage = () => {
@@ -233,17 +234,17 @@ const OrderTShirtFormPage = () => {
           // Send all data to the database
           try {
             const response = await axios.post(
-              "http://localhost:8080/tshirt-orders/addTShirtOrder",
+              `${mainEndpoint}tshirtOrder/create`,
               {
-                name: formData.name,
-                department: formData.department,
-                studentNumber: formData.studentNumber,
-                contactNumber: formData.contactNumber,
-                email: formData.email,
-                size: formData.size,
-                paymentMethod: formData.paymentMethod,
-                paymentAmount: formData.paymentAmount,
-                imageUrl: uploadedImageUrl,
+                Name: formData.name,
+                Department: formData.department,
+                StudentNumber: formData.studentNumber,
+                ContactNumber: formData.contactNumber,
+                Email: formData.email,
+                Size: formData.size,
+                PaymentMethod: formData.paymentMethod,
+                PaymentAmount: formData.paymentAmount,
+                ImageUrl: uploadedImageUrl,
               }
             );
 
@@ -274,6 +275,7 @@ const OrderTShirtFormPage = () => {
               imageUrl: "",
               tempImg: null,
             }));
+            setIsFileUploaded(false);
           } catch (error) {
             setFormLoader(false);
             console.error(

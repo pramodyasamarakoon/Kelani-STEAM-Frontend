@@ -79,41 +79,45 @@ const CommitteeSwiper = ({
       />
       {/* President Slide */}
       <SwiperSlide>
-        {/* Text */}
         <div
           style={{
             position: "absolute",
             zIndex: 103,
-            left: "40%", // Align to the left
-            top: "50%",
-            // bottom: "50%",
-            transform: "translate(-50%, -50%)",
+            width: "90%", // Full width of the SwiperSlide
+            height: "80%", // Full height of the SwiperSlide
             display: "flex",
-            flexDirection: "column", // Align items in a column
-            alignItems: "flex-end", // Right-align content
-            marginRight: "20px", // Add right margin
+            justifyContent: "center", // Center items horizontally
+            alignItems: "center", // Center items vertically
           }}
         >
-          <p className="font-Poppins-SemiBold text-3xl mb-2">
-            {presidentPosition}
-          </p>
-          <p className="font-Poppins-Regular text-[16px]">{presidentName}</p>
-        </div>
-        {/* President Card */}
-        <div
-          style={{
-            position: "absolute",
-            zIndex: 103,
-            right: "10%", // Align to the left
-            top: "50%",
-            // bottom: "50%",
-            transform: "translate(-50%, -50%)",
-            display: "flex",
-            justifyContent: "center", // Center content horizontally
-            marginRight: "20px", // Add right margin
-          }}
-        >
-          {isPresident ? <PresidentHoverCard /> : <DirectorHoverCard />}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row", // Align items in a row
+              alignItems: "center", // Center items vertically within this div
+              gap: "40px", // Space between text and image
+            }}
+          >
+            {/* Text */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column", // Align items in a column
+                alignItems: "flex-end", // Right-align content
+              }}
+            >
+              <p className="font-Poppins-SemiBold text-3xl mb-2">
+                {presidentPosition}
+              </p>
+              <p className="font-Poppins-Regular text-[16px]">
+                {presidentName}
+              </p>
+            </div>
+            {/* President Card */}
+            <div>
+              {isPresident ? <PresidentHoverCard /> : <DirectorHoverCard />}
+            </div>
+          </div>
         </div>
       </SwiperSlide>
 
