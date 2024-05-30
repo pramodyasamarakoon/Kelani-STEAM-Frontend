@@ -515,6 +515,7 @@ export const universities = [
     "Open University of Sri Lanka",
     "Sri Lanka Technological Campus (SLTC)",
     "Sri Lanka Institute of Information Technology (SLIIT)",
+    "Other"
   ];
 
   export const cloudinaryPreset = "ughnxbxn"

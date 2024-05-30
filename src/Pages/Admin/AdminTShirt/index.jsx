@@ -25,7 +25,7 @@ const AdminTShirt = () => {
     // Check for the AuthToken in local storage
     const authToken = localStorage.getItem("AuthToken");
 
-    if (authToken) {
+    if (authToken && isValidBase64(authToken)) {
       // AuthToken is available, load the album data
       loadOrderData();
     } else {
@@ -142,6 +142,16 @@ const AdminTShirt = () => {
     ordersData: [],
   });
   const [tableLoader, setTableLoader] = useState(false);
+
+  // Validating the Auth Token
+  const isValidBase64 = (str) => {
+    try {
+      const decoded = atob(str);
+      return decoded.length === 32; // Check if the decoded string length is 32 bytes
+    } catch (e) {
+      return false;
+    }
+  };
 
   // View the Payment Proof
   const handleViewButtonClick = (imageUrl) => {

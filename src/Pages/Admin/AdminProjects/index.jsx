@@ -29,7 +29,7 @@ const AdminProjects = () => {
     // Check for the AuthToken in local storage
     const authToken = localStorage.getItem("AuthToken");
 
-    if (authToken) {
+    if (authToken && isValidBase64(authToken)) {
       // AuthToken is available, load the  data
     loadProjectData();
     } else {
@@ -72,6 +72,16 @@ const AdminProjects = () => {
     openDialog: false,
     deleteRowId: "",
   });
+
+  // Validating the Auth Token
+  const isValidBase64 = (str) => {
+    try {
+      const decoded = atob(str);
+      return decoded.length === 32; // Check if the decoded string length is 32 bytes
+    } catch (e) {
+      return false;
+    }
+  };
 
   // Function to handle input changes and update formData
   const handleChange = (event) => {

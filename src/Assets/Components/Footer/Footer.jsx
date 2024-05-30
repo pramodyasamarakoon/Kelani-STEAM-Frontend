@@ -59,6 +59,7 @@ function Footer() {
         if (response.data && response.data.Token) {
           // Save authToken to localStorage
           localStorage.setItem("AuthToken", response.data.Token);
+          localStorage.setItem("User Name", username);
           // Navigate to the home page
           window.location.href = "../AdminAlbums";
         }

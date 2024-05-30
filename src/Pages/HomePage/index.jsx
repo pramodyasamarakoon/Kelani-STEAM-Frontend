@@ -79,6 +79,13 @@ function HomePage() {
   const [showEventContainer, setShowEventContainer] = useState(false);
 
   useEffect(() => {
+    // Check for the AuthToken in local storage
+    const authToken = localStorage.getItem("AuthToken");
+
+    if (authToken && isValidBase64(authToken)) {
+      // AuthToken is available, navigate to the Admin Panel
+      window.location.href = "/AdminAlbums";
+    }
     // Load Album Data
     loadAlbumData();
 
@@ -150,6 +157,16 @@ function HomePage() {
   // Submit Form Handling
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Validating the Auth Token
+  const isValidBase64 = (str) => {
+    try {
+      const decoded = atob(str);
+      return decoded.length === 32; // Check if the decoded string length is 32 bytes
+    } catch (e) {
+      return false;
+    }
+  };
 
   const handleFormSubmit = (formData) => {
     // Handle form submission logic here
@@ -647,7 +664,6 @@ function HomePage() {
           {/*T Shirt Content */}
 
           <Grid container spacing={2} sx={{ marginX: 36 }}>
-            
             {/*T Shirt Photo */}
             <Grid
               item
@@ -676,7 +692,7 @@ function HomePage() {
                   size="small"
                   sx={{
                     mx: 4,
-                    width: 90
+                    width: 90,
                   }}
                 >
                   Order Now

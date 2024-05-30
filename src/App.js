@@ -12,6 +12,7 @@ import AdminAlbums from './Pages/Admin/AdminAlbums';
 import AdminProjects from './Pages/Admin/AdminProjects';
 import AdminCommittee from './Pages/Admin/AdminCommittee';
 import AdminTShirt from './Pages/Admin/AdminTShirt';
+import AdminUsers from './Pages/Admin/AdminUsers';
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
         <Route path="/AdminProjects" element={<AdminProjects/>} />
         <Route path="/AdminCommittee" element={<AdminCommittee/>} />
         <Route path="/AdminTShirtOrders" element={<AdminTShirt/>} />
+
+        {/*Super Admin */}
+        <Route path='/AdminUsers' element={<AdminUsers/>}/>
       </Routes>
     </BrowserRouter>
     </div>

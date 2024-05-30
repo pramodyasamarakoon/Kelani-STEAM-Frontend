@@ -10,7 +10,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import AdbIcon from "@mui/icons-material/Adb";
 import Logo from "../../../Assets/Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -18,6 +18,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import back20 from "../../Images/Back30Small.jpg";
 import StoreIcon from "@mui/icons-material/Store";
 import { Link } from "react-router-dom";
+import PersonIcon from "@mui/icons-material/Person";
 
 const pages = [
   {
@@ -61,10 +62,65 @@ const adminPages = [
   },
 ];
 
+const superAdminPages = [
+  {
+    label: "Albums",
+    link: "/AdminAlbums",
+  },
+  {
+    label: "Bookings",
+    link: "/AdminBookings",
+  },
+  {
+    label: "Projects",
+    link: "/AdminProjects",
+  },
+  {
+    label: "Committee",
+    link: "/AdminCommittee",
+  },
+  {
+    label: "T Shirt Orders",
+    link: "/AdminTShirtOrders",
+  },
+  {
+    label: "Users",
+    link: "/AdminUsers",
+  },
+];
+
 const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
   // console.log("NavBar visibilityOfOrderButton:", visibilityOfOrderButton);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [isAccountOpen, setAccountOpen] = React.useState(false);
+  const [userName, setUserName] = React.useState("");
+
+  useEffect(() => {
+    // Check for the AuthToken in local storage
+    const userName = localStorage.getItem("User Name");
+    if (userName) {
+      setUserName(userName);
+    }
+  }, []);
+
+  const handleAccountButton = () => {
+    if (isAccountOpen) {
+      setAccountOpen(false);
+    } else {
+      setAccountOpen(true);
+      const UserName = localStorage.getItem("User Name");
+      setUserName(UserName);
+    }
+  };
+
+  const onSignOut = () => {
+    setUserName("");
+    localStorage.removeItem("User Name");
+    localStorage.removeItem("AuthToken");
+    // Redirect to the home page
+    window.location.href = "/";
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -193,7 +249,28 @@ const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
                 </Button>
               ))}
             {isAdmin &&
+              userName === "" &&
               adminPages.map((page) => (
+                <Button
+                  key={page.label}
+                  onClick={handleCloseNavMenu}
+                  href={page.link}
+                  size="small"
+                  sx={{
+                    my: 2,
+                    color: "black",
+                    display: "block",
+                    backgroundColor: "transparent",
+                    borderRadius: "1rem",
+                    marginX: "1rem",
+                  }}
+                >
+                  {page.label}
+                </Button>
+              ))}
+            {isAdmin &&
+              userName === "Admin Account" &&
+              superAdminPages.map((page) => (
                 <Button
                   key={page.label}
                   onClick={handleCloseNavMenu}
@@ -234,6 +311,21 @@ const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
             ) : null}
           </Box>
 
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {isAdmin ? (
+              <IconButton
+                onClick={handleAccountButton}
+                size="medium"
+                sx={{
+                  mx: 4,
+                  color: "black",
+                }}
+              >
+                <PersonIcon />
+              </IconButton>
+            ) : null}
+          </Box>
+
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             {visibilityOfOrderButton ? (
               <Link to="/OrderTShirtFormPage">
@@ -254,6 +346,38 @@ const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
           </Box>
         </Toolbar>
       </Container>
+
+      {isAccountOpen ? (
+        <Box
+          sx={{
+            position: "fixed",
+            top: "80px",
+            right: "80px",
+            backgroundColor: "white",
+            border: "1px solid #ccc",
+            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+            borderRadius: "8px",
+            padding: "16px",
+            zIndex: 1000,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "300px",
+          }}
+        >
+          <p className="font-Poppins-Regular mt-2 mb-3"> {userName} </p>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            size="small"
+            onClick={onSignOut}
+            sx={{ alignSelf: "flex-end" }}
+          >
+            Sign Out
+          </Button>
+        </Box>
+      ) : null}
     </AppBar>
   );
 };
