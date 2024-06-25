@@ -79,6 +79,7 @@ function HomePage() {
   const [showEventContainer, setShowEventContainer] = useState(false);
 
   useEffect(() => {
+  
     // Check for the AuthToken in local storage
     const authToken = localStorage.getItem("AuthToken");
 

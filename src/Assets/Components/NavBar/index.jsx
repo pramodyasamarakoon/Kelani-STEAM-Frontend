@@ -249,7 +249,7 @@ const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
                 </Button>
               ))}
             {isAdmin &&
-              userName === "" &&
+              userName !== "Admin Account" &&
               adminPages.map((page) => (
                 <Button
                   key={page.label}
@@ -374,7 +374,7 @@ const NavBar = ({ visibilityOfOrderButton = true, isAdmin = false }) => {
             onClick={onSignOut}
             sx={{ alignSelf: "flex-end" }}
           >
-            Sign Out
+            Log Out
           </Button>
         </Box>
       ) : null}

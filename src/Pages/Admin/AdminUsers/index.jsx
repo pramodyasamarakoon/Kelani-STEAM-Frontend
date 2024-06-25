@@ -28,8 +28,9 @@ const AdminUsers = () => {
   useEffect(() => {
     // Check for the AuthToken in local storage
     const authToken = localStorage.getItem("AuthToken");
+    const userName = localStorage.getItem("User Name");
 
-    if (authToken && isValidBase64(authToken)) {
+    if (authToken && isValidBase64(authToken) && userName === "Admin Account") {
       // AuthToken is available, load the album data
       loadAllUsers();
     } else {
@@ -454,3 +455,5 @@ const AdminUsers = () => {
 };
 
 export default AdminUsers;
+
+
